@@ -23,8 +23,8 @@ var webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    filename: utils.assetsPath('js/[name].js'),
+    chunkFilename: utils.assetsPath('js/[id].js')
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
@@ -48,11 +48,12 @@ var webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
+      version:'2.0',
       filename: {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
         ? 'index.html'
         : {{/if_or}}config.build.index,
-      template: 'index.html',
-      inject: true,
+      template: './view/index.ejs',
+      inject: false,
       minify: {
         removeComments: true,
         collapseWhitespace: true,

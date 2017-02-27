@@ -13,7 +13,7 @@ var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : {{/if_or}}require('./webpack.dev.conf')
-
+var mock = require('../mock');
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
@@ -51,7 +51,10 @@ Object.keys(proxyTable).forEach(function (context) {
 })
 
 // handle fallback for HTML5 history API
-app.use(require('connect-history-api-fallback')())
+//只有以下两个请求才是html页面请求，其他均不会请求html
+app.use(require('connect-history-api-fallback')({
+  htmlAcceptHeaders: ['text/html', 'application/xhtml+xml']
+}))
 
 // serve webpack bundle output
 app.use(devMiddleware)
@@ -60,11 +63,15 @@ app.use(devMiddleware)
 // compilation error display
 app.use(hotMiddleware)
 
+//模拟数据
+mock(app);
+
+
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-var uri = 'http://localhost:' + port
+  var uri = 'http://localhost:' + port+config.dev.assetsPublicPath+(process.argv[2] || 'index.html');
 
 devMiddleware.waitUntilValid(function () {
   console.log('> Listening at ' + uri + '\n')
