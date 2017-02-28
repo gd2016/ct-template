@@ -8,7 +8,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-
+var htmlPlugins=require('../config/plug.html.js')(true)
 var env = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : {{/if_or}}config.build.env
@@ -47,23 +47,25 @@ var webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      version:'2.0',
-      filename: {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
-        ? 'index.html'
-        : {{/if_or}}config.build.index,
-      template: './view/index.ejs',
-      inject: false,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
-    }),
+
+    //new HtmlWebpackPlugin({
+    //  version:'2.0',
+    //  filename: {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
+    //    ? 'index.html'
+    //    : {{/if_or}}config.build.index,
+    //  template: './view/index.ejs',
+    //  inject: false,
+    //  minify: {
+    //    removeComments: true,
+    //    collapseWhitespace: true,
+    //    removeAttributeQuotes: true
+    //    // more options:
+    //    // https://github.com/kangax/html-minifier#options-quick-reference
+    //  },
+    //  // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+    //  chunksSortMode: 'dependency'
+    //}),
+
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
@@ -92,7 +94,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ])
-  ]
+  ].concat(htmlPlugins)
 })
 
 if (config.build.productionGzip) {

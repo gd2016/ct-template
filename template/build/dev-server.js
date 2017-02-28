@@ -71,7 +71,7 @@ mock(app);
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-  var uri = 'http://localhost:' + port+config.dev.assetsPublicPath+(process.argv[2] || 'index.html');
+var uri = 'http://localhost:' + port+config.build.assetsPublicPath+'view/'+(process.argv[2] || 'index.html');
 
 devMiddleware.waitUntilValid(function () {
   console.log('> Listening at ' + uri + '\n')

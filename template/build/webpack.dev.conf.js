@@ -5,7 +5,7 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-
+var htmlPlugins=require('../config/plug.html.js')(false)
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
@@ -25,12 +25,12 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
-      version:'2.0',
-      filename: 'view/index.html',
-      template: './view/index.ejs',
-      inject: false
-    }),
+    //new HtmlWebpackPlugin({
+    //  version:'2.0',
+    //  filename: 'view/index.html',
+    //  template: './view/index.ejs',
+    //  inject: false
+    //}),
     new FriendlyErrorsPlugin()
-  ]
+  ].concat(htmlPlugins)
 })
