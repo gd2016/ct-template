@@ -41,7 +41,7 @@
 npm run dev
 ```
 
-可以带参数如 `npm run dev --config app` 则可以自动打开/view/app.html;
+可以带参数如 `npm run dev view/app` 则可以自动打开/view/app.html;
 
 * 生产环境构建
 
