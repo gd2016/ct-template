@@ -1,5 +1,9 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/iojs', '/usr/local/bin/npm', 'run', 'dev' ]
+1 verbose cli [ '/usr/local/bin/iojs',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'dev',
+1 verbose cli   'app' ]
 2 info using npm@4.0.5
 3 info using node@v6.2.0
 4 verbose stack Error: missing script: dev
@@ -15,7 +19,7 @@
 4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:436:12)
 5 verbose cwd /Users/rubyisapm/teamshare/webpack
 6 error Darwin 14.5.0
-7 error argv "/usr/local/bin/iojs" "/usr/local/bin/npm" "run" "dev"
+7 error argv "/usr/local/bin/iojs" "/usr/local/bin/npm" "run" "dev" "app"
 8 error node v6.2.0
 9 error npm  v4.0.5
 10 error missing script: dev
