@@ -41,7 +41,7 @@
 npm run dev
 ```
 
-可以带参数如 `npm run dev view/app` 则可以自动打开/view/app.html;
+可以带参数如 `npm run dev view/app` 则可以自动打开/view/app.html; 默认则打开view/index.html，此项在config/index.js中配置。
 
 * 生产环境构建
 
