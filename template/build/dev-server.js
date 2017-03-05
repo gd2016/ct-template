@@ -66,11 +66,6 @@ app.use(hotMiddleware)
 //模拟数据
 mock(app);
 
-
-// serve pure static assets
-var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
-app.use(staticPath, express.static('./static'))
-
 var uri = 'http://localhost:' + port+config.build.assetsPublicPath+'view/'+(process.argv[2] || 'index.html');
 
 devMiddleware.waitUntilValid(function () {

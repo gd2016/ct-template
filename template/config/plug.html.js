@@ -13,18 +13,16 @@ function htmlPlugins(prod) {
     var option={
       filename: path.resolve(__dirname, '../view/' + filename + '.html'),
       template: './ejs/' + file,
-      inject:false
+      inject:false,
+      version:+new Date()
     };
-    if(!prod){
-      option.version=+new Date();
-    }else{
+    if(prod){
       option.minify= {
         removeComments: true,
         collapseWhitespace: true,
         removeAttributeQuotes: true
       };
       option.chunksSortMode= 'dependency';
-      option.version=config.build.version;
     }
     return new HtmlWebpackPlugin(option)
   });

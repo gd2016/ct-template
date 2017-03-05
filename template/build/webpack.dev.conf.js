@@ -3,7 +3,6 @@ var webpack = require('webpack')
 var config = require('../config')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 var htmlPlugins=require('../config/plug.html.js')(false)
 // add hot-reload related code to entry chunks
@@ -24,13 +23,6 @@ module.exports = merge(baseWebpackConfig, {
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    // https://github.com/ampedandwired/html-webpack-plugin
-    //new HtmlWebpackPlugin({
-    //  version:'2.0',
-    //  filename: 'view/index.html',
-    //  template: './view/index.ejs',
-    //  inject: false
-    //}),
     new FriendlyErrorsPlugin()
   ].concat(htmlPlugins)
 })
