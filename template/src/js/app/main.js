@@ -1,4 +1,4 @@
-import '../css/common';
+import '../../css/common';
 $.ajax({
     url:'/api/patch/gettestchannelId',
   //url:'/api/api1',
