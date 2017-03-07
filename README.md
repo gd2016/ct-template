@@ -49,7 +49,20 @@ npm run dev
 npm run build
 ```
 
+## Q & A
 
+### 正式版上的资源访问不是/asset，是/static/projectName/asset，该怎么设置?
+
+设置config/index中的dev.assetsSubDirectory设置为'static/projectName/asset'。
+
+
+## TODO
+
+遍历ejs和entry文件夹
+
+打开根目录中的index.html
+
+html页面改成不区分大小写
 
 
 
