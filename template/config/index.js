@@ -1,8 +1,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
-var entry =require('./entry');
-module.exports = {
-  entry:entry,
+
+var config= {
   build: {
     env: require('./prod.env'),
     assetsRoot: path.resolve(__dirname, '../'),
@@ -25,7 +24,6 @@ module.exports = {
     env: require('./dev.env'),
     port: 8080,
     host:'localhost',
-    index:'view/index.html',
     autoOpenBrowser: true,
     assetsSubDirectory: 'asset',
     assetsPublicPath: '/',
@@ -36,4 +34,8 @@ module.exports = {
     // just be aware of this issue when enabling this option.
     cssSourceMap: false
   }
-}
+};
+
+module.exports =config;
+var entry =require('./entry');
+config.entry=entry;

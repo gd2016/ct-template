@@ -3,16 +3,16 @@
  */
 
 var path = require('path');
-var fs = require('fs');
-var ejsTemplates = fs.readdirSync(path.resolve(__dirname, '../ejs'));
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var utils=require('../build/utils');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var config=require('./index');
 function htmlPlugins(prod) {
+  var ejsTemplates=utils.readFilesInDir(path.resolve(__dirname, '../ejs'));
   return ejsTemplates.map(function (file) {
-    var filename = file.split('.')[0];
+    var filename = path.relative('./ejs/',file).split('.')[0];
     var option={
       filename: path.resolve(__dirname, '../view/' + filename + '.html'),
-      template: './ejs/' + file,
+      template: file,
       inject:false,
       version:+new Date()
     };
@@ -26,6 +26,6 @@ function htmlPlugins(prod) {
     }
     return new HtmlWebpackPlugin(option)
   });
-};
+}
 
 module.exports = htmlPlugins;

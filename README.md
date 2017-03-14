@@ -41,7 +41,7 @@
 npm run dev
 ```
 
-可以带参数如 `npm run dev view/app` 则可以自动打开/view/app.html; 默认则打开view/index.html，此项在config/index.js中配置。
+可以带参数如 `npm run dev view/app` 则可以自动打开/view/app.html; 默认则打开网站根目录。
 
 * 生产环境构建
 
@@ -57,10 +57,6 @@ npm run build
 
 
 ## TODO
-
-遍历ejs和entry文件夹
-
-打开根目录中的index.html
 
 html页面改成不区分大小写
 

@@ -1,7 +1,7 @@
 var path = require('path')
 var config = require('../config')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-
+var fs = require('fs');
 exports.assetsPath = function (_path) {
   var assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
@@ -69,3 +69,19 @@ exports.styleLoaders = function (options) {
   }
   return output
 }
+
+
+//read files in dir
+exports.readFilesInDir=function (dir){
+  var files = fs.readdirSync(dir);
+  var allFiles=[];
+  files.map(item=>{
+    var file=fs.lstatSync(path.resolve(dir,item));
+    if(!file.isDirectory()){
+      allFiles.push(path.resolve(dir,item))
+    }else{
+      return allFiles=allFiles.concat(arguments.callee(path.resolve(dir,item)));
+    }
+  });
+  return allFiles;
+};

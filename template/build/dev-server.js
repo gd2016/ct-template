@@ -24,6 +24,10 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var app = express()
 var compiler = webpack(webpackConfig)
 
+app.get(/^(\/|\/index.html)$/, function(req, res) {
+  res.sendFile(path.join(__dirname, '../', 'index.html'));
+});
+
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   quiet: true
@@ -56,8 +60,8 @@ app.use(hotMiddleware)
 //模拟数据
 mock(app);
 
-var index=typeof process.argv[2]!=='undefined' ? process.argv[2]+'.html' : config.dev.index;
-var uri = 'http://'+host+':' + port+config.dev.assetsPublicPath+index;
+var index=typeof process.argv[2]!=='undefined' ? config.dev.assetsPublicPath+process.argv[2]+'.html' : '';
+var uri = 'http://'+host+':' + port+index;
 
 devMiddleware.waitUntilValid(function () {
   console.log('> Listening at ' + uri + '\n')
