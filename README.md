@@ -97,7 +97,7 @@ mock数据的配置都在/mock下定义，在define.js中设置module.export.def
 --- | --- | --- | ---
 isProxy | Boolean | 是否使用代理 | false
 matchPath | RegExp or String 如/\/api/i或者'api' | 代理规则，即路径符合该规则时通过代理访问 | /\/api/i
-domain | String | 代理到的域名和端口号。如http://tcysystinker.admin.ct108.org:1505 | ""
+domain | String | 代理到的域名和端口号。如http://a.org:1505 | ""
 
 当isProxy为false时，会使用/mock/data中的内容进行数据获取;
 脚手架默认会读取data中的每一个.js文件，所以开发者可以按照页面级的数据来定义mock数据；请参照/mock/data中的样例。
