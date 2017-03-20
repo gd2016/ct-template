@@ -11,11 +11,9 @@ files.map((file) => {
 
 module.exports = {
   define: {
-    isProxy: true,
-    matchPath: /\/api/,
-    domains: {
-      test1: "http://tcysystinker.admin.ct108.org:1505"
-    }
+    isProxy: false,
+    matchPath: /\/api/i,
+    domain:  ""
   },
   interFaces: interFaces,
   getInterFace(key){

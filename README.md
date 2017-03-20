@@ -1,3 +1,9 @@
+## 介绍
+
+该项目fork自官方脚手架webpack。
+
+整个脚手架帮你完成html自动编译和入口文件自动读取，不需要开发者另外进行配置。
+
 ## 初始化项目
 
 ```
@@ -67,6 +73,7 @@ ejs/pm/a.ejs会对应生成view/pm/a.html;
 #### /src/app中每个.js文件都是一个入口文件;如/src/app/pageA.js；
 
 入口文件:/src/app/\*.js
+
 生成文件：/asset/\*.js
 
 配置信息: entryMode.pagePacked:false
@@ -74,11 +81,26 @@ ejs/pm/a.ejs会对应生成view/pm/a.html;
 #### /src/app中每个文件夹为一个页面的脚本文件，其中的index.js文件才是最终要的入口文件；如src/app/pageA/index.js
 
 入口文件: /src/app/*/index.js
+
 生成文件: /asset/\*.js
 
 配置信息: entryMode.pagePacked:true
 
 **注意**:以上入口配置请在/config/entry.js中配置；
+
+## mock数据
+
+mock数据的配置都在/mock下定义，在define.js中设置module.export.define来完成代理配置。
+配置如下：
+
+属性 | 类型 | 描述 | 默认值
+--- | --- | --- | ---
+isProxy | Boolean | 是否使用代理 | false
+matchPath | RegExp or String 如/\/api/i或者'api' | 代理规则，即路径符合该规则时通过代理访问 | /\/api/i
+domain | String | 代理到的域名和端口号。如http://tcysystinker.admin.ct108.org:1505 | ""
+
+当isProxy为false时，会使用/mock/data中的内容进行数据获取;
+脚手架默认会读取data中的每一个.js文件，所以开发者可以按照页面级的数据来定义mock数据；请参照/mock/data中的样例。
 
 ## 实现方案解析
 
