@@ -48,6 +48,41 @@ npm run dev
 ```
 npm run build
 ```
+## 项目文件分布
+
+### /ejs
+
+/ejs用于存放项目的.ejs文件。
+.ejs文件用于自动生成html文件，也就是项目的真实页面文件。
+脚手架会自动读取其中的全部.ejs文件并在view文件夹中生成对应路径的html文件。
+如ejs/a.ejs会对应生成view/a.html；
+ejs/pm/a.ejs会对应生成view/pm/a.html;
+
+### /src
+
+/src用于存放项目脚本文件；
+其中/src/app文件参与入口文件的生成；
+脚手架支持两种入口文件模式:
+
+#### /src/app中每个.js文件都是一个入口文件;如/src/app/pageA.js；
+
+入口文件:/src/app/\*.js
+生成文件：/asset/\*.js
+
+配置信息: entryMode.pagePacked:false
+
+#### /src/app中每个文件夹为一个页面的脚本文件，其中的index.js文件才是最终要的入口文件；如src/app/pageA/index.js
+
+入口文件: /src/app/*/index.js
+生成文件: /asset/\*.js
+
+配置信息: entryMode.pagePacked:true
+
+**注意**:以上入口配置请在/config/entry.js中配置；
+
+## 实现方案解析
+
+整个脚手架帮你完成html自动编译和入口文件自动读取，不需要开发者另外进行配置。
 
 ## Q & A
 

@@ -85,3 +85,16 @@ exports.readFilesInDir=function (dir){
   });
   return allFiles;
 };
+
+
+exports.readDirsInDir=function (dir){
+  var files = fs.readdirSync(dir);
+  var allFiles=[];
+  files.map(item=>{
+    var file=fs.lstatSync(path.resolve(dir,item));
+    if(file.isDirectory()){
+      allFiles.push(path.resolve(dir,item))
+    }
+  });
+  return allFiles;
+};
