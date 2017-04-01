@@ -28,17 +28,17 @@ var base={
     }
 };
 var Interface = {
-    debug:utility.base.extend(true,base,{
+    debug:utility.base.extend(true,{},base,{
         common:{
             api1:'/api/api1'
         }
     }),
-    test:utility.base.extend(true,base,{
+    test:utility.base.extend(true,{},base,{
         common:{
             api1:'/api/api11'
         }
     }),
-    official:utility.base.extend(true,base,{
+    official:utility.base.extend(true,{},base,{
         common:{
             api1:'/api/api111'
         }
