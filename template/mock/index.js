@@ -2,11 +2,13 @@ var proxy = require("express-http-proxy");
 var mockData = require("./define");
 var apiProxy = function () {
   if (mockData.define.isProxy) {
-    return proxy(mockData.define.domain, {
-      forwardPath: function (req, res) {
-        return req._parsedUrl.path
-      }
-    });
+    return mockData.define.proxies.map(function(item){
+      return proxy(item.domain, {
+        forwardPath: function (req, res) {
+          return req._parsedUrl.path
+        }
+      });
+    })
   } else {
     return function (req, res, next) {
       if (req.baseUrl) {
@@ -22,11 +24,12 @@ var apiProxy = function () {
 
 module.exports = function (app) {
   //模拟数据
-  if (mockData.define.isProxy && mockData.define.matchPath !== '') {
-    app.use(mockData.define.matchPath, apiProxy);
+  if (mockData.define.isProxy) {
+    mockData.define.proxies.map(function(item,index){
+      app.use(item.matchPath, apiProxy[index]);
+    });
   } else {
-    var keys = mockData.interFaces.keys();  //遍历Key
-
+    var keys = mockData.interFaces.keys();
     for (var key of keys) {
       app.use(key, apiProxy);
     }
