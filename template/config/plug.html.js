@@ -14,9 +14,10 @@ function htmlPlugins(prod) {
       filename: path.resolve(__dirname, '../view/' + filename + '.html'),
       template: file,
       inject:false,
-      version:+new Date()
+      script:'<script src="'+config.dev.assetsPublicPath+config.dev.assetsSubDirectory+'/'+config.version+'/js/'+filename+'.js?v='+(+new Date())+'"></script>'
     };
     if(prod){
+      option.script='<script src="'+config.build.assetsPublicPath+config.build.assetsSubDirectory+'/'+config.version+'/js/'+filename+'.js"></script>';
       option.minify= {
         removeComments: true,
         collapseWhitespace: true,

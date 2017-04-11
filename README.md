@@ -63,6 +63,10 @@ npm run build
 脚手架会自动读取其中的全部.ejs文件并在view文件夹中生成对应路径的html文件。
 如ejs/a.ejs会对应生成view/a.html；
 ejs/pm/a.ejs会对应生成view/pm/a.html;
+ejs中的脚本会被自动注入；
+
+**注入规则:** 脚本的路径和名称和该ejs所在的路径和名称对应；/ejs/pm/a.ejs中注入的脚本为asset/[version]/pm/a.js。
+请在开发时严格遵守这一约定。
 
 ### /src
 
@@ -102,6 +106,17 @@ domain | String | 代理到的域名和端口号。如http://a.org:1505 | ""
 当isProxy为false时，会使用/mock/data中的内容进行数据获取;
 脚手架默认会读取data中的每一个.js文件，所以开发者可以按照页面级的数据来定义mock数据；请参照/mock/data中的样例。
 
+## 版本控制
+
+项目遵循版本叠加原则，每次版本生成都会在asset里面新建一个以版本为名称的目录，放置该版本的所有资源(js和其他静态资源)。
+
+### 配置
+
+/config/index中的config.version。
+
+请在新版本构建时修改该参数，脚手架会帮你生成该版本所需的资源。
+
+
 ## 实现方案解析
 
 整个脚手架帮你完成html自动编译和入口文件自动读取，不需要开发者另外进行配置。
@@ -110,7 +125,11 @@ domain | String | 代理到的域名和端口号。如http://a.org:1505 | ""
 
 ### 正式版上的资源访问不是/asset，是/static/projectName/asset，该怎么设置?
 
-设置config/index中的dev.assetsSubDirectory设置为'static/projectName/asset'。
+设置config/index中的dev.assetsPublicPath和build.assetsPublicPath'/static/projectName/'。
+
+###
+
+
 
 
 ## TODO

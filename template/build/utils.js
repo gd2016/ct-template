@@ -4,8 +4,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var fs = require('fs');
 exports.assetsPath = function (_path) {
   var assetsSubDirectory = process.env.NODE_ENV === 'production'
-    ? config.build.assetsSubDirectory
-    : config.dev.assetsSubDirectory
+    ? config.build.assetsSubDirectory+'/'+config.version
+    : config.dev.assetsSubDirectory+'/'+config.version
   return path.posix.join(assetsSubDirectory, _path)
 }
 
