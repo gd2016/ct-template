@@ -84,7 +84,6 @@ module.exports = {
             'no-unexpected-multiline': 2,//禁止出现令人困惑的多行表达式
             'no-unreachable': 2, //禁止在return、throw、continue 和 break 语句之后出现不可达代码
             'use-isnan': 2, //禁止使用 isNaN() 检查 NaN
-            'no-debugger': 2,//禁用 debugger
             'no-extra-semi': 2,//禁止不必要的分号
             'no-control-regex': 2,//禁止在正则表达式中使用控制字符
             'no-ex-assign': 2,//禁止对 catch 子句的参数重新赋值
