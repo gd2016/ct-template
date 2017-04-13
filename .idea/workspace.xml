@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4b32b479-dfe7-4b8b-943d-fee3b5d7deb3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/.eslintrc.js" afterPath="$PROJECT_DIR$/template/.eslintrc.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="webpack.iws" />
@@ -24,17 +25,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name=".eslintrc.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/template/.eslintrc.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59923667">
-              <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
-              <folding>
-                <element signature="e#1001#1017#0" expanded="true" />
-                <element signature="e#1559#1629#0" expanded="true" />
-                <element signature="e#1706#1777#0" expanded="true" />
-                <element signature="e#5398#5564#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state>
+              <first_editor vertical-scroll-proportion="0.41221374">
+                <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -50,6 +49,7 @@
         <option value="$PROJECT_DIR$/template/build/build.js" />
         <option value="$PROJECT_DIR$/template/package.json" />
         <option value="$PROJECT_DIR$/template/.eslintrc.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -351,14 +351,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/template/.eslintrc.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59923667">
-          <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.51703405">
+          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
           <folding>
             <element signature="e#1001#1017#0" expanded="true" />
             <element signature="e#1559#1629#0" expanded="true" />
             <element signature="e#1706#1777#0" expanded="true" />
             <element signature="e#5398#5564#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state>
+          <first_editor vertical-scroll-proportion="0.41221374">
+            <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
