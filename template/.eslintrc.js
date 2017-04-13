@@ -90,7 +90,7 @@ module.exports = {
             'no-ex-assign': 2,//禁止对 catch 子句的参数重新赋值
             'no-extra-boolean-cast': 2,//禁止不必要的布尔转换
             'no-regex-spaces': 2,//正则中避免使用多个空格
-            'no-extra-parens': 2,//禁止不必要的括号({{}})
+            'no-extra-parens': 2,//禁止不必要的括号
             'no-invalid-regexp': 2, //禁止 RegExp 构造函数中存在无效的正则表达式字符串
             'no-obj-calls': 2,//禁止把全局对象作为函数调用
             'no-sparse-arrays': 2, //禁用稀疏数组
