@@ -27,7 +27,7 @@ module.exports = {
             'WebUploader':false,
             'AREA':false
     },//by ruby
-    {/if_eq}
+{{/if_eq}}
   {{#if_eq lintConfig "standard"}}
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
   extends: 'standard',
