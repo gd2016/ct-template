@@ -200,7 +200,7 @@ module.exports = {
             'no-new-symbol': 2, //禁止使用 Symbol 构造器
             'no-path-concat': 2,//使用 __dirname 和 __filename 时尽量避免使用字符串拼接
             'no-useless-constructor': 2,//禁止多余的构造器
-            'prefer-const': 2//要求使用 const 声明那些声明后不再被修改的变量,
+            'prefer-const': 2,//要求使用 const 声明那些声明后不再被修改的变量,
     {{/if_eq}}
 
     // allow debugger during development
