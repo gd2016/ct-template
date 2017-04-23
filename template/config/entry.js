@@ -1,5 +1,5 @@
 var entryMode={
-  pagePacked:false
+  pagePacked:true
 };
 var path = require('path');
 var utils=require('../build/utils');
