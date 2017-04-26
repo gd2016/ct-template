@@ -1,17 +1,17 @@
 /**
  * @author rubyisapm
  */
-var constConfig={
+var constConfig = {
     data: {
         reportType: [
             {
-                key:1,
-                val:'下载',
-                color:'text-danger'
-            },{
-                key:2,
-                val:'安装',
-                color:'text-success'
+                key: 1,
+                val: '下载',
+                color: 'text-danger'
+            }, {
+                key: 2,
+                val: '安装',
+                color: 'text-success'
             }
         ]
     },
@@ -23,7 +23,7 @@ var constConfig={
             });
             return matchedItem[0].val;
         },
-        getKeyByVal(col,val){
+        getKeyByVal(col, val){
             var data = constConfig.data[col];
             var matchedItem = data.filter((item)=> {
                 return item.val === val;
