@@ -130,14 +130,7 @@ domain | String | 代理到的域名和端口号。如http://a.org:1505 | ""
 
 设置config/index中的dev.assetsPublicPath和build.assetsPublicPath'/static/projectName/'。
 
-###
 
-
-
-
-## TODO
-
-html页面改成不区分大小写
 
 
 
