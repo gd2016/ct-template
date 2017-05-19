@@ -1,5 +1,5 @@
 import utility from 'ct-utility';
-function getEnv() {
+var getEnv = function() {
     var env = '';
     var port = location.port;
     var tdl = location.host.split('.').slice(-1)[0];
@@ -12,10 +12,10 @@ function getEnv() {
         env = 'official';
     }
     return env;
-}
+};
 var base = {
     common: {
-        api1: '/api/api111',//请默认设置可变项为正式版接口地址，以防止正式版出错
+        api1: '/api/api111', //请默认设置可变项为正式版接口地址，以防止正式版出错
         api2: '/api/api2'
     },
     patchList: {
@@ -46,4 +46,5 @@ var Interface = {
     })
 };
 var env = getEnv();
+
 export default Interface[env];

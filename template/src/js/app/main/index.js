@@ -1,13 +1,10 @@
 import '../../../css/common';
+import 'common/const';
+import 'common/interface';
 $.ajax({
     url: '/api/patch/gettestchannelId',
-    //url:'/api/api1',
     type: 'get',
-//    dataType:'json',
     success: function(res) {
         console.log(res);
     }
 });
-
-
-
