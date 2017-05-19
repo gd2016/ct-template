@@ -17,25 +17,25 @@ var constConfig = {
         types(){
             var that = constConfig;
             $.ajax({
-                url:'/api/constlis1',
-                cache:false,
-                async:false
-            }).done(res=>{
-                if(res.Status){
-                    that.data.types.data=[];
-                    res.Data.map(item=>{
+                url: '/api/constlis1',
+                cache: false,
+                async: false
+            }).done(res=> {
+                if (res.Status) {
+                    that.data.types.data = [];
+                    res.Data.map(item=> {
                         that.data.types.data.push({
                             key: item.Id,
                             val: item.Val
                         })
                     })
-                }else{
+                } else {
                     //warning!请给出默认值
-                    that.data.types.data=[];
+                    that.data.types.data = [];
                 }
-            }).fail((error)=>{
+            }).fail((error)=> {
                 //warning!请给出默认值
-                that.data.types.data=[];
+                that.data.types.data = [];
             })
         }
     },
