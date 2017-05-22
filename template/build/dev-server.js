@@ -2,16 +2,15 @@ require('./check-versions')()
 
 var config = require('../config')
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+    process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var webpackConfig = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
-  ? require('./webpack.prod.conf')
-  : {{/if_or}}require('./webpack.dev.conf')
+var bodyParser = require('body-parser')
+var webpackConfig = require('./webpack.dev.conf')
 var mock = require('../mock');
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
@@ -25,29 +24,29 @@ var app = express()
 var compiler = webpack(webpackConfig)
 
 app.get(/^(\/|\/index.html)$/, function(req, res) {
-  res.sendFile(path.join(__dirname, '../', 'index.html'));
+    res.sendFile(path.join(__dirname, '../', 'index.html'));
 });
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  quiet: true
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: () => {}
+    log: () => {}
 })
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
-  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-    hotMiddleware.publish({ action: 'reload' })
-    cb()
-  })
+    compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+        hotMiddleware.publish({ action: 'reload' })
+        cb()
+    })
 })
 
 // handle fallback for HTML5 history API
 //只有以下两个请求才是html页面请求，其他均不会请求html
 app.use(require('connect-history-api-fallback')({
-  htmlAcceptHeaders: ['text/html', 'application/xhtml+xml']
+    htmlAcceptHeaders: ['text/html', 'application/xhtml+xml']
 }))
 
 // serve webpack bundle output
@@ -62,23 +61,24 @@ var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsS
 app.use(staticPath, express.static('./static'))
 
 //模拟数据
+app.use(bodyParser());
 mock(app);
 
 var index=typeof process.argv[2]!=='undefined' ? config.dev.assetsPublicPath+process.argv[2]+'.html' : '';
 var uri = 'http://'+host+':' + port+index;
 
 devMiddleware.waitUntilValid(function () {
-  console.log('> Listening at ' + uri + '\n')
+    console.log('> Listening at ' + uri + '\n')
 })
 
 module.exports = app.listen(port,host, function (err) {
-  if (err) {
-    console.log(err)
-    return
-  }
+    if (err) {
+        console.log(err)
+        return
+    }
 
-  // when env is testing, don't need open it
-  if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-    opn(uri)
-  }
+    // when env is testing, don't need open it
+    if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+        opn(uri)
+    }
 })
