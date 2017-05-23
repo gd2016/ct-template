@@ -3,6 +3,7 @@ var mockData = require("./define");
 var apiProxy = function() {
     if (mockData.define.isProxy) {
         return proxy(mockData.define.domain, {
+            limit:'500mb',
             forwardPath: function(req, res) {
                 return req._parsedUrl.path
             }
