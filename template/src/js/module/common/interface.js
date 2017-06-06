@@ -2,7 +2,7 @@ import utility from 'ct-utility';
 var getEnv = function() {
     var env = '';
     var port = location.port;
-    var tdl = location.host.split('.').slice(-1)[0];
+    var tdl = location.host.split('.').slice(-1)[0].split(':')[0];
 
     if (port === '8080') {
         env = 'debug';

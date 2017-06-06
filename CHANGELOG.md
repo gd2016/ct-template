@@ -15,3 +15,7 @@
 - 修复 缺失body-parser引发的bug
 
 - 修复 express-http-proxy转发大文件请求时失败(添加limit为更大的值)
+
+**2017-06-06**
+
+- 修复 interface中对于tdl的获取的bug
