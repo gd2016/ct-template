@@ -1,21 +1,31 @@
+/**
+ * 该模块主要用于配置系统中的接口、链接等地址
+ *
+ * 其通过检测url中的顶级域名(如org / net)和端口号来判断系统当前所在的环境(测试版/预发版/正式版)
+ * 根据环境的不同将需要改变的地址改变到对应环境中的地址
+ *
+ * 开发时请咨询后端开发，根据实际情况进行判断环境(环境判断逻辑可修改，!!!请注意)
+ *
+ */
+
 import utility from 'ct-utility';
 var getEnv = function() {
-    var env = '';
-    var port = location.port;
-    var tdl = location.host.split('.').slice(-1)[0].split(':')[0];
+    let env = '';
+    const port = location.port;
+    const tdl = location.host.split('.').slice(-1)[0].split(':')[0];
 
-    if (port === '8080') {
-        env = 'debug';
-    } else if (tdl === 'org' && port === '1505') {
-        env = 'test';
-    } else {
+    if (tdl === 'net' && port === '1506') {
+        env = 'pre';
+    } else if (tdl === 'net') {
         env = 'official';
+    } else {
+        env = 'test';
     }
     return env;
 };
 var base = {
     common: {
-        api1: '/api/api111', //请默认设置可变项为正式版接口地址，以防止正式版出错
+        api1: '/api/api111',
         api2: '/api/api2'
     },
     patchList: {
@@ -29,14 +39,14 @@ var base = {
     }
 };
 var Interface = {
-    debug: utility.base.extend(true, {}, base, {
-        common: {
-            api1: '/api/api1'
-        }
-    }),
     test: utility.base.extend(true, {}, base, {
         common: {
             api1: '/api/api11'
+        }
+    }),
+    pre: utility.base.extend(true, {}, base, {
+        common: {
+            api1: '/api/api111'
         }
     }),
     official: utility.base.extend(true, {}, base, {
