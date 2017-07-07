@@ -1,91 +1,92 @@
 /**
  * @author rubyisapm
  */
+import utility from 'ct-utility';
+import Interface from 'common/interface';
 var constConfig = {
-    data: {
-        reportType: [
-            {
-                key: 1,
-                val: '下载',
-                color: 'text-danger'
-            }, {
-                key: 2,
-                val: '安装',
-                color: 'text-success'
-            }
-        ],
-        types(){
-            var that = constConfig;
+    auditStatus: [{
+        key: 0,
+        val: '不限'
+    }, {
+        key: 1,
+        val: '审核通过'
+    }, {
+        key: 2,
+        val: '审核不通过'
+    }],
+    portraitType(){
+        const that = constConfig;
+        let p;
 
-            $.ajax({
-                url: '/api/constlis1',
-                cache: false,
-                async: false
-            }).done(res=> {
-                if (res.Status) {
-                    that.data.types.data = [];
-                    res.Data.map(item=> {
-                        that.data.types.data.push({
-                            key: item.Id,
-                            val: item.Val
+        if (Array.isArray(that.portraitType.data) && that.portraitType.data.length > 0) {
+            p = Promise.resolve(that.portraitType.data);
+        } else {
+            p = Promise.resolve($.ajax({
+                url: Interface.common.getPortraitTypeList,
+                cache: false
+            })).then(res=> {
+                res = utility.objTransfer.lowerKey(res);
+
+                if (res.statusCode === 0) {
+                    that.portraitType.data = [{
+                        key: 0,
+                        val: '不限'
+                    }];
+                    res.data.map(item=> {
+                        that.portraitType.data.push({
+                            key: item.key,
+                            val: item.val
                         });
                     });
                 } else {
                     //warning!请给出默认值
-                    that.data.types.data = [];
+                    that.portraitType.data = [];
                 }
-            }).fail(()=> {
+            }).catch(()=> {
                 //warning!请给出默认值
-                that.data.types.data = [];
+                that.portraitType.data = [];
             });
         }
+        return p;
     },
-    getter: {
-        getData(col){
-            var data;
-            var that = constConfig;
+    getData(col, hasDef = true, def = '不限'){
+        let data;
+        const that = constConfig;
 
-            if (Array.isArray(that.data[col])) {
-                data = that.data[col];
-            } else if (Array.isArray(that.data[col].data) && that.data[col].data.length > 0) {
-                data = that.data[col].data;
-            } else {
-                that.data[col]();
-                data = that.data[col].data;
-            }
-            return data;
-        },
-        getValByKey(col, key){
-            var data = constConfig.getter.getData(col);
-            var matchedItem;
-
-            matchedItem = data.filter((item)=> {
-                return item.key === key;
-            });
-            return matchedItem[0].val;
-        },
-        getKeyByVal(col, val){
-            var data = constConfig.getter.getData(col);
-            var matchedItem = data.filter((item)=> {
-                return item.val === val;
-            });
-
-            return matchedItem[0].key;
-        },
-        getListConfig(col){
-            var data = constConfig.getter.getData(col);
-            var config = {};
-
-            data.map((item)=> {
-                config[item.key] = {
-                    text: item.val
-                };
-                if (typeof item.color !== 'undefined') {
-                    config[item.key].className = item.color;
-                }
-            });
-            return config;
+        if (Array.isArray(that[col])) {
+            data = JSON.parse(JSON.stringify(that[col]));
+        } else if (Array.isArray(that[col].data) && that[col].data.length > 0) {
+            data = JSON.parse(JSON.stringify(that[col].data));
         }
+
+        if (!hasDef) {
+            data = data.slice(1);
+        } else if (def !== '不限') {
+            data[0].val = def;
+        }
+        return data;
+    },
+    getVal(col, key, def = '不限'){
+        const data = constConfig.getData(col);
+        const matchedItem = data.filter((item)=> {
+            return item.key === key;
+        });
+
+        if (matchedItem[0].val === '不限' && (def === '请选择' || def === '全部')) {
+            return def;
+        }
+        return matchedItem[0].val;
+    },
+    getKey(col, val){
+        if (val === '请选择' || val === '全部') {
+            val = '不限';
+        }
+        const data = constConfig.getData(col);
+        const matchedItem = data.filter((item)=> {
+            return item.val === val;
+        });
+
+        return matchedItem[0].key;
     }
 };
 
