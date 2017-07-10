@@ -17,7 +17,7 @@ const getPagePermission = function(page, permisson = []) {
     const pageConfig = config[page];
     const pagePermissionStr = JSON.stringify(pageConfig).replace(/\d{6}/g, (match)=> {
         match = match * 1;
-        return permisson.includes(match).toString();
+        return (permisson.indexOf(match) > -1).toString();
     });
 
     return JSON.parse(pagePermissionStr);
