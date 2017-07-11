@@ -36,7 +36,6 @@ export default function(page) {
     })).then(res=> {
         res = utility.objTransfer.lowerKey(res);
         if (res.statusCode === 0) {
-            res.data = [300105, 102343];
             const pagePermission = getPagePermission(page, res.data);
 
             return Promise.resolve(pagePermission);

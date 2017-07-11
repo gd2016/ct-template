@@ -112,7 +112,7 @@ module.exports = {
             'no-fallthrough': 2,//禁止 case 语句落空
             'no-with': 2,//禁用 with 语句,
             'default-case': 2,//要求 switch 语句中有 default 分支
-            'consistent-return': 2, //要求 return 语句要么总是指定返回的值，要么不指定
+            //'consistent-return': 2, //要求 return 语句要么总是指定返回的值，要么不指定
             'dot-notation': 2, //要求使用点号
             'no-else-return': 2,//禁止 if 语句中 return 语句之后有 else 块
             'no-extend-native': 2,//不要扩展原生对象
@@ -189,7 +189,7 @@ module.exports = {
             'no-duplicate-imports': 2,//同一模块有多个导入时一次性写完
             'handle-callback-err': 0,//要求回调函数中有容错处理
             'comma-style': [2, 'last'], //强制使用一致的逗号风格
-            'complexity': [2, 3], //指定程序中允许的最大环路复杂度
+            //'complexity': [2, 3], //指定程序中允许的最大环路复杂度
             'computed-property-spacing': [2, 'never'],//禁止在计算的属性的方括号中使用空格
             'constructor-super': 0, //要求在构造函数中有 super() 的调用
             'no-new-require': 2,//禁止调用 require 时使用 new 操作符
