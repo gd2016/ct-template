@@ -1,8 +1,12 @@
 /**
  * @author rubyisapm
+ * 该模块用于管理项目中的所有常量
+ *
  * 约定：
- * 常量为一个数组，其中的每一项有两个key(key:常量的唯一标识; val:常量的描述)
- * 请遵循key val的形式，因为后面的统一方法中是读取数据的key val的。
+ * 1. 常量为一个数组，其中的每一项有两个key(key:常量的唯一标识; val:常量的描述)
+ * 2. 常量的设置请遵循key val的形式，因为后面的统一方法中是读取数据的key val的。
+ * 3. 常量必须有默认项，即'请选择'、'全部'、'不限'所在的项，并且保证在数组的第一项
+ * 4. 模块支持的常量默认项兼容'请选择'、'全部'、'不限'三种
  *
  * 名词解释：
  * 静态常量: 前端静态写入的常量，如下面的auditStatus
@@ -14,10 +18,10 @@
  * 模块外部对常量的获取方式:
  * 1. 建议统一采用constConfig.getData进行获取
  * 2. 对于动态常量的获取，首先确保数据被请求到，请使用例如
- * constConfig.portraitType().then(function(){this.portraitTypeList=constConfig.getData(传入参数)})的方式获取。
+ * constConfig.portraitType().then(function(){this.portraitTypeList=constConfig.getData('portraitType')})的方式获取并设置到自己的模块中。
  *
  * constConfig内的通用方法:
- * 注意: 通用方法不需要开发者改写
+ * !!注意: 通用方法不需要开发者改写
  * 1. getData 获取一个常量
  * 2. getVal 获取一个常量的指定描述，如获取auditStatus中key为1的val值
  * 3. getKey 获取一个常量的指定key，如获取auditStatus中val为'审核通过'的key
@@ -38,12 +42,14 @@ var constConfig = {
     }],
     /**
      * 该方法为动态常量的定义
-     * 该方法返回一个promise，用于通过接口获取后端常量。
+     * 该方法返回一个promise，用于通过接口获取后端常量，开发者需要使用该常量时需要调用该方法，以便拿到请求数据的promise实例，来进行下一步操作
+     *
+     * 缓存：
      * 该方法通过将数据加入到如portraitType.data中进行数据缓存，二次获取直接读取缓存中的内容。
      * 后续提到的缓存，是指portraitType.data
      *
      * 方法的调用时机：
-     * 在用到portraitType常量时，执行例如constConfig.portraitType().then(function(){this.portraitTypeList=constConfig.getData(传入参数)})。
+     * 在用到portraitType常量时，执行例如constConfig.portraitType().then(function(){this.portraitTypeList=constConfig.getData('portraitType')})。
      * 其中的this.portraitTypeList为vue对象中的portraitType属性.
      */
     portraitType(){
@@ -86,6 +92,7 @@ var constConfig = {
         return p;
     },
     /**
+     * 获取某个常量的数据
      * @param col String 需要获取的常量，如'auditStatus'
      * @param hasDef Boolean 返回的数据中是否需要带默认值，如'全部'/'不限'
      * @param def String 在hasDef为true时生效，此项指定默认值的描述，默认为'不限'；如果你需要默认值为'全部',请将参数def设置为'全部'
@@ -108,6 +115,7 @@ var constConfig = {
         return data;
     },
     /**
+     * 获取某个常量中指定key对应的val
      * @param col String 需要获取的常量，如'auditStatus'
      * @param key [js基础类型的数据] 指定需要获取val值对应的key值
      * @param def String 此项指定默认值的描述，默认为'不限'；如果你需要默认值为'全部',请将参数def设置为'全部'
@@ -124,6 +132,7 @@ var constConfig = {
         return matchedItem[0].val;
     },
     /**
+     * 获取某个常量中指定val对应的key
      * @param col String 需要获取的常量，如'auditStatus'
      * @param val String 指定需要获取key值对应的val值
      */
