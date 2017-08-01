@@ -10,7 +10,7 @@ try{
 files.map((file) => {
     var data = require(__dirname + '/data/' + file);
     Object.keys(data).map((key) => {
-        if(typeof data[key].$params==='undefined'){
+        if(typeof data[key].$params==='undefined' && typeof data[key].$method==='undefined' && typeof data[key].$contentType==='undefined' && typeof data[key].$specParams==='undefined'){
             interFaces.set(key.toLowerCase(), data[key].$res || data[key]);
         }else{
             if(typeof interFaces.get(key.toLowerCase())==='undefined'){

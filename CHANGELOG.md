@@ -52,3 +52,4 @@
 
 - 新增 package.json中加入jsx语法编译支持 "babel-helper-vue-jsx-merge-props": "^2.0.2","babel-plugin-syntax-jsx": "^6.18.0",
 
+- 优化 加入restful接口数据模拟支持(通过mock/data中配置$method/$specParams/$contentType/$params检测请求是否符合)

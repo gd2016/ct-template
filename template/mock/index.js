@@ -3,30 +3,78 @@ var mockData = require("./define");
 var apiProxy = function() {
     if (mockData.define.isProxy) {
         return proxy(mockData.define.domain, {
-            limit:'500mb',
             forwardPath: function(req, res) {
                 return req._parsedUrl.path
             }
         });
     } else {
         return function(req, res, next) {
-            var postParams=Object.keys(req.body);
+            var useBodyParam = ['post', 'put', 'delete', 'options', 'patch', 'propfind', 'proppatch', 'mkcol', 'copy', 'move', 'lock', 'unlock'];
+            var useQueryParam = ['get', 'head'];
+            var method = req.method.toLocaleLowerCase();
+            var isQueryLike = useQueryParam.indexOf(method) > -1;
+            var queryParams = req.query;//获取query字符串的对象形式(get实质就是添加query) get head
+            var bodyParams = req.body;//获取请求主体中的数据 post put delete options patch PROPFIND PROPPATCH MKCOL COPY MOVE LOCK UNLOCK
             if (req.baseUrl) {
-                if(Array.isArray(mockData.getInterFace(req.baseUrl)) && typeof mockData.getInterFace(req.baseUrl)[0].$params!=='undefined'){
-                    var data=mockData.getInterFace(req.baseUrl).filter(function(mockdata){
-                        var params=mockdata.$params;
-                        return params.filter(function(param){
-                                return postParams.indexOf(param)===-1;
-                            }).length===0; // paramsMatched
+                var reqs = mockData.getInterFace(req.baseUrl);
+                var hasSame = Array.isArray(reqs);
+                if (hasSame) {
+                    var matchReqs = reqs.filter(function(item) {
+                        var paramsMatch = false,
+                            methodMatch = false,
+                            contentTypeMatch = false,
+                            specParamMatch = false;
+                        if (typeof item.$params !== 'undefined') {
+                            var paramKeys;
+                            if (isQueryLike) {
+                                paramKeys = Object.keys(queryParams);
+                            } else {
+                                paramKeys = Object.keys(bodyParams);
+                            }
+                            paramsMatch = item.$params.filter(function(item) {
+                                return paramKeys.indexOf(item) === -1;
+                            }).length === 0;
+                        } else {
+                            paramsMatch = true;
+                        }
+                        if (typeof item.$method !== 'undefined') {
+                            methodMatch = item.$method.toLowerCase() === method;
+                        } else {
+                            methodMatch = true;
+                        }
+                        if (typeof item.$contentType !== 'undefined') {
+                            contentTypeMatch = req.is(item.$contentType);
+                        } else {
+                            contentTypeMatch = true;
+                        }
+                        if (typeof item.$specParam !== 'undefined') {
+                            var params;
+                            if (isQueryLike) {
+                                params = queryParams;
+                            } else {
+                                params = bodyParams;
+                            }
+                            for (var i in item.$specParams) {
+                                if (item.$specParams.hasOwnProperty(i)) {
+                                    specParamMatch = specParamMatch[i] === params[i];
+                                    if (!specParamMatch) {
+                                        break;
+                                    }
+                                }
+                            }
+                        } else {
+                            specParamMatch = true;
+                        }
+                        return paramsMatch && methodMatch && contentTypeMatch && specParamMatch;
                     });
-                    if(data.length>0){
-                        res.json(data[0].$res);
-                    }else{
+                    if (matchReqs.length > 0) {
+                        return res.json(matchReqs[0].$res);
+                    } else {
                         res.json({
                             "msg": "nodata"
                         });
                     }
-                }else{
+                } else {
                     res.json(mockData.getInterFace(req.baseUrl));
                 }
             } else {
