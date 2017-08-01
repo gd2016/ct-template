@@ -46,3 +46,9 @@
 
 - 修改 将jdpicker版本改为2.0.0
 
+**2017-08-01**
+
+- 修复 在项目中加入babel-polyfill的支持
+
+- 新增 package.json中加入jsx语法编译支持 "babel-helper-vue-jsx-merge-props": "^2.0.2","babel-plugin-syntax-jsx": "^6.18.0",
+
