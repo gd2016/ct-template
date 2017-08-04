@@ -57,3 +57,5 @@
 **2017-08-04**
 
 - 修复 mock数据时匹配全路径（将baseUrl修改为baseUrl+path形式）
+
+- 修复 将上述的path兼容win和mac win中的req.path以'/'结束
