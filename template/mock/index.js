@@ -15,8 +15,8 @@ var apiProxy = function() {
             var isQueryLike = useQueryParam.indexOf(method) > -1;
             var queryParams = req.query;//获取query字符串的对象形式(get实质就是添加query) get head
             var bodyParams = req.body;//获取请求主体中的数据 post put delete options patch PROPFIND PROPPATCH MKCOL COPY MOVE LOCK UNLOCK
-            if (req.baseUrl) {
-                var reqs = mockData.getInterFace(req.baseUrl);
+            if (req.baseUrl+req.path) {
+                var reqs = mockData.getInterFace(req.baseUrl+req.path);
                 var hasSame = Array.isArray(reqs);
                 if (hasSame) {
                     var matchReqs = reqs.filter(function(item) {
@@ -75,7 +75,7 @@ var apiProxy = function() {
                         });
                     }
                 } else {
-                    res.json(mockData.getInterFace(req.baseUrl));
+                    res.json(mockData.getInterFace(req.baseUrl+req.path));
                 }
             } else {
                 res.json({
