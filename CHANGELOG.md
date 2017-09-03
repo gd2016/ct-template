@@ -64,4 +64,8 @@
 
 **2017-08-14**
 
-- 修复 fix bug
+- 修复 fix bug 加入"babel-plugin-transform-vue-jsx": "^3.4.3"
+
+**2017-09-03**
+
+-修复 isProxy:true时post数据无法被服务端接收。mock中仅当isProxy:false时加入bodyParser解析，并由原来的bodyParser()变为bodyParser.urlencoded({extended:true})和bodyParser.json()

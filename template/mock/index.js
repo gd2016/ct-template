@@ -1,5 +1,7 @@
 var proxy = require("express-http-proxy");
 var mockData = require("./define");
+var bodyParser = require('body-parser')
+
 var apiProxy = function() {
     if (mockData.define.isProxy) {
         return proxy(mockData.define.domain, {
@@ -16,6 +18,7 @@ var apiProxy = function() {
             var queryParams = req.query;//获取query字符串的对象形式(get实质就是添加query) get head
             var bodyParams = req.body;//获取请求主体中的数据 post put delete options patch PROPFIND PROPPATCH MKCOL COPY MOVE LOCK UNLOCK
             var path=req.path.replace(/\/$/,'');
+
             if (req.baseUrl+path) {
                 var reqs = mockData.getInterFace(req.baseUrl+path);
                 var hasSame = Array.isArray(reqs);
@@ -48,7 +51,7 @@ var apiProxy = function() {
                         } else {
                             contentTypeMatch = true;
                         }
-                        if (typeof item.$specParam !== 'undefined') {
+                        if (typeof item.$specParams !== 'undefined') {
                             var params;
                             if (isQueryLike) {
                                 params = queryParams;
@@ -57,7 +60,7 @@ var apiProxy = function() {
                             }
                             for (var i in item.$specParams) {
                                 if (item.$specParams.hasOwnProperty(i)) {
-                                    specParamMatch = specParamMatch[i] === params[i];
+                                    specParamMatch = item.$specParams[i] === params[i];
                                     if (!specParamMatch) {
                                         break;
                                     }
@@ -94,6 +97,8 @@ module.exports = function(app) {
     } else {
         var keys = mockData.interFaces.keys();  //遍历Key
         for (var key of keys) {
+            app.use(bodyParser.urlencoded({extended:true}));
+            app.use(bodyParser.json());
             app.use(key, apiProxy);
         }
     }

@@ -9,7 +9,6 @@ var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
-var bodyParser = require('body-parser')
 var webpackConfig = require('./webpack.dev.conf')
 var mock = require('../mock');
 // default port where dev server listens for incoming traffic
@@ -61,7 +60,6 @@ var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsS
 app.use(staticPath, express.static('./static'))
 
 //模拟数据
-app.use(bodyParser());
 mock(app);
 
 var index=typeof process.argv[2]!=='undefined' ? config.dev.assetsPublicPath+process.argv[2]+'.html' : '';
