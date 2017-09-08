@@ -68,4 +68,10 @@
 
 **2017-09-03**
 
--修复 isProxy:true时post数据无法被服务端接收。mock中仅当isProxy:false时加入bodyParser解析，并由原来的bodyParser()变为bodyParser.urlencoded({extended:true})和bodyParser.json()
+- 修复 isProxy:true时post数据无法被服务端接收。mock中仅当isProxy:false时加入bodyParser解析，并由原来的bodyParser()变为bodyParser.urlencoded({extended:true})和bodyParser.json()
+
+**2017-09-08**
+
+- 新增 加入pace引用
+
+- 修改 将css版本升级到1.0.1
