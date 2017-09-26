@@ -3,7 +3,7 @@ var path = require('path')
 
 var config= {
   version:'1.0.0',
-  toScriptServer:false,
+  toScriptServer:true,
   build: {
     env: require('./prod.env'),
     assetsRoot: path.resolve(__dirname, '../'),
