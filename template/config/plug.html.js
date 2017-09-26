@@ -38,7 +38,7 @@ function htmlPlugins(prod) {
                     var server=scriptServer[serverKey];
                     var optionClone=JSON.parse(JSON.stringify(option));
                     optionClone.script='<script src="'+server+config.build.assetsPublicPath+config.build.assetsSubDirectory+'/'+config.version+'/js/'+filename+'.js"></script>';
-                    optionClone.filename = path.resolve(__dirname, '../view_'+text[serverKey]+'/' + filename + '.html');
+                    optionClone.filename = path.resolve(__dirname, '../view_'+text[serverKey]+'('+serverKey+')'+'/' + filename + '.html');
                     optionClone.minify= {
                         removeComments: true,
                         collapseWhitespace: true,
