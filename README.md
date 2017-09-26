@@ -177,9 +177,21 @@ mock/data下保存着接口响应数据，当isProxy为false时，返回该目�
 
 ### 配置
 
-/config/index中的config.version。
+#### /config/index中的config.version。
 
 请在新版本构建时修改该参数，脚手架会帮你生成该版本所需的资源。
+
+#### /config/index中的config.toScriptServer
+
+该选项在是否需要将脚本部署到资源站(即非该项目站点)中时使用
+
+*资源部署到资源站*
+
+config.toScriptServer需设置为true，此时该工具会帮你生成对应不同版本的view文件（如view_开发版、view_测试版等）
+
+*资源放在项目中*
+
+config.toScriptServer需设置为false，此时该工具只会生成一个view文件，其中的脚本链接使用绝对路径指向该项目生成的脚本
 
 ## 代码检查
 
