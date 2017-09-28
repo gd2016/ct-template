@@ -57,7 +57,7 @@ https://www.showdoc.cc/1665709?page_id=15328534
 版本 |   IP | 文件位置
 --- | --- | ---
 开发版 | 192.168.1.18 | /D:/www2/CtStaticAdm_dev/A/{项目目录,如LvSysAdm/EmergencySwitch/}
-提测版 |   无 |    无
+提测版 | 192.168.1.18 | /D:/www2/CtStaticAdm_test/A/{项目目录,如LvSysAdm/EmergencySwitch/}
 测试版 |   192.168.1.18 | /D:/www2/CtStaticAdm/A/{项目目录,如LvSysAdm/EmergencySwitch/}
 预发版 | 121.40.106.185 | /E:/pre/staticadm_pre/A/{项目目录,如LvSysAdm/EmergencySwitch/}
 正式1 |  121.40.106.185 | /D:/www8/staticadm/A/{项目目录,如LvSysAdm/EmergencySwitch/}
@@ -68,7 +68,7 @@ https://www.showdoc.cc/1665709?page_id=15328534
 站点 | 地址
 --- | ---
 开发版 | {项目index.html地址，如http://lv.admin.ct108.org:1506/static/EmergencySwitch/index.html}
-提测版 |   无
+提测版 | {项目index.html地址，如http://lv.admin.ct108.org:1507/static/EmergencySwitch/index.html}
 测试版 | {项目index.html地址，如http://lv.admin.ct108.org:930/static/EmergencySwitch/index.html}
 预发版 | {项目index.html地址，如http://lv.admin.ct108.net:2505/static/EmergencySwitch/index.html}
-正式1 | {项目index.html地址，如http://lv.admin.ct108.net/static/EmergencySwitch/index.html}
+正式版 | {项目index.html地址，如http://lv.admin.ct108.net/static/EmergencySwitch/index.html}
