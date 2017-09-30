@@ -193,6 +193,10 @@ config.toScriptServer需设置为true，此时该工具会帮你生成对应不�
 
 config.toScriptServer需设置为false，此时该工具只会生成一个view文件，其中的脚本链接使用绝对路径指向该项目生成的脚本
 
+#### /config/index中的config.pageExtend
+
+默认为html。当开发者需要更改生成页面的文件扩展名时，设置该项为相应的扩展名，如'cshtml'
+
 ## 代码检查
 
 脚手架使用eslint进行代码检查，**请在初始化项目时选择none模式以使用内置.eslinrc.js文件来进行代码检查。**

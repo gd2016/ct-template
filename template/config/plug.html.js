@@ -38,7 +38,7 @@ function htmlPlugins(prod) {
                     var server=scriptServer[serverKey];
                     var optionClone=JSON.parse(JSON.stringify(option));
                     optionClone.script='<script src="'+server+config.build.assetsPublicPath+config.build.assetsSubDirectory+'/'+config.version+'/js/'+filename+'.js"></script>';
-                    optionClone.filename = path.resolve(__dirname, '../view_'+text[serverKey]+'('+serverKey+')'+'/' + filename + '.html');
+                    optionClone.filename = path.resolve(__dirname, '../view_'+text[serverKey]+'('+serverKey+')'+'/' + filename + '.' + config.pageExtend);
                     optionClone.minify= {
                         removeComments: true,
                         collapseWhitespace: true,
@@ -48,6 +48,7 @@ function htmlPlugins(prod) {
                     htmlPlugins.push(new HtmlWebpackPlugin(optionClone));
                 });
             }else{
+                option.filename= path.resolve(__dirname, '../view/' + filename + '.' + config.pageExtend);
                 option.script='<script src="'+config.build.assetsPublicPath+config.build.assetsSubDirectory+'/'+config.version+'/js/'+filename+'.js"></script>';
                 option.minify= {
                     removeComments: true,

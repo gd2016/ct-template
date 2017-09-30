@@ -4,7 +4,8 @@ var path = require('path')
 var config= {
   version:'1.0.0',
   toScriptServer:true,
-  build: {
+    pageExtend:'html',
+    build: {
     env: require('./prod.env'),
     assetsRoot: path.resolve(__dirname, '../'),
     assetsSubDirectory: 'asset',
