@@ -32,11 +32,11 @@ webpack + Vuejs
 
 ### 结构说明
 
-[遵循vuejs项目开发规范]()
+[遵循项目目录规范](http://192.168.1.26:8080/doku.php?id=home:huangxj:admsys:projectrule:vuejsdirectory)
 
 ### 接口文档
 
-https://www.showdoc.cc/1665709?page_id=15328534
+{接口文档链接 || swagger链接 || 本项目内部.doc文件的git地址}
 
 ## 兼容性说明
 
