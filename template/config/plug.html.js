@@ -7,11 +7,11 @@ var utils=require('../build/utils');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var config=require('./index');
 var scriptServer={
-    dev:'//staticadm.tcy365.org:1506',//开发版
-    test:'//staticadm.tcy365.org:1507',//提测版
-    testStable:'//staticadm.tcy365.org:1505',//测试稳定版
-    pre:'//staticadm.tcy365.com:2505',//预发版
-    official:'//staticadm.tcy365.com'//正式版
+    dev:'//staticadm.tcy365.org:1506/A',//开发版
+    test:'//staticadm.tcy365.org:1507/A',//提测版
+    testStable:'//staticadm.tcy365.org:1505/A',//测试稳定版
+    pre:'//staticadm.tcy365.com:2505/A',//预发版
+    official:'//staticadm.tcy365.com/A'//正式版
 };
 var text={
     dev:'开发版',
