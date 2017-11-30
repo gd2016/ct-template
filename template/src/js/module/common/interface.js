@@ -17,7 +17,7 @@ var getEnv = function() {
         'net:8001': 'pre',
         'net': 'official'
     };
-    const tdl = location.host.split('.').slice(-1);
+    const tdl = location.host.split('.').slice(-1)[0];
 
     return env[tdl] || 'dev';
 };
