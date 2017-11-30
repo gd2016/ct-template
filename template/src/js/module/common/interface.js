@@ -10,18 +10,16 @@
 
 import utility from 'ct-utility';
 var getEnv = function() {
-    let env = '';
-    const port = location.port;
-    const tdl = location.host.split('.').slice(-1)[0].split(':')[0];
+    let env = {
+        'org:1506': 'dev',
+        'org:1507': 'test',
+        'org:1505': 'testStable',
+        'net:8001': 'pre',
+        'net': 'official'
+    };
+    const tdl = location.host.split('.').slice(-1);
 
-    if (tdl === 'net' && port === '1506') {
-        env = 'pre';
-    } else if (tdl === 'net') {
-        env = 'official';
-    } else {
-        env = 'test';
-    }
-    return env;
+    return env[tdl] || 'dev';
 };
 var base = {
     common: {
@@ -39,7 +37,17 @@ var base = {
     }
 };
 var Interface = {
+    dev: utility.base.extend(true, {}, base, {
+        common: {
+            api1: '/api/api11'
+        }
+    }),
     test: utility.base.extend(true, {}, base, {
+        common: {
+            api1: '/api/api11'
+        }
+    }),
+    testStable: utility.base.extend(true, {}, base, {
         common: {
             api1: '/api/api11'
         }
