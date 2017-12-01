@@ -10,7 +10,7 @@
 
 import utility from 'ct-utility';
 var getEnv = function() {
-    let env = {
+    const env = {
         'org:1506': 'dev',
         'org:1507': 'test',
         'org:1505': 'testStable',
