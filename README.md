@@ -212,7 +212,11 @@ config.toScriptServer需设置为false，此时该工具只会生成一个view�
 设置config/index中的dev.assetsPublicPath和build.assetsPublicPath'/static/projectName/'。
 
 
+## 脚手架内置脚本使用示例
 
+### code-msg.js
+
+[使用示例](https://github.com/ct-adc/webpack/blob/master/README.md)
 
 
 
