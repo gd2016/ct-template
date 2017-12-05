@@ -2,7 +2,7 @@
  * @author rubyisapm
  */
 const codeMsg = {
-    groupError: 10200,
+    groupError: 10200, // 当一个code错误码为组合错误(即包含了多个错误)时，使用组合code
     msgByCode: {
         10101: '游戏缩写不合法',
         10102: '存在游戏缩写与代码版本的项目',
