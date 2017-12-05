@@ -15,7 +15,7 @@ Promise.resolve($.ajax({
         return Promise.reject(CodeMsg.getMsgByCode(res.code, res.data));
     }
 }).catch(msg=>{
-    // 根据不同的错误状态，找到
+    // 根据不同的错误状态，得出可显示错误信息
     msg = CodeMsg.resolveMsg(msg, '列表请求失败');
     console.log(msg);
 });
