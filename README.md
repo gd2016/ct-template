@@ -214,9 +214,7 @@ config.toScriptServer需设置为false，此时该工具只会生成一个view�
 
 ## 脚手架内置脚本使用示例
 
-### code-msg.js
-
-[使用示例](https://github.com/ct-adc/webpack/blob/master/README.md)
+[使用示例](https://github.com/ct-adc/webpack/blob/master/example.md)
 
 
 
