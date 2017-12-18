@@ -43,13 +43,10 @@ module.exports = {
         "router": {
             "type": "confirm",
             "message": "Install vue-router?"
-        },
-        "lint": {
-            "type": "confirm",
-            "message": "Use ESLint to lint your code?"
-        },
-        "lintConfig": "none"
+        }
     },
+    "lint": true,
+    "lintConfig": "none",
     "filters": {
         ".eslintrc.js": true,
         ".eslintignore": true,
