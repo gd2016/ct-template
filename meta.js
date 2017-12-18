@@ -44,9 +44,33 @@ module.exports = {
             "type": "confirm",
             "message": "Install vue-router?"
         }
+        //"lint": {
+        //    "type": "confirm",
+        //    "message": "Use ESLint to lint your code?"
+        //},
+        //"lintConfig": {
+        //    "when": "lint",
+        //    "type": "list",
+        //    "message": "Pick an ESLint preset",
+        //    "choices": [
+        //        {
+        //            "name": "Standard (https://github.com/feross/standard)",
+        //            "value": "standard",
+        //            "short": "Standard"
+        //        },
+        //        {
+        //            "name": "AirBNB (https://github.com/airbnb/javascript)",
+        //            "value": "airbnb",
+        //            "short": "AirBNB"
+        //        },
+        //        {
+        //            "name": "none (configure it yourself)",
+        //            "value": "none",
+        //            "short": "none"
+        //        }
+        //    ]
+        //}
     },
-    "lint": true,
-    "lintConfig": "none",
     "filters": {
         ".eslintrc.js": true,
         ".eslintignore": true,
@@ -55,9 +79,6 @@ module.exports = {
         "build/webpack.test.conf.js": false,
         "test/e2e/**/*": false,
         "src/router/**/*": false
-    },
-    complete (data) {
-        console.log(data.lintConfig);
     },
     "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };
