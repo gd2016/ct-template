@@ -69,15 +69,15 @@ module.exports = {
           "short": "none"
         }
       ]
-    },
-    "unit": {
-      "type": "confirm",
-      "message": "Setup unit tests with Karma + Mocha?"
-    },
-    "e2e": {
-      "type": "confirm",
-      "message": "Setup e2e tests with Nightwatch?"
     }
+    //"unit": {
+    //  "type": "confirm",
+    //  "message": "Setup unit tests with Karma + Mocha?"
+    //},
+    //"e2e": {
+    //  "type": "confirm",
+    //  "message": "Setup e2e tests with Nightwatch?"
+    //}
   },
   "filters": {
     ".eslintrc.js": "lint",
