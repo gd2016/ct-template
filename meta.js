@@ -56,9 +56,8 @@ module.exports = {
         "test/e2e/**/*": false,
         "src/router/**/*": false
     },
-    complete: function(data){
-        data.lint = true;
-        data.lintConfig = 'none';
+    complete (data) {
+        console.log(data.lintConfig);
     },
     "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };
