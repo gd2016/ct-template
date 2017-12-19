@@ -2,8 +2,9 @@
   "name": "{{ name }}",
   "version": "1.0.0",
   "description": "{{ description }}",
-  "author": "{{ author }}",
-  "private": true,
+  "author": "{{ author }}"{{#if_eq projectType "component"}},
+  "private": false{{/if_eq}}{{#if_eq projectType "business"}},
+  "private": true{{/if_eq}},
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"{{#unit}},
