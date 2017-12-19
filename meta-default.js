@@ -71,18 +71,12 @@ module.exports = {
       ]
     },
     "unit": {
-      //"type": "confirm",
-      //"message": "Setup unit tests with Karma + Mocha?",
-        "filter": function(){
-            return false;
-        }
+      "type": "confirm",
+      "message": "Setup unit tests with Karma + Mocha?"
     },
     "e2e": {
-      //"type": "confirm",
-      //"message": "Setup e2e tests with Nightwatch?",
-        "filter": function(){
-            return false;
-        }
+      "type": "confirm",
+      "message": "Setup e2e tests with Nightwatch?"
     }
   },
   "filters": {
