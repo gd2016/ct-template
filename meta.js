@@ -28,7 +28,13 @@ module.exports = {
         "name": {
             "type": "string",
             "required": true,
-            "message": "Project name"
+            "message": function(data){
+                if(data.projectType === 'component'){
+                    return 'component name';
+                }else if(data.projectType === 'business'){
+                    return 'project name';
+                }
+            }
         },
         "description": {
             "type": "string",
