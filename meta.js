@@ -102,7 +102,9 @@ module.exports = {
         "test/unit/**/*": "unit",
         "build/webpack.test.conf.js": "unit",
         "build/webpack.umd.conf.js": "projectType === 'component'",
-        "src/component": "projectType === 'component'",
+        "src/component": function(data){
+            return data.projectType === 'component';
+        },
         "index.js": "projectType === 'component'",
         "test/e2e/**/*": "e2e"
     },

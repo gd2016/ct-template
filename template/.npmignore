@@ -1,0 +1,12 @@
+build/
+config/
+ejs/
+mock/
+.eslintignore
+.ellintrc.js
+.babelrc
+.postcssrc.js
+index.html
+package-lock.json
+
+
