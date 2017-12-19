@@ -116,4 +116,4 @@ webpack + Vuejs
 预发版 | {项目index.html地址，如http://lv.admin.ct108.net:2505/static/EmergencySwitch/index.html}
 正式版 | {项目index.html地址，如http://lv.admin.ct108.net/static/EmergencySwitch/index.html}
 
-{{/if}}
+{{/if_eq}}
