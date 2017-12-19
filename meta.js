@@ -14,7 +14,7 @@ module.exports = {
             "message": "Your project type",
             "choices": [
                 {
-                    "name": "business project: for business",
+                    "name": "business: for business",
                     "value": "business",
                     "short": "business"
                 },
@@ -102,9 +102,7 @@ module.exports = {
         "test/unit/**/*": "unit",
         "build/webpack.test.conf.js": "unit",
         "build/webpack.umd.conf.js": "projectType === 'component'",
-        "src/component": function(data){
-            return data.projectType === 'component';
-        },
+        "src/component": "projectType === 'component'",
         "index.js": "projectType === 'component'",
         "test/e2e/**/*": "e2e"
     },
