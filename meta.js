@@ -24,6 +24,16 @@ module.exports = {
       "type": "string",
       "message": "Author"
     },
+      "component": {
+          "type": "confirm",
+          "message": "Init project to develop component?"
+      },
+      "componentName": {
+          "when": "component",
+          "type": "string",
+          "required": true,
+          "message": "Component name"
+      },
     "build": {
       "type": "list",
       "message": "Vue build",
@@ -69,30 +79,23 @@ module.exports = {
           "short": "none"
         }
       ]
+    },
+    "unit": {
+      "type": "confirm",
+      "message": "Setup unit tests with Karma + Mocha?"
+    },
+    "e2e": {
+      "type": "confirm",
+      "message": "Setup e2e tests with Nightwatch?"
     }
-    //"unit": {
-    //  //"type": "confirm",
-    //  //"message": "Setup unit tests with Karma + Mocha?",
-    //    "filter": function(){
-    //        return false;
-    //    }
-    //},
-    //"e2e": {
-    //  //"type": "confirm",
-    //  //"message": "Setup e2e tests with Nightwatch?",
-    //    "filter": function(){
-    //        return false;
-    //    }
-    //}
   },
   "filters": {
-      "unit": false,
-      "e2e": false,
     ".eslintrc.js": "lint",
     ".eslintignore": "lint",
     "config/test.env.js": "unit || e2e",
     "test/unit/**/*": "unit",
     "build/webpack.test.conf.js": "unit",
+    "build/webpack.umd.conf.js": "component",
     "test/e2e/**/*": "e2e"
   },
   "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
