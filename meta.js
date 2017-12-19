@@ -69,23 +69,25 @@ module.exports = {
           "short": "none"
         }
       ]
-    },
-    "unit": {
-      //"type": "confirm",
-      //"message": "Setup unit tests with Karma + Mocha?",
-        "filter": function(){
-            return false;
-        }
-    },
-    "e2e": {
-      //"type": "confirm",
-      //"message": "Setup e2e tests with Nightwatch?",
-        "filter": function(){
-            return false;
-        }
     }
+    //"unit": {
+    //  //"type": "confirm",
+    //  //"message": "Setup unit tests with Karma + Mocha?",
+    //    "filter": function(){
+    //        return false;
+    //    }
+    //},
+    //"e2e": {
+    //  //"type": "confirm",
+    //  //"message": "Setup e2e tests with Nightwatch?",
+    //    "filter": function(){
+    //        return false;
+    //    }
+    //}
   },
   "filters": {
+      "unit": false,
+      "e2e": false,
     ".eslintrc.js": "lint",
     ".eslintignore": "lint",
     "config/test.env.js": "unit || e2e",
