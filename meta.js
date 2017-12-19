@@ -14,13 +14,13 @@ module.exports = {
             "message": "Your project type",
             "choices": [
                 {
-                    "name": "normal project",
-                    "value": "normal: for business",
+                    "name": "business project: for business",
+                    "value": "business",
                     "short": "business"
                 },
                 {
-                    "name": "component",
-                    "value": "component: for component",
+                    "name": "component: for component",
+                    "value": "component",
                     "short": "component"
                 }
             ]
