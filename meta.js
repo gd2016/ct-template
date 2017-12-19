@@ -102,8 +102,7 @@ module.exports = {
         "test/unit/**/*": "unit",
         "build/webpack.test.conf.js": "unit",
         "build/webpack.umd.conf.js": "projectType === 'component'",
-        "src/component": "projectType === 'component'",
-        "index.js": "projectType === 'component'",
+        "src/component/**/*": "projectType === 'component'",
         "test/e2e/**/*": "e2e"
     },
     "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
