@@ -9,6 +9,22 @@ module.exports = {
         }
     },
     "prompts": {
+        "projectType": {
+            "type": "list",
+            "message": "Your project type",
+            "choices": [
+                {
+                    "name": "normal project",
+                    "value": "normal: for business",
+                    "short": "business"
+                },
+                {
+                    "name": "component",
+                    "value": "component: for component",
+                    "short": "component"
+                }
+            ]
+        },
         "name": {
             "type": "string",
             "required": true,
@@ -23,16 +39,6 @@ module.exports = {
         "author": {
             "type": "string",
             "message": "Author"
-        },
-        "component": {
-            "type": "confirm",
-            "message": "Init project to develop component?"
-        },
-        "componentName": {
-            "when": "component",
-            "type": "string",
-            "required": true,
-            "message": "Component name"
         },
         "build": {
             "type": "list",
@@ -95,8 +101,9 @@ module.exports = {
         "config/test.env.js": "unit || e2e",
         "test/unit/**/*": "unit",
         "build/webpack.test.conf.js": "unit",
-        "build/webpack.umd.conf.js": "component",
-        "src/component": "component",
+        "build/webpack.umd.conf.js": "projectType === 'component'",
+        "src/component": "projectType === 'component'",
+        "index.js": "projectType === 'component'",
         "test/e2e/**/*": "e2e"
     },
     "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"

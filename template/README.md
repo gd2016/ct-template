@@ -1,5 +1,5 @@
-{{#if component}}
-## {{componentName}}
+{{#if_eq projectType "component"}}
+## {{name}}
 
 {组件描述}
 
@@ -7,10 +7,10 @@
 
 ## 使用
 
-从npm安装{{componentName}}
+从npm安装{{name}}
 
 ```
-npm install {{componentName}}
+npm install {{name}}
 ```
 在代码中使用
 
