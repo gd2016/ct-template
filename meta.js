@@ -11,7 +11,7 @@ module.exports = {
     "prompts": {
         "projectType": {
             "type": "list",
-            "message": "Your project type",
+            "message": "project type",
             "choices": [
                 {
                     "name": "business: for business",
@@ -28,13 +28,7 @@ module.exports = {
         "name": {
             "type": "string",
             "required": true,
-            "message": function(data){
-                if(data.projectType === 'component'){
-                    return 'component name';
-                }else if(data.projectType === 'business'){
-                    return 'project name';
-                }
-            }
+            "message": 'project name'
         },
         "description": {
             "type": "string",
@@ -109,7 +103,9 @@ module.exports = {
         "build/webpack.test.conf.js": "unit",
         "build/webpack.umd.conf.js": "projectType === 'component'",
         "src/component/**/*": "projectType === 'component'",
-        "test/e2e/**/*": "e2e"
+        "test/e2e/**/*": "e2e",
+        "src/js/module/**/*": "projectType === 'business'",
+        "src/css/**/*": "projectType === 'business'"
     },
     "completeMessage": "To get started:\n\n  {{^inPlace}}cd {{destDirName}}\n  {{/inPlace}}npm install\n  npm run dev\n\nDocumentation can be found at https://vuejs-templates.github.io/webpack"
 };
