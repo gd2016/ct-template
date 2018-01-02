@@ -1,5 +1,6 @@
 /**
  * @author rubyisapm
+ * permission的原理：使用后端返回的权限信息进行vue全局混合，以便在vm中进行按钮控制
  */
 import Interface from 'common/interface';
 import utility from 'ct-utility';
@@ -15,7 +16,7 @@ const config = {
 };
 const getPagePermission = function(page, permisson = []) {
     const pageConfig = config[page];
-    const pagePermissionStr = JSON.stringify(pageConfig).replace(/\d{6}/g, (match)=> {
+    const pagePermissionStr = JSON.stringify(pageConfig).replace(/\d{6,8}/g, (match)=> {
         match = match * 1;
         return (permisson.indexOf(match) > -1).toString();
     });
