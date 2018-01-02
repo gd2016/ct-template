@@ -6,6 +6,8 @@
 
 - 优化 升级webpack到V3
 
+- 新增 新增module/common/vue-filter.js
+
 **2017-12-22**
 
 - 修复 将webpack.umd.con.js中的resolve.module改为['src/component','node_modules'], 以便组件打包时根据该路径查找资源
