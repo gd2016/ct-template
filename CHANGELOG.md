@@ -1,5 +1,11 @@
 ## 更新日志
 
+**2018-01-02**
+
+- 修改 将vue版本固定至2.5.x
+
+- 优化 升级webpack到V3
+
 **2017-12-22**
 
 - 修复 将webpack.umd.con.js中的resolve.module改为['src/component','node_modules'], 以便组件打包时根据该路径查找资源
