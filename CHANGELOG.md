@@ -1,5 +1,9 @@
 ## 更新日志
 
+**2018-03-26**
+
+- 修改 将vue和vue-template-compiler 的版本固定到2.5.x
+
 **2018-03-20**
 
 - 修改 将构建目录修改到dist(/assets,/html)中，并加入docker版本
