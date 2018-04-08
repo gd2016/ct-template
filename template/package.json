@@ -16,10 +16,16 @@
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
   },
   "dependencies": {
+{{#if_eq projectType "business"}}
     "vue": "~2.5.0"{{#router}},
     "vue-router": "^2.2.0"{{/router}}
+{{/if_eq}}
   },
   "devDependencies": {
+{{#if_eq projectType "component"}}
+    "vue": "~2.5.0"{{#router}},
+    "vue-router": "^2.2.0"{{/router}},
+{{/if_eq}}
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     {{#lint}}

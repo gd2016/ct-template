@@ -1,5 +1,13 @@
 ## 更新日志
 
+**2018-04-08**
+
+- 优化 当开发组件时，将readme中的使用说明默认使用组件名称
+
+- 优化 当开发组件时，build时设置vue从外部获得
+
+- 优化 当开发组件时，package.json中的vue和vue-router依赖改为开发依赖
+
 **2018-03-26**
 
 - 修改 将vue和vue-template-compiler 的版本固定到2.5.x

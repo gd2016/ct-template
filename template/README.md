@@ -22,7 +22,7 @@
 从npm安装ct-adc-test
 
 ```
-npm install ct-adc-test --save
+npm install {{name}} --save
 ```
 在代码中使用
 

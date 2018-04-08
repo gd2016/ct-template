@@ -41,6 +41,12 @@ module.exports = {
             commonjs2: 'ct-utility',
             amd: 'ct-utility',
             root: 'ct-utility'
+        },
+        'vue': {
+            commonjs: 'vue',
+            commonjs2: 'vue',
+            amd: 'vue',
+            root: 'vue'
         }
     }
 };
