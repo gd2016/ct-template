@@ -8,6 +8,10 @@
 
 - 优化 当开发组件时，package.json中的vue和vue-router依赖改为开发依赖
 
+- 删除 common/premission.js common/const.js 相关内容已独立为组件形式
+
+- 修改 修改index.js示例文件
+
 **2018-03-26**
 
 - 修改 将vue和vue-template-compiler 的版本固定到2.5.x
