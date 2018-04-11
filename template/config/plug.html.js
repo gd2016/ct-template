@@ -12,7 +12,7 @@ var scriptServer = {
     testStable: '//staticadm.tcy365.org:1505/A',//测试稳定版
     pre: '//staticadm.tcy365.com:2505/A',//预发版
     official: '//staticadm.tcy365.com/A',//正式版
-    docker: '//static.tcy365.{domain_suffix}/A'
+    docker: '//staticadm.tcy365.{domain_suffix}/A'
 };
 var text = {
     dev: '开发版1506',

@@ -1,5 +1,9 @@
 ## 更新日志
 
+**2018-04-11**
+
+- 优化 docker构建地址修复为staticadm
+
 **2018-04-08**
 
 - 优化 将babel preset升级为babel-preset-env。替换"babel-preset-latest": "^6.22.0", "babel-preset-stage-2": "^6.22.0",
