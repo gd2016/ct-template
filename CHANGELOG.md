@@ -10,6 +10,14 @@
 
 **2018-04-08**
 
+- 优化 将babel preset升级为babel-preset-env。替换"babel-preset-latest": "^6.22.0", "babel-preset-stage-2": "^6.22.0",
+
+- 优化 升级"babel-loader": "^7.1.4"
+
+- 优化 升级"extract-text-webpack-plugin": "^3.0.2"
+
+**2018-04-08**
+
 - 优化 当开发组件时，将readme中的使用说明默认使用组件名称
 
 - 优化 当开发组件时，build时设置vue从外部获得

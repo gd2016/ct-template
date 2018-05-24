@@ -1,15 +1,12 @@
 {
   "presets": [
-    ["latest", {
-      "es2015": { "modules": false }
-    }],
-    "stage-2"
+    ["env"]
   ],
   "plugins": ["transform-runtime"],
   "comments": false,
   "env": {
     "test": {
-      "presets": ["latest", "stage-2"],
+      "presets": ["env"],
       "plugins": [ "istanbul" ]
     }
   }
