@@ -10,6 +10,18 @@
   vue init ct-adc/webpack [你的项目名称]
 ```
 
+### 初始化配置
+
+![img](https://github.com/ct-adc/webpack/blob/master/init.png)
+
+* project type 组件开发/常规项目开发
+
+* Use ESLint to lint your code 选none以便使用内部约定方式开发
+
+* Setup unit tests with Karma + Mocha? 该功能还未使用 选none
+
+* Setup e2e tests with Nightwatch? 该功能还未使用 选none
+
 ## 配置项说明 
 
 项目根目录下的build/config/mock文件为项目构建配置文件
@@ -59,38 +71,22 @@ npm run build
 ### /ejs
 
 /ejs用于存放项目的.ejs文件。
+
 .ejs文件用于自动生成html文件，也就是项目的真实页面文件。
 脚手架会自动读取其中的全部.ejs文件并在view文件夹中生成对应路径的html文件。
 如ejs/a.ejs会对应生成view/a.html；
-ejs/pm/a.ejs会对应生成view/pm/a.html;
 ejs中的脚本会被自动注入；
-
-**注入规则:** 脚本的路径和名称和该ejs所在的路径和名称对应；/ejs/pm/a.ejs中注入的脚本为asset/[version]/pm/a.js。
-请在开发时严格遵守这一约定。
 
 ### /src
 
 /src用于存放项目脚本文件；
 其中/src/app文件参与入口文件的生成；
-脚手架支持两种入口文件模式:
 
-#### /src/app中每个.js文件都是一个入口文件;如/src/app/pageA.js；
-
-入口文件:/src/app/\*.js
-
-生成文件：/asset/\*.js
-
-配置信息: entryMode.pagePacked:false
-
-#### /src/app中每个文件夹为一个页面的脚本文件，其中的index.js文件才是最终要的入口文件；如src/app/pageA/index.js
+/src/app中每个文件夹为一个页面的脚本文件，其中的index.js文件才是最终要的入口文件；如src/app/pageA/index.js
 
 入口文件: /src/app/*/index.js
 
 生成文件: /asset/\*.js
-
-配置信息: entryMode.pagePacked:true
-
-**注意**:以上入口配置请在/config/entry.js中配置；
 
 ## mock数据
 
@@ -171,19 +167,24 @@ mock/data下保存着接口响应数据，当isProxy为false时，返回该目�
 
 **会检测所有在mock/data中指定的条件，当指定的规则全部通过检测时，才返回该接口的数据**
 
-## 版本控制
+## 项目构建
+
+### 版本控制
 
 项目遵循版本叠加原则，每次版本生成都会在asset里面新建一个以版本为名称的目录，放置该版本的所有资源(js和其他静态资源)。
 
-### 配置
+### publicPath
 
-#### /config/index中的config.version。
+将/config/index中config.build.assetsPublicPath设置为项目/资源放置的目录；
+如/projectName/
+
+#### 配置
+
+**版本信息：**/config/index中的config.version
 
 请在新版本构建时修改该参数，脚手架会帮你生成该版本所需的资源。
 
-#### /config/index中的config.toScriptServer
-
-该选项在是否需要将脚本部署到资源站(即非该项目站点)中时使用
+**脚本是否部署到资源站：**/config/index中的config.toScriptServer
 
 *资源部署到资源站*
 
@@ -193,13 +194,9 @@ config.toScriptServer需设置为true，此时该工具会帮你生成对应不�
 
 config.toScriptServer需设置为false，此时该工具只会生成一个view文件，其中的脚本链接使用绝对路径指向该项目生成的脚本
 
-#### /config/index中的config.pageExtend
+**页面扩展名：** /config/index中的config.pageExtend
 
 默认为html。当开发者需要更改生成页面的文件扩展名时，设置该项为相应的扩展名，如'cshtml'
-
-## 代码检查
-
-脚手架使用eslint进行代码检查，**请在初始化项目时选择none模式以使用内置.eslinrc.js文件来进行代码检查。**
 
 ## 实现方案解析
 
