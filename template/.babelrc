@@ -1,13 +1,19 @@
 {
   "presets": [
-    ["env"]
+    ["env", {
+      "modules": false,
+      "targets": {
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 9"]
+      }
+    }],
+    "stage-2"
   ],
   "plugins": ["transform-runtime"],
-  "comments": false,
+  "comments": false{{#if_or unit e2e}},
   "env": {
     "test": {
       "presets": ["env"],
       "plugins": [ "istanbul" ]
     }
-  }
+  }{{/if_or}}
 }
