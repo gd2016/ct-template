@@ -1,3 +1,6 @@
+/**
+ * checkversion主要用来检测node&npm版本是否符合packeage.json中的要求
+ */
 var chalk = require('chalk')
 var semver = require('semver')
 var packageConfig = require('../package.json')

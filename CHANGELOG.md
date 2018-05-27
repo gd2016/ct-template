@@ -6,6 +6,10 @@
 
 - 优化 去除热更新时的reload
 
+- 优化 build生成的页面添加view文件夹
+
+- 新增 在babelrc中加入"transform-vue-jsx"插件，支持jsx语法
+
 **2018-04-11**
 
 - 优化 docker构建地址修复为staticadm
