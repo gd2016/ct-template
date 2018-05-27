@@ -1,8 +1,9 @@
 import Vue from 'vue';
+import App from './component/app';
 
 new Vue({
     el: '#app',
-    data: {
-        text: 'hello world'
+    render(h){
+        return h(App);
     }
 });
