@@ -42,7 +42,7 @@ function htmlPlugins(prod) {
                     var server = scriptServer[serverKey];
                     var optionClone = JSON.parse(JSON.stringify(option));
                     optionClone.script = '<script src="' + server + config.build.assetsPublicPath + config.build.assetsSubDirectory + '/' + config.version + '/js/' + filename + '.js?v=' + (+new Date()) + '"></script>';
-                    optionClone.filename = path.resolve(config.build.assetsRoot, 'html/', text[serverKey] + '/' + filename + '.' + config.pageExtend);
+                    optionClone.filename = path.resolve(config.build.assetsRoot, 'html/', text[serverKey] + '/' + viewFile + '/' + filename + '.' + config.pageExtend);
                     optionClone.minify = {
                         removeComments: true,
                         collapseWhitespace: true,
