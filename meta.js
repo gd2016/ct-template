@@ -75,8 +75,6 @@ module.exports = {
         }
     },
     "filters": {
-        ".eslintrc.js": "lint",
-        ".eslintignore": "lint",
         "build/webpack.umd.conf.js": "projectType === 'component'",
         "src/component/**/*": "projectType === 'component'",
         "src/js/module/**/*": "projectType === 'business'",
