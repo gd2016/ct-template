@@ -10,6 +10,8 @@
 
 - 新增 在babelrc中加入"transform-vue-jsx"插件，支持jsx语法
 
+- 新增 新增请求 & 错误处理相关代码供参考使用
+
 **2018-04-11**
 
 - 优化 docker构建地址修复为staticadm
