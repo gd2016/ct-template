@@ -10,17 +10,9 @@
   vue init ct-adc/webpack [你的项目名称]
 ```
 
-### 初始化配置
-
-![img](https://github.com/ct-adc/webpack/blob/master/init.png)
+### 初始化配置特殊说明
 
 * project type 组件开发/常规项目开发
-
-* Use ESLint to lint your code 选none以便使用内部约定方式开发
-
-* Setup unit tests with Karma + Mocha? 该功能还未使用 选none
-
-* Setup e2e tests with Nightwatch? 该功能还未使用 选none
 
 ## 配置项说明 
 
