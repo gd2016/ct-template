@@ -1,3 +1,6 @@
+/**
+ * 生产环境构建主入口
+ */
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
@@ -27,7 +30,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory + '/' + co
                 chunkModules: false
             }) + '\n\n')
 
-            console.log(chalk.cyan('  Build complete.\n'))
+            console.log(chalk.cyan('Build complete.\n'))
             console.log(chalk.yellow(
                 '  Tip: built files are meant to be served over an HTTP server.\n' +
                 '  Opening index.html over file:// won\'t work.\n'

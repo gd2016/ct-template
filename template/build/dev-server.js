@@ -22,10 +22,16 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 var app = express()
 var compiler = webpack(webpackConfig)
 
+/**
+ * 代理index.html页面，引导访问项目根目录的index.html
+ */
 app.get(/^(\/|\/index.html)$/, function(req, res) {
     res.sendFile(path.join(__dirname, '../', 'index.html'));
 });
 
+/**
+ * 将publicPath指向webpack中配置的publicPath
+ */
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
     quiet: true
@@ -34,10 +40,9 @@ var devMiddleware = require('webpack-dev-middleware')(compiler, {
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
     log: () => {}
 })
-// force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
     compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-        hotMiddleware.publish({ action: 'reload' })
+        hotMiddleware.publish()
         cb()
     })
 })

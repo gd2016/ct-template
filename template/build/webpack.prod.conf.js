@@ -9,8 +9,7 @@ var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var htmlPlugins=require('../config/plug.html.js')(true)
 var env = {{#if_or unit e2e}}process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
-  : {{/if_or}}config.build.env
-
+  : {{/if_or}}config.build.env;
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({

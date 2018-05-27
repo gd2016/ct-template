@@ -1,5 +1,19 @@
 ## 更新日志
 
+**2018-05-27**
+
+- 优化 去除初始化时的eslint和test选项, 添加自动安装选项
+
+- 优化 去除热更新时的reload
+
+- 优化 build生成的页面添加view文件夹
+
+- 新增 在babelrc中加入"transform-vue-jsx"插件，支持jsx语法
+
+- 新增 新增请求 & 错误处理相关代码供参考使用
+
+- 删除 删除 minimsg / popover 资源引入
+
 **2018-04-13**
 
 - 优化 升级jdpicker到2.2.1
