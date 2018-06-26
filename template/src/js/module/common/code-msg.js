@@ -24,7 +24,7 @@ const codeMsg = {
         if (defaultMsg === ''){
             defaultMsg = codeMsg.dataErrorMsg.default;
         }
-        return `${codeMsg.dataErrorMsg[code]}[${code}]` || `${defaultMsg}[${code}]`;
+        return `${codeMsg.dataErrorMsg[code] || defaultMsg}[${code}]`;
     },
     /**
      * 处理消息以便得到可供显示的内容
@@ -36,7 +36,7 @@ const codeMsg = {
         if (defaultMsg === ''){
             defaultMsg = this.responseErrorMsg.default;
         }
-        return `${this.responseErrorMsg[response.status]}[${response.status}]` || `${defaultMsg}[${response.status}]`;
+        return `${this.responseErrorMsg[response.status] || defaultMsg}[${response.status}]`;
     },
     resolveRequestError(){
         return this.requestErrorMsg.default;
