@@ -6,7 +6,7 @@ var apiProxy = function() {
     if (mockData.define.isProxy) {
         return proxy(mockData.define.domain, {
             forwardPath: function(req, res) {
-                return req._parsedUrl.path
+                return mockData.define.path + req._parsedUrl.path;
             }
         });
     } else {
