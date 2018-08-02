@@ -112,9 +112,9 @@ module.exports = {
         "src/js/module/**/*": "projectType === 'business'",
         "src/css/**/*": "projectType === 'business'",
         "src/js/app/main/component/*.vue":"operation === 'all'",
-        "src/js/app/main/component/(add.vue|app.vue)": "addOperation",
-        "src/js/app/main/component/edit.vue":"editOperation",
-        "src/js/app/main/component/btn.vue":"editOperation || btnOperation",
+        "src/js/app/main/component/(add.vue|app.vue)": "operation === 'some' && addOperation",
+        "src/js/app/main/component/(edit.vue|app.vue|btn.vue)":"operation === 'some' && editOperation",
+        "src/js/app/main/component/btn.vue":"operation === 'some' && (editOperation || viewOperation)",
     },
     complete: function(data, { chalk }) {
         const green = chalk.green
