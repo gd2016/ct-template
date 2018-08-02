@@ -78,30 +78,25 @@ module.exports = {
                     "name": "some",
                     "value": "some",
                     "short": "some"
-                },
-                {
-                    "name": "only for list",
-                    "value": "list",
-                    "short": "list"
                 }
             ]
         },
-        "add":{
+        "addOperation":{
             "when":"operation === 'some'",
             "type":"confirm",
             "message" :"has add operation?"
         },
-        "edit":{
+        "editOperation":{
             "when":"operation === 'some'",
             "type":"confirm",
             "message" :"has edit operation?"
         },
-        "search":{
+        "searchOperation":{
             "when":"operation === 'some'",
             "type":"confirm",
             "message" :"has search operation?"
         },
-        "view":{
+        "viewOperation":{
             "when":"operation === 'some'",
             "type":"confirm",
             "message" :"has view operation?"
@@ -115,7 +110,11 @@ module.exports = {
         "build/webpack.umd.conf.js": "projectType === 'component'",
         "src/component/**/*": "projectType === 'component'",
         "src/js/module/**/*": "projectType === 'business'",
-        "src/css/**/*": "projectType === 'business'"
+        "src/css/**/*": "projectType === 'business'",
+        "src/js/app/main/**/*":"operation === 'all'",
+        "src/js/app/main/component/add.vue": "addOperation",
+        "src/js/app/main/component/edit.vue":"editOperation",
+        "src/js/app/main/component/btn.vue":"editOperation || btnOperation",
     },
     complete: function(data, { chalk }) {
         const green = chalk.green
