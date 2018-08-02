@@ -13,7 +13,7 @@
                         <button type="button" @click="show=false" class="btn btn-primary">取消</button>
                     </template>
                 </ct-form>
-                <div v-if="error" class="error">{{error}}</div>
+                <div v-if="error" class="error">\{{error}}</div>
             </template>
         </slideout>
     </div>

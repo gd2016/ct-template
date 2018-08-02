@@ -14,7 +14,7 @@
                     <form-item isStatic label="类型" :value="info.Type"></form-item>
                     <form-item isStatic label="备注:" :value="info.Remark"></form-item>
                 </form>
-                <div v-if="error" class="error">{{error}}</div>
+                <div v-if="error" class="error">\{{error}}</div>
             </template>
         </slideout>
     </div>
