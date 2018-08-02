@@ -3,8 +3,7 @@
  */
 const codeMsg = {
     dataErrorMsg: {
-        20001: '已存在相同名称计时物品类',
-        default: '数据处理错误'
+        1: '服务器错误'
     },
     responseErrorMsg: {
         404: '接口不存在',
@@ -20,11 +19,8 @@ const codeMsg = {
      * @param {Number} code 接口响应数据中的code属性
      * @returns {String} 消息字符串或消息字符串组成的数组
      */
-    resolveDataError(code, defaultMsg = ''){
-        if (defaultMsg === ''){
-            defaultMsg = codeMsg.dataErrorMsg.default;
-        }
-        return `${codeMsg.dataErrorMsg[code] || defaultMsg}[${code}]`;
+    resolveDataError(code, message){
+        return `${codeMsg.dataErrorMsg[code] || message}[${code}]`;
     },
     /**
      * 处理消息以便得到可供显示的内容

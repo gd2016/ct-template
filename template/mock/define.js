@@ -22,10 +22,10 @@ files.map((file) => {
 });
 module.exports = {
     define: {
-        isProxy: false,
+        isProxy: true,
         matchPath: /\/api/i,
-        domain: "http://tcysystinker.admin.ct108.org:1505",
-        path: ''
+        domain: 'http://yapi.tcy365.org:3000',
+        path: '/mock/228'
     },
     interFaces: interFaces,
     getInterFace(key){

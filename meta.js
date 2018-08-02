@@ -65,9 +65,46 @@ module.exports = {
                 }
             ]
         },
-        "router": {
-            "type": "confirm",
-            "message": "Install vue-router?"
+        "operation": {
+            "type": "list",
+            "message": "include operation",
+            "choices": [
+                {
+                    "name": "add, edit, view, search",
+                    "value": "all",
+                    "short": "all"
+                },
+                {
+                    "name": "some",
+                    "value": "some",
+                    "short": "some"
+                },
+                {
+                    "name": "only for list",
+                    "value": "list",
+                    "short": "list"
+                }
+            ]
+        },
+        "add":{
+            "when":"operation === 'some'",
+            "type":"confirm",
+            "message" :"has add operation?"
+        },
+        "edit":{
+            "when":"operation === 'some'",
+            "type":"confirm",
+            "message" :"has edit operation?"
+        },
+        "search":{
+            "when":"operation === 'some'",
+            "type":"confirm",
+            "message" :"has search operation?"
+        },
+        "view":{
+            "when":"operation === 'some'",
+            "type":"confirm",
+            "message" :"has view operation?"
         },
         "autoInstall": {
             type: 'confirm',

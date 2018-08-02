@@ -15,9 +15,10 @@ var getEnv = function() {
     return env[tdl] || 'dev';
 };
 var base = {
-    common: {
-        api1: '/api/api111',
-        api2: '/api/api2'
+    statistics: {
+        list: '/api/getlist',
+        post: '/api/post',
+        detail: '/api/detail'
     },
     patchList: {
         api3: '/api/api3'

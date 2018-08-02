@@ -18,7 +18,7 @@ var config = {
     dev: {
         env: require('./dev.env'),
         port: 8080,
-        host: 'localhost',
+        host: 'a.admin.ct108.org',
         autoOpenBrowser: true,
         assetsSubDirectory: 'asset',
         assetsPublicPath: '/',

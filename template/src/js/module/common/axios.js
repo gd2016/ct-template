@@ -2,7 +2,7 @@
  * 该处实现供开发者参考
  */
 import axios from 'axios';
-import utility from 'ct-utility';
+// import utility from 'ct-utility';
 import CodeMsg from 'common/code-msg';
 
 // 设置不缓存请求
@@ -15,15 +15,16 @@ const axiosObj = axios.create({
 // 要求接口必须有code, code为0时为成功，code为非0时失败
 axiosObj.interceptors.response.use(function(response) {
     try {
-        const transfered = utility.objTransfer.lowerKey(response.data);
+        // const transfered = utility.objTransfer.lowerKey(response.data);
+        const transfered = response.data;
 
-        if (transfered.code === 0){
+        if (transfered.Code === 0){
             return transfered;
         }
-        if (typeof transfered.code !== 'undefined'){
+        if (typeof transfered.Code !== 'undefined'){
             return Promise.reject({
                 code: '$API-LOGIC-ERROR',
-                message: CodeMsg.resolveDataError(transfered.code),
+                message: CodeMsg.resolveDataError(transfered.Code, transfered.Message),
                 response: response
             });
         } 

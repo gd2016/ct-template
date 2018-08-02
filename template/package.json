@@ -14,14 +14,22 @@
   },
   "dependencies": {
 {{#if_eq projectType "business"}}
-    "vue": "~2.5.0"{{#router}},
-    "vue-router": "^2.2.0"{{/router}}
+    "vue": "~2.5.0",
+    "vue-router": "^2.2.0",
+    "async-validator": "^1.8.4",
+    "ct-adc-const": "^1.0.0-alpha.3",
+    "ct-adc-list": "^4.0.1",
+    "ct-adc-loading": "^1.0.0-alpha.3",
+    "ct-adc-mini-msg": "^2.0.0",
+    "ct-adc-page": "^1.1.0",
+    "ct-adc-permission": "^1.1.0",
+    "ct-adc-slideout": "^1.1.6-alpha.1"
 {{/if_eq}}
   },
   "devDependencies": {
 {{#if_eq projectType "component"}}
-    "vue": "~2.5.0"{{#router}},
-    "vue-router": "^2.2.0"{{/router}},
+    "vue": "~2.5.0",
+    "vue-router": "^2.2.0",
 {{/if_eq}}
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
