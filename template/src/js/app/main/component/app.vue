@@ -1,10 +1,13 @@
 <template>
-    <div class="container-fluid">{{#searchOperation}}
-        <ct-form  searchForm :loading="loading" @search="search">
+    <div class="container-fluid">{{#if_or operation "all" searchOperation}}
+        <ct-form  searchForm :loading="loading" @search="search">or
             <form-item maxlength="30" v-model="searchInfo.Id" type="text" label="ID"></form-item>
             <form-item  defaultSelect :selectList="typeList"  v-model="searchInfo.Type" type="select" label="类型"></form-item>  
-        </ct-form>
-        {{/searchOperation}}
+        </ct-form>{{/if_or}}{{#if_eq operation "all" searchOperation}}
+        <ct-form  searchForm :loading="loading" @search="search">eq
+            <form-item maxlength="30" v-model="searchInfo.Id" type="text" label="ID"></form-item>
+            <form-item  defaultSelect :selectList="typeList"  v-model="searchInfo.Type" type="select" label="类型"></form-item>  
+        </ct-form>{{/if_eq}}
         <div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
         </div>
