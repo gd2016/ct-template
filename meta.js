@@ -84,18 +84,99 @@ module.exports = {
         },
         "first":{
             "when":"searchItems",
-            "type":"string",
-            "message" :"first item type?"
+            "type":"list",
+            "message":"choose your first item type",
+            "choices": [
+                {
+                    "name": "text",
+                    "value": "text",
+                    "short": "text"
+                },
+                {
+                    "name": "select",
+                    "value": "select",
+                    "short": "select"
+                },
+                {
+                    "name": "dates",
+                    "value": "dates",
+                    "short": "dates"
+                },
+                {
+                    "name": "date",
+                    "value": "date",
+                    "short": "date"
+                },
+                {
+                    "name": "autoComplete",
+                    "value": "autoComplete",
+                    "short": "autoComplete"
+                }
+            ]
         },
         "second":{
             "when":"searchItems>1",
-            "type":"string",
-            "message" :"second item type?"
+            "type":"list",
+            "message":"choose your second item type",
+            "choices": [
+                {
+                    "name": "text",
+                    "value": "text",
+                    "short": "text"
+                },
+                {
+                    "name": "select",
+                    "value": "select",
+                    "short": "select"
+                },
+                {
+                    "name": "dates",
+                    "value": "dates",
+                    "short": "dates"
+                },
+                {
+                    "name": "date",
+                    "value": "date",
+                    "short": "date"
+                },
+                {
+                    "name": "autoComplete",
+                    "value": "autoComplete",
+                    "short": "autoComplete"
+                }
+            ]
         },
         "third":{
             "when":"searchItems>2",
-            "type":"string",
-            "message" :"third item type?"
+            "type":"list",
+            "message":"choose your third item type",
+            "choices": [
+                {
+                    "name": "text",
+                    "value": "text",
+                    "short": "text"
+                },
+                {
+                    "name": "select",
+                    "value": "select",
+                    "short": "select"
+                },
+                {
+                    "name": "dates",
+                    "value": "dates",
+                    "short": "dates"
+                },
+                {
+                    "name": "date",
+                    "value": "date",
+                    "short": "date"
+                },
+                {
+                    "name": "autoComplete",
+                    "value": "autoComplete",
+                    "short": "autoComplete"
+                }
+            ]
         },
         "addOperation":{
             "type":"confirm",
