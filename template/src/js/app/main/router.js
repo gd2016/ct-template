@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import App from './component/app';
-import VueRouter from 'vue-router';
-import edit from './component/edit';
-import add from './component/add';
+import VueRouter from 'vue-router';{{#editOperation}}
+import edit from './component/edit';{{/editOperation}}{{#addOperation}}
+import add from './component/add';{{/addOperation}}
 export default new VueRouter({
     routes: [{
         path: '/',
@@ -11,11 +11,12 @@ export default new VueRouter({
         path: '/app',
         component: App,
         children: [{
-            path: 'edit',
-            component: edit
-        }, {
-            path: 'add',
-            component: add
+            path: 'edit'{{#editOperation}},
+            component: edit{{/editOperation}}
+        },
+        {
+            path: 'add'{{#addOperation}},
+            component: add{{/addOperation}}
         }]
     }, {
         path: '/no-permission',

@@ -24,6 +24,12 @@ module.exports = {
             }
             
             return str;
+        },
+        "if_is": function (v1, v2, options) {
+            if(v1===v2){
+                return options.fn(this);
+            }
+            return options.inverse(this);
         }
     },
     "prompts": {
@@ -83,7 +89,7 @@ module.exports = {
             "type":"string",
             "message" :"how many search items?"
         },
-        "searchItem1":{
+        "search_first":{
             "when":"searchItems",
             "type":"list",
             "message":"choose your first item type",
@@ -115,7 +121,7 @@ module.exports = {
                 }
             ]
         },
-        "searchItem2":{
+        "search_second":{
             "when":"searchItems>1",
             "type":"list",
             "message":"choose your second item type",
@@ -147,7 +153,7 @@ module.exports = {
                 }
             ]
         },
-        "searchItem3":{
+        "search_third":{
             "when":"searchItems>2",
             "type":"list",
             "message":"choose your third item type",
@@ -179,7 +185,7 @@ module.exports = {
                 }
             ]
         },
-        "searchItem4":{
+        "search_fourth":{
             "when":"searchItems>3",
             "type":"list",
             "message":"choose your fourth item type",

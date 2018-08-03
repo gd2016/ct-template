@@ -1,9 +1,10 @@
 <template>
     <div class="container-fluid">{{#searchOperation}}
         <ct-form  searchForm :loading="loading" @search="search">
-            {{#search_item searchItems}}
-            
-            {{/search_item}}
+            <form-item v-model="searchInfo.Id" type="{{search_first}}" label="搜索项"></form-item>{{#search_second}}
+            <form-item v-model="searchInfo.Id" type="{{search_first}}" label="搜索项"></form-item>{{/search_second}}{{#search_third}}
+            <form-item v-model="searchInfo.Id" type="{{search_third}}" label="搜索项"></form-item>{{/search_third}}{{#search_fourth}}
+            <form-item v-model="searchInfo.Id" type="{{search_fourth}}" label="搜索项"></form-item>{{/search_fourth}}
         </ct-form>{{/searchOperation}}
         {{#addOperation}}<div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
@@ -13,8 +14,8 @@
             <adc-column prop="Id" name="ID"></adc-column>
             <adc-column prop="Name" name="名称"></adc-column>
             <adc-column prop="CreateTime" filter="dateTimeFormat" name="时间"></adc-column>
-            <adc-column prop="GrantState" :mapper="stateFormat" name="状态"></adc-column>  
-            <adc-column :vm="{name: 'btn'}" name="操作"></adc-column> 
+            <adc-column prop="GrantState" :mapper="stateFormat" name="状态"></adc-column>{{#if_or viewOperation editOperation}} 
+            <adc-column :vm="{name: 'btn'}" name="操作"></adc-column> {{/if_or}}
         </adc-table>
         <page form
             :curr-page="searchInfo.PageIndex"
@@ -30,10 +31,10 @@ import Interface from 'common/interface';
 import page from 'ct-adc-page';
 import ctForm from 'component/ctForm';
 import formItem from 'component/formItem';
-import Const from 'common/const';
+import Const from 'common/const';{{#if_or viewOperation editOperation}} 
 import Vue from 'vue';
 import btn from './btn';
-Vue.component('btn', btn);
+Vue.component('btn', btn);{{/if_or}} 
 export default {
     data() {
         return {
@@ -59,11 +60,11 @@ export default {
                 this.list = res.Data.List;
                 this.count = res.Data.RecordCount;
             });
-        }, 
+        }{{#searchOperation}}, 
         search(){
             this.searchInfo.PageIndex = 1;
             this.getData();
-        },
+        }{{/searchOperation}},
         changePage(index){
             this.searchInfo.PageIndex = index;
             this.getData();
@@ -74,10 +75,10 @@ export default {
                 this.searchInfo.PageIndex = 1;
                 this.getData();
             }
-        },
+        }{{#addOperation}},
         add(){
             this.$router.push({path: '/app/add'});
-        }
+        }{{/addOperation}}
     },
     mixins: [mixin],
     components: {

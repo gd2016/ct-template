@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div>{{#viewOperation}}
         <button  type="button" class="btn btn-xs btn-primary"  @click="view">
             <i class="glyphicon glyphicon-edit"></i> 查看
-        </button>
+        </button>{{/viewOperation}}{{#editOperation}}
         <button  type="button" class="btn btn-xs btn-primary"  @click="edit">
             <i class="glyphicon glyphicon-edit"></i> 编辑
-        </button>
+        </button>{{/editOperation}}{{#viewOperation}}
         <slideout  width="50%" title="查看" v-model="show" >
             <template slot="body">
                 <form v-if="!error" v-loading="loading" class="form-horizontal">
@@ -16,19 +16,19 @@
                 </form>
                 <div v-if="error" class="error">\{{error}}</div>
             </template>
-        </slideout>
+        </slideout>{{/viewOperation}}
     </div>
 </template>
-<script>
+<script>{{#viewOperation}}
 import formItem from 'component/formItem';
 import slideout from 'ct-adc-slideout';
 import mixin from 'common/loadMixin';
-import Interface from 'common/interface';
-export default {
-    mixins: [mixin],
+import Interface from 'common/interface';{{/viewOperation}}
+export default {{{#viewOperation}}
+    mixins: [mixin],{{/viewOperation}}
     data() {
-        return {
-            info: {},
+        return {{{#viewOperation}}
+            info: {},{{/viewOperation}}
             show: false
         };
     },
@@ -40,7 +40,7 @@ export default {
             }
         }
     },
-    methods: {
+    methods: {{{#viewOperation}}
         view(){
             this.show = true;
             this.getInfo({
@@ -51,14 +51,14 @@ export default {
             }).then((res)=>{
                 this.info = res.Data;
             });
-        },
+        },{{/viewOperation}}
         edit(){
             this.$router.push({path: '/app/edit', query: {id: this.item.Id}});
         }
-    },
+    }{{#viewOperation}},
     components: {
         formItem,
         slideout
-    }
+    }{{/viewOperation}}
 };
 </script>
