@@ -4,6 +4,7 @@
             <form-item v-model="searchInfo.Id" type="{{first}}" label="搜索项"></form-item>{{#if second}}
             <form-item v-model="searchInfo.Type" type="{{second}}" defaultSelect :selectList="typeList" label="搜索项"></form-item>{{/if}}
         </ct-form>{{/searchOperation}}{{#addOperation}}
+        {{#foreach searchItems}}1{{/foreach}}
         <div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
         </div>{{/addOperation}}
