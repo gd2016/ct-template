@@ -20,7 +20,7 @@ module.exports = {
         "search_item": function (v1, options) {
             var str='';
             for (let index = 1; index < v1; index++) {
-                str+=options.fn(this,{data:{index:index}});
+                str+=options.fn(this,{data:{"index":index}});
             }
             return str;
         },
