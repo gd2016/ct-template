@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">{{#searchOperation}}
-        <ct-form  searchForm :loading="loading" @search="search">{{#foreach items}}
-            <form-item v-model="searchInfo.Id" type="{{type}}" label="搜索项"></form-item>{{/foreach}}
+        <ct-form  searchForm :loading="loading" @search="search">{{#search_item items}}
+            {{/search_item}}
         </ct-form>{{/searchOperation}}
         {{#addOperation}}<div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>

@@ -16,15 +16,13 @@ module.exports = {
 
             return options.inverse(this);
         },
-        "foreach": function (v1, options) {
-            var obj = {};
-            this.items = [];
+        "search_item": function (v1, options) {
+            var str='';
             for (let index = 1; index < v1; index++) {
-                obj.type=this['item'+index];
-                this.items.push(obj);
+                str+='<form-item v-model="searchInfo.Id" type="'+this["searchItem"+index]+'" label="搜索项"></form-item>';
             }
             console.log(this);
-            return options.fn(this.items);
+            return str;
         }
     },
     "prompts": {
@@ -84,7 +82,7 @@ module.exports = {
             "type":"string",
             "message" :"how many search items?"
         },
-        "item1":{
+        "searchItem1":{
             "when":"searchItems",
             "type":"list",
             "message":"choose your first item type",
@@ -116,7 +114,7 @@ module.exports = {
                 }
             ]
         },
-        "item2":{
+        "searchItem2":{
             "when":"searchItems>1",
             "type":"list",
             "message":"choose your second item type",
@@ -148,7 +146,7 @@ module.exports = {
                 }
             ]
         },
-        "item3":{
+        "searchItem3":{
             "when":"searchItems>2",
             "type":"list",
             "message":"choose your third item type",
@@ -180,10 +178,37 @@ module.exports = {
                 }
             ]
         },
-        "item4":{
+        "searchItem4":{
             "when":"searchItems>3",
-            "type":"string",
-            "message" :"third item type?"
+            "type":"list",
+            "message":"choose your fourth item type",
+            "choices": [
+                {
+                    "name": "text",
+                    "value": "text",
+                    "short": "text"
+                },
+                {
+                    "name": "select",
+                    "value": "select",
+                    "short": "select"
+                },
+                {
+                    "name": "dates",
+                    "value": "dates",
+                    "short": "dates"
+                },
+                {
+                    "name": "date",
+                    "value": "date",
+                    "short": "date"
+                },
+                {
+                    "name": "autoComplete",
+                    "value": "autoComplete",
+                    "short": "autoComplete"
+                }
+            ]
         },
         "addOperation":{
             "type":"confirm",
