@@ -75,19 +75,19 @@ module.exports = {
             "message" :"how many search items?"
         },
         "first":{
-            "when":"searchItems<2",
+            "when":"searchItems",
             "type":"string",
-            "message" :"type?"
+            "message" :"first item type?"
         },
         "second":{
-            "when":"searchItems<3",
+            "when":"searchItems>1",
             "type":"string",
-            "message" :"type?"
+            "message" :"second item type?"
         },
         "third":{
-            "when":"searchItems<4",
+            "when":"searchItems>2",
             "type":"string",
-            "message" :"type?"
+            "message" :"third item type?"
         },
         "addOperation":{
             "type":"confirm",
