@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">{{#searchOperation}}
-        <ct-form  searchForm :loading="loading" @search="search">{{#each searchItems}}
-            <form-item v-model="searchInfo.Id" type="text" label="ID"></form-item>{{/each}}
+        <ct-form  searchForm :loading="loading" @search="search">{{first}}
+            <form-item v-model="searchInfo.Id" type="text" label="ID"></form-item>{{second}}{{third}}
             <form-item v-model="searchInfo.Type" type="select" defaultSelect :selectList="typeList" label="类型"></form-item>  
         </ct-form>{{/searchOperation}}
         <div class="clearfix mb10">
