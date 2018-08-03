@@ -18,6 +18,7 @@ module.exports = {
         },
         "foreach": function (v1, options) {
             this.item = [{type:this.first},{type:this.second}];
+            console.log(this);
             var str = "";
             for (let index = 0; index < v1; index++) {
                 str+=options.fn(this);
