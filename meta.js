@@ -17,10 +17,10 @@ module.exports = {
             return options.inverse(this);
         },
         "search_item": function (v1, options) {
-            console.log(this);
+            console.log(options.fn(this));
             var str='';
             for (let index = 1; index < v1; index++) {
-                str+='<form-item v-model="searchInfo.Id" type="'+this["searchItem"+index]+'" label="搜索项"></form-item>';
+                str+=options.fn(this)+'<form-item v-model="searchInfo.Id" type="'+this["searchItem"+index]+'" label="搜索项"></form-item>';
             }
             
             return str;
