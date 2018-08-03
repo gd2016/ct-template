@@ -17,11 +17,11 @@ module.exports = {
             return options.inverse(this);
         },
         "foreach": function (v1, v2, options) {
-            var templates = null;
-            for(var i=0;i<v1;i++){
-                templates+=options.fn(this);
-            }
-            return templates;
+//             var templates = null;
+//             for(var i=0;i<v1;i++){
+//                 templates+=options.fn(this);
+//             }
+            return options.fn(thus)+v1;
         }
     },
     "prompts": {
