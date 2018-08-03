@@ -17,13 +17,13 @@ module.exports = {
             return options.inverse(this);
         },
         "foreach": function (v1, options) {
-            console.log(this);
             var obj = {};
             this.items = [];
             for (let index = 1; index < v1; index++) {
                 obj.type=this['item'+index];
                 this.items.push(obj);
             }
+            console.log(this);
             return options.fn(this.items);
         }
     },
