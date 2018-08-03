@@ -1,6 +1,7 @@
 <template>
     <div class="container-fluid">{{#searchOperation}}
-        <ct-form  searchForm :loading="loading" @search="search">{{#search_item searchItems}}
+        <ct-form  searchForm :loading="loading" @search="search">
+            {{#search_item searchItems}}
             {{/search_item}}
         </ct-form>{{/searchOperation}}
         {{#addOperation}}<div class="clearfix mb10">
