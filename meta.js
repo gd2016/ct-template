@@ -20,7 +20,7 @@ module.exports = {
         "search_item": function (v1, options) {
             var str='';
             for (let index = 1; index < v1; index++) {
-                str+=options.fn(this,{data:{"index":index,"name":index+"name"}});
+                str+=options.fn(this,{data:{"type":this["search_"+index],"name":index+"name"}});
             }
             return str;
         },
@@ -54,41 +54,46 @@ module.exports = {
                 }
             ]
         },
-        "check": {
+//         "name": {
+//             "type": "string",
+//             "required": true,
+//             "message": 'project name'
+//         },
+//         "description": {
+//             "type": "string",
+//             "required": false,
+//             "message": "Project description",
+//             "default": "A Vue.js project"
+//         },
+//         "author": {
+//             "type": "string",
+//             "message": "Author"
+//         },
+        "operation": {
             "type": "checkbox",
-            "message": 'check name',
+            "message": 'What operations are included ？',
             "choices": [
                 {
-                    "name": "firstName",
-                    "value": "firstValue",
-                    "short": "firstShort"
+                    "name": "add",
+                    "value": "add",
+                    "short": "add"
                 },
                 {
-                    "name": "secondName",
-                    "value": "secondName",
-                    "short": "secondName"
+                    "name": "edit",
+                    "value": "edit",
+                    "short": "edit"
                 },
                 {
-                    "name": "thirdName",
-                    "value": "thirdName",
-                    "short": "thirdName"
+                    "name": "search",
+                    "value": "search",
+                    "short": "search"
+                },
+                {
+                    "name": "view",
+                    "value": "view",
+                    "short": "view"
                 }
             ]
-        },
-        "name": {
-            "type": "string",
-            "required": true,
-            "message": 'project name'
-        },
-        "description": {
-            "type": "string",
-            "required": false,
-            "message": "Project description",
-            "default": "A Vue.js project"
-        },
-        "author": {
-            "type": "string",
-            "message": "Author"
         },
         "build": {
             "type": "list",
@@ -106,16 +111,12 @@ module.exports = {
                 }
             ]
         },
-        "searchOperation":{
-            "type":"confirm",
-            "message" :"has search operation?"
-        },
         "searchItems":{
-            "when":"searchOperation",
+            "when":"operation.search",
             "type":"string",
             "message" :"how many search items?"
         },
-        "search_first":{
+        "search_1":{
             "when":"searchItems",
             "type":"rawlist",
             "message":"choose your first item type",
