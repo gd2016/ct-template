@@ -1,7 +1,7 @@
 <template>
     <div v-if="isSearch" class="col-sm-3">
         <div class="form-group form-group-sm">
-            <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">{{label}}</label>
+            <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">\{{label}}</label>
             <div class="col-sm-8" :class="{'has-error': validateState==='error'}">
                 <section v-if="type==='text'">
                     <input :placeholder="placeholder"  :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
@@ -9,7 +9,7 @@
                 <section v-if="type==='select'">
                     <select class="form-control" :value="commonValue" @change="handleChange">
                         <option value="" v-if="defaultSelect">请选择</option>
-                        <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">{{item[valueKey.value]}}</option>
+                        <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
                     </select>
                 </section>
                 <section v-if="type==='dates'">
@@ -35,10 +35,10 @@
     </div>
     <div v-else class="form-group clearfix">
         <label :class="labelClass?labelClass:'col-sm-3'" class="control-label">
-            <i v-if="required" class="red">*</i>{{label}}
+            <i v-if="required" class="red">*</i>\{{label}}
         </label>
         <div v-if="isStatic" :class="[{'form-control-static':isStatic},valueClass?valueClass:'col-sm-9']">
-            {{value}}
+            \{{value}}
             <slot></slot>
         </div>
         <div v-if="!isStatic" :class="[{'has-error': validateState==='error'},valueClass?valueClass:'col-sm-9']">
@@ -48,7 +48,7 @@
             <section v-if="type==='select'">
                 <select class="form-control" :value="commonValue" @change="handleChange">
                     <option value="" v-if="defaultSelect">请选择</option>
-                    <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">{{item[valueKey.value]}}</option>
+                    <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
                 </select>
             </section>
             <section v-if="type==='dates'">
@@ -73,7 +73,7 @@
             </section>
             <slot></slot>
             <span v-if="validateState==='error'" class="help-block text-danger">
-            <span class="glyphicon glyphicon-remove-sign"></span> {{ validateMessage }}</span>
+            <span class="glyphicon glyphicon-remove-sign"></span> \{{ validateMessage }}</span>
         </div>
     </div>
     
