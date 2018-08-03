@@ -51,11 +51,11 @@ export default { {{#viewOperation}}
             }).then((res)=>{
                 this.info = res.Data;
             });
-        },{{/editOperation}}
+        }{{#/editOperation}},{{/viewOperation}}
         edit(){
             this.$router.push({path: '/app/edit', query: {id: this.item.Id}});
-        }
-    }{{#editOperation}},
+        }{{/editOperation}}
+    }{{#viewOperation}},
     components: {
         formItem,
         slideout
