@@ -21,7 +21,7 @@ module.exports = {
 //             for(var i=0;i<v1;i++){
 //                 templates+=options.fn(this);
 //             }
-            return options.fn(thus)+v1;
+            return options.fn(this)+v1;
         }
     },
     "prompts": {
