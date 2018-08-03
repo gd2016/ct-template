@@ -1,10 +1,11 @@
 <template>
     <div class="container-fluid">{{#searchOperation}}
         <ct-form  searchForm :loading="loading" @search="search">
-            <form-item v-model="searchInfo.Id" type="{{search_second}}" label="搜索项"></form-item>{{#search_second}}
-            <form-item v-model="searchInfo.Id" type="{{search_third}}" label="搜索项"></form-item>{{/search_second}}{{#search_third}}
-            <form-item v-model="searchInfo.Id" type="{{search_first}}" label="搜索项"></form-item>{{/search_third}}{{#search_fourth}}
-            <form-item v-model="searchInfo.Id" type="{{search_fourth}}" label="搜索项"></form-item>{{/search_fourth}}
+            <!-- <form-item v-model="searchInfo.Id" type="{{search_first}}" label="搜索项"></form-item>{{#search_second}}
+            <form-item v-model="searchInfo.Id" type="{{this}}" label="搜索项"></form-item>{{/search_second}}{{#search_third}}
+            <form-item v-model="searchInfo.Id" type="{{this}}" label="搜索项"></form-item>{{/search_third}}{{#search_fourth}}
+            <form-item v-model="searchInfo.Id" type="{{this}}" label="搜索项"></form-item>{{/search_fourth}} -->
+            {{#search_item searchItems}}<form-item v-model="searchInfo.Id" type="{{index}}" label="搜索项"></form-item>{{/search_item}}
         </ct-form>{{/searchOperation}}
         {{#addOperation}}<div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
