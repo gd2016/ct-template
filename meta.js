@@ -20,7 +20,7 @@ module.exports = {
             console.log(options.fn(this));
             var str='';
             for (let index = 1; index < v1; index++) {
-                str+=options.fn(this)+'<form-item v-model="searchInfo.Id" type="'+this["searchItem"+index]+'" label="搜索项"></form-item>';
+                str+='<form-item v-model="searchInfo.Id" type="'+this["searchItem"+index]+'" label="搜索项"></form-item>'+options.fn(this);
             }
             
             return str;
