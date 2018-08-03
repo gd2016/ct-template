@@ -10,18 +10,12 @@ const {
 module.exports = {
     "helpers": {
         "if_or": function (v1, v2, options) {
+          console.log(v1,v2,options);
             if (v1 || v2) {
                 return options.fn(this);
             }
 
             return options.inverse(this);
-        },
-        "foreach": function (v1, v2, options) {
-//             var templates = null;
-//             for(var i=0;i<v1;i++){
-//                 templates+=options.fn(this);
-//             }
-            return options.fn(this)+v1;
         }
     },
     "prompts": {
