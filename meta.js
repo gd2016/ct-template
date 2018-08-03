@@ -20,7 +20,7 @@ module.exports = {
             console.log(this);
             var obj = {};
             this.items = [];
-            for (let index = 0; index < v1; index++) {
+            for (let index = 1; index < v1; index++) {
                 obj.type=this['item'+index];
                 this.items.push(obj);
             }
