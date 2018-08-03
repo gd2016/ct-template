@@ -17,12 +17,14 @@ module.exports = {
             return options.inverse(this);
         },
         "foreach": function (v1, options) {
-            console.log(this);
-            var str = null;
-            for (let index = 0; index < v1; index++) {
-                str+=options.fn(this);
+            var obj = {};
+            this.items = [];
+            for (let index = 1; index < v1; index++) {
+                obj.type=this['item'+index];
+                this.items.push(obj);
             }
-            return str;
+            console.log(this);
+            return options.fn(this.items);
         }
     },
     "prompts": {
@@ -82,7 +84,7 @@ module.exports = {
             "type":"string",
             "message" :"how many search items?"
         },
-        "first":{
+        "item1":{
             "when":"searchItems",
             "type":"list",
             "message":"choose your first item type",
@@ -114,7 +116,7 @@ module.exports = {
                 }
             ]
         },
-        "second":{
+        "item2":{
             "when":"searchItems>1",
             "type":"list",
             "message":"choose your second item type",
@@ -146,7 +148,7 @@ module.exports = {
                 }
             ]
         },
-        "third":{
+        "item3":{
             "when":"searchItems>2",
             "type":"list",
             "message":"choose your third item type",
@@ -177,6 +179,11 @@ module.exports = {
                     "short": "autoComplete"
                 }
             ]
+        },
+        "item4":{
+            "when":"searchItems>3",
+            "type":"string",
+            "message" :"third item type?"
         },
         "addOperation":{
             "type":"confirm",
