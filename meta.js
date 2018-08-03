@@ -17,13 +17,15 @@ module.exports = {
             return options.inverse(this);
         },
         "foreach": function (v1, options) {
-            this.item = [{type:this.first},{type:this.second}];
             console.log(this);
-            var str = "";
-            for (let index = 0; index < v1; index++) {
-                str+=options.fn(this);
+            var length = v1;
+            var obj = {};
+            this.searchItems = [];
+            for (let index = 0; index < length; index++) {
+                obj.type=this[index];
+                this.searchItems.push(obj);
             }
-            return str;
+            return options.fn(this.searchItems);
         }
     },
     "prompts": {
@@ -83,18 +85,23 @@ module.exports = {
             "type":"string",
             "message" :"how many search items?"
         },
-        "first":{
+        "1":{
             "when":"searchItems",
             "type":"string",
             "message" :"first item type?"
         },
-        "second":{
+        "2":{
             "when":"searchItems>1",
             "type":"string",
             "message" :"second item type?"
         },
-        "third":{
+        "3":{
             "when":"searchItems>2",
+            "type":"string",
+            "message" :"third item type?"
+        },
+        "4":{
+            "when":"searchItems>3",
             "type":"string",
             "message" :"third item type?"
         },
