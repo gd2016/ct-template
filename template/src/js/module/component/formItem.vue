@@ -1,16 +1,33 @@
 <template>
     <div v-if="isSearch" class="col-sm-3">
         <div class="form-group form-group-sm">
-            <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">\{{label}}</label>
+            <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">{{label}}</label>
             <div class="col-sm-8" :class="{'has-error': validateState==='error'}">
                 <section v-if="type==='text'">
-                    <input :placeholder="placeholder" @keyup="handleUp" :maxlength="maxlength" @input="handleInput" type="text" class="form-control" :value="inputValue" />
+                    <input :placeholder="placeholder"  :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
                 </section>
                 <section v-if="type==='select'">
-                    <select class="form-control" :value="selectValue" @change="handleChange">
+                    <select class="form-control" :value="commonValue" @change="handleChange">
                         <option value="" v-if="defaultSelect">请选择</option>
-                        <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
+                        <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">{{item[valueKey.value]}}</option>
                     </select>
+                </section>
+                <section v-if="type==='dates'">
+                    <dates-input v-model="datesValue" :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" ></dates-input>
+                </section>
+                <section v-if="type==='date'">
+                    <date-input ref="date" v-model="commonValue" :placeholder="placeholder" @change="handleChange" ></date-input>
+                </section>
+                <section v-if="type==='autoComplete'">
+                    <auto-complete  
+                        :list="completeList"
+                        :placeholder="placeholder"  @select="selectComplete"
+                        v-model="commonValue"  @change="handleChange"
+                        :match-keys="matchKeys" 
+                        :keys="keys" 
+                        :show-keys="showKeys"
+                    >
+                    </auto-complete>
                 </section>
                 <section v-if="!type"><slot></slot></section>
             </div>
@@ -18,28 +35,45 @@
     </div>
     <div v-else class="form-group clearfix">
         <label :class="labelClass?labelClass:'col-sm-3'" class="control-label">
-            <i v-if="required" class="red">*</i>\{{label}}
+            <i v-if="required" class="red">*</i>{{label}}
         </label>
         <div v-if="isStatic" :class="[{'form-control-static':isStatic},valueClass?valueClass:'col-sm-9']">
-            \{{value}}
+            {{value}}
             <slot></slot>
         </div>
         <div v-if="!isStatic" :class="[{'has-error': validateState==='error'},valueClass?valueClass:'col-sm-9']">
             <section v-if="type==='text'">
-                <input :disabled="disabled" :placeholder="placeholder" @keyup="handleUp" :maxlength="maxlength" @input="handleInput" type="text" class="form-control" :value="inputValue" />
+                <input :disabled="disabled" :placeholder="placeholder" :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
             </section>
             <section v-if="type==='select'">
-                <select class="form-control" :value="selectValue" @change="handleChange">
+                <select class="form-control" :value="commonValue" @change="handleChange">
                     <option value="" v-if="defaultSelect">请选择</option>
-                    <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
+                    <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">{{item[valueKey.value]}}</option>
                 </select>
             </section>
+            <section v-if="type==='dates'">
+                <dates-input v-model="datesValue" :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" ></dates-input>
+            </section>
+            <section v-if="type==='date'">
+                <date-input ref="date" v-model="commonValue" :placeholder="placeholder" @change="handleChange" ></date-input>
+            </section>
+            <section v-if="type==='autoComplete'">
+                <auto-complete  
+                    :list="completeList"
+                    :placeholder="placeholder"  @select="selectComplete"
+                    v-model="commonValue"  @change="handleChange"
+                    :match-keys="matchKeys" 
+                    :keys="keys" 
+                    :show-keys="showKeys"
+                >
+                </auto-complete>
+            </section>
             <section v-if="type==='textarea'">
-                <textarea :disabled="disabled"  @keyup="handleUp" :maxlength="maxlength" @input="handleInput" :placeholder="placeholder" :value="inputValue" style="max-width:100%" class="form-control"></textarea>
+                <textarea :disabled="disabled" :maxlength="maxlength" @input="handleChange" :placeholder="placeholder" :value="commonValue" style="max-width:100%" class="form-control"></textarea>
             </section>
             <slot></slot>
             <span v-if="validateState==='error'" class="help-block text-danger">
-            <span class="glyphicon glyphicon-remove-sign"></span> \{{ validateMessage }}</span>
+            <span class="glyphicon glyphicon-remove-sign"></span> {{ validateMessage }}</span>
         </div>
     </div>
     
@@ -47,16 +81,22 @@
 
 <script>
 import AsyncValidator from 'async-validator';
+import {DateInput, DatesInput} from 'ct-adc-date';
+import AutoComplete from 'ct-adc-auto-complete';
 export default {
+    components: {
+        DatesInput, DateInput, AutoComplete
+    },
     props: {
         prop: [String, Array],
         label: String,
         labelClass: String,
         valueClass: String,
         isStatic: Boolean,
-        value: [String, Number],
+        value: [String, Number, Object],
         type: String,
         selectList: Array,
+        completeList: Array,
         valueKey: {
             type: Object, 
             default: ()=>{
@@ -68,15 +108,24 @@ export default {
         disabled: Boolean,
         maxlength: {type: [String, Number]},
         defaultSelect: {type: Boolean, default: false},
-        placeholder: String
+        placeholder: String,
+        beginPlaceholder: String,
+        endPlaceholder: String,
+        autoSelectIfOne: Boolean,
+        allForEmpty: Boolean,
+        autoClear: Boolean,
+        matchKeys: Array,
+        keys: Array,
+        showKeys: Array,
+        keyfield: {type: String, default: 'key'}
     },
     data() {
         return {
             validateState: '',
             validateMessage: '',
-            inputValue: this.value,
-            selectValue: this.value,
-            reset: false
+            datesValue: this.value,
+            reset: false,
+            commonValue: this.value
         };
     },
     methods: {
@@ -98,34 +147,37 @@ export default {
         resetField(){
             this.reset = true;
             if (this.form.model){
-                this.inputValue = '';
-                this.selectValue = '';
+                this.commonValue = '';
+                this.datesValue = '';
             }
             this.validateState = '';
             this.validateMessage = '';
         },
-        handleInput(event) {
-            const value = event.target.value;
-
-            this.setInputValue(value);
-            this.$emit('input', value); //与v-model绑定
-        },
         handleChange(event){
-            const value = event.target.value;
+            var value = '';
 
-            this.setSelectValue(value);
-            this.$emit('input', value);
-        },
-        handleUp(){
-            if (this.pattern && this.inputValue){
-                this.inputValue = this.inputValue.replace(this.pattern, '');
+            if (this.type === 'date'){
+                value = this.$refs.date.getDate();
+            } else if (this.type === 'autoComplete'){
+                value = event;
+            } else {
+                value = event.target.value;
             }
+            this.setValue(value);
+            this.$emit('input', value);
+            this.$emit('change', value);
         },
-        setInputValue(val){
-            this.inputValue = val;
+        setValue(val){
+            this.commonValue = val;
         },
-        setSelectValue(val){
-            this.selectValue = val;
+        updateTime(){
+            this.$emit('input', this.datesValue);
+            this.$emit('change', this.datesValue);
+        },
+        selectComplete(obj){
+            this.setValue(obj[this.keyfield].toString());
+            this.$emit('input', obj[this.keyfield].toString());
+            this.$emit('select', obj);
         }
     },
     computed: {
@@ -167,8 +219,7 @@ export default {
             this.validate(()=>{});   
         },
         value(val){
-            if (this.type === 'text' || this.type === 'textarea') this.setInputValue(val);
-            else this.setSelectValue(val);
+            this.setValue(val);
         }
     },
     mounted() {

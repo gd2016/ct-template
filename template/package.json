@@ -17,6 +17,8 @@
     "vue": "~2.5.0",
     "vue-router": "^2.2.0",
     "async-validator": "^1.8.4",
+    "ct-adc-auto-complete": "^3.0.0",
+    "ct-adc-date": "^2.0.0-alpha.2",
     "ct-adc-const": "^1.0.0-alpha.3",
     "ct-adc-list": "^4.0.1",
     "ct-adc-loading": "^1.0.0-alpha.3",

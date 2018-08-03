@@ -1,12 +1,12 @@
 <template>
     <div class="container-fluid">{{#searchOperation}}
-        <ct-form  searchForm :loading="loading" @search="search">{{first}}
-            <form-item v-model="searchInfo.Id" type="text" label="ID"></form-item>{{second}}{{third}}
-            <form-item v-model="searchInfo.Type" type="select" defaultSelect :selectList="typeList" label="类型"></form-item>  
-        </ct-form>{{/searchOperation}}
+        <ct-form  searchForm :loading="loading" @search="search">
+            <form-item v-model="searchInfo.Id" type="{{first}}" label="搜索项"></form-item>{{#if searchItems>1}}
+            <form-item v-model="searchInfo.Type" type="{{second}}" defaultSelect :selectList="typeList" label="搜索项"></form-item>{{/if}}  
+        </ct-form>{{/searchOperation}}{{#addOperation}}
         <div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
-        </div>
+        </div>{{/addOperation}}
         <adc-table  :data="list" v-loading="loading"
                    :status="status"  :msg="message">
             <adc-column prop="Id" name="ID"></adc-column>
@@ -41,8 +41,6 @@ export default {
             list: [],
             count: 0,
             searchInfo: {
-                Type: null,
-                Id: null,
                 PageIndex: 1,
                 PageSize: 15
             }
