@@ -65,39 +65,24 @@ module.exports = {
                 }
             ]
         },
-        "operation": {
-            "type": "list",
-            "message": "include operation",
-            "choices": [
-                {
-                    "name": "add, edit, view, search",
-                    "value": "all",
-                    "short": "all"
-                },
-                {
-                    "name": "some",
-                    "value": "some",
-                    "short": "some"
-                }
-            ]
+        "searchOperation":{
+            "type":"confirm",
+            "message" :"has search operation?"
+        },
+        "searchItems":{
+            "when":"searchOperation",
+            "type":"string",
+            "message" :"how many search items?"
         },
         "addOperation":{
-            "when":"operation === 'some'",
             "type":"confirm",
             "message" :"has add operation?"
         },
         "editOperation":{
-            "when":"operation === 'some'",
             "type":"confirm",
             "message" :"has edit operation?"
         },
-        "searchOperation":{
-            "when":"operation === 'some'",
-            "type":"confirm",
-            "message" :"has search operation?"
-        },
         "viewOperation":{
-            "when":"operation === 'some'",
             "type":"confirm",
             "message" :"has view operation?"
         },
@@ -111,9 +96,9 @@ module.exports = {
         "src/component/**/*": "projectType === 'component'",
         "src/js/module/**/*": "projectType === 'business'",
         "src/css/**/*": "projectType === 'business'",
-        "src/js/app/main/component/add.vue": "operation === 'all' || addOperation",
-        "src/js/app/main/component/edit.vue":"operation === 'all' || editOperation",
-        "src/js/app/main/component/btn.vue":"operation === 'all' || editOperation || viewOperation",
+        "src/js/app/main/component/add.vue": "addOperation",
+        "src/js/app/main/component/edit.vue":"editOperation",
+        "src/js/app/main/component/btn.vue":"editOperation || viewOperation",
     },
     complete: function(data, { chalk }) {
         const green = chalk.green

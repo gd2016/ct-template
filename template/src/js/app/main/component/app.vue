@@ -1,9 +1,9 @@
 <template>
-    <div class="container-fluid">{{#if_eq operation "all" searchOperation}}
-        <ct-form  searchForm :loading="loading" @search="search">
-            <form-item maxlength="30" v-model="searchInfo.Id" type="text" label="ID"></form-item>
-            <form-item  defaultSelect :selectList="typeList"  v-model="searchInfo.Type" type="select" label="类型"></form-item>  
-        </ct-form>{{/if_eq}}
+    <div class="container-fluid">{{#searchOperation}}
+        <ct-form  searchForm :loading="loading" @search="search">{{#each searchItems}}
+            <form-item v-model="searchInfo.Id" type="text" label="ID"></form-item>{{#/each}}
+            <form-item v-model="searchInfo.Type" type="select" defaultSelect :selectList="typeList" label="类型"></form-item>  
+        </ct-form>{{/searchOperation}}
         <div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
         </div>
