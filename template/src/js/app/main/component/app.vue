@@ -2,8 +2,9 @@
     <div class="container-fluid">{{#searchOperation}}
         <ct-form  searchForm :loading="loading" @search="search">
             <!-- <form-item v-model="searchInfo.Id" type="{{first}}" label="搜索项"></form-item>{{#if second}}
-            <form-item v-model="searchInfo.Type" type="{{second}}" defaultSelect :selectList="typeList" label="搜索项"></form-item>{{/if}} -->{{#each searchItems}}
-            <form-item v-model="searchInfo.Id" type="{{first}}" label="{{label}}"></form-item>{{/each}}
+            <form-item v-model="searchInfo.Type" type="{{second}}" defaultSelect :selectList="typeList" label="搜索项"></form-item>{{/if}} -->
+            {{#each searchItems}}
+            <form-item v-model="searchInfo.Id" type="{{type}}" label="{{label}}"></form-item>{{/each}}
         </ct-form>{{/searchOperation}}{{#addOperation}}
         <div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
