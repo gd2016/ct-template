@@ -17,7 +17,7 @@ module.exports = {
 
             return options.inverse(this);
         },
-        "foreach": function (v1, options) {
+        "foreach": function (v1, v2, options) {
             var templates = null;
             for (let index = 0; index < v1; index++) {
                 templates+=options.fn(this);
