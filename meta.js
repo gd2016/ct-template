@@ -9,12 +9,9 @@ const {
 
 module.exports = {
     "helpers": {
-        "if_or": function (v1, v2, options) {
-            if (v1 || v2) {
-                return options.fn(this);
-            }
-
-            return options.inverse(this);
+        "foreach": function (v1, v2, options) {
+            console.log(options,option.fn,options.inverse,this);
+            return options.fn(this);
         }
     },
     "prompts": {
