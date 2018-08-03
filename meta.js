@@ -17,7 +17,10 @@ module.exports = {
             return options.inverse(this);
         },
         "foreach": function (v1, v2, options) {
-            console.log(options,option.fn,options.inverse,this);
+            var template = null;
+            for(var i=0;i<v1;i++){
+                template+=this;
+            }
             return options.fn(this);
         }
     },
