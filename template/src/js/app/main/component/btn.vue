@@ -51,7 +51,7 @@ export default { {{#viewOperation}}
             }).then((res)=>{
                 this.info = res.Data;
             });
-        }{{#/editOperation}},{{/viewOperation}}
+        }{{/viewOperation}}{{#if_and viewOperation editOperation}},{{/if_and}}{{#editOperation}}
         edit(){
             this.$router.push({path: '/app/edit', query: {id: this.item.Id}});
         }{{/editOperation}}
