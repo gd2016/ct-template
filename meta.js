@@ -18,10 +18,9 @@ module.exports = {
         },
         "foreach": function (v1, options) {
             console.log(this);
-            var length = v1;
             var obj = {};
             this.items = [];
-            for (let index = 0; index < length; index++) {
+            for (let index = 0; index < v1; index++) {
                 obj.type=this[index];
                 this.items.push(obj);
             }
