@@ -17,8 +17,8 @@ module.exports = {
             return options.inverse(this);
         },
         "foreach": function (v1, options) {
-            console.log(this);
-            var str = null;
+            this.item = [{type:this.first},{type:this.second}];
+            var str = "";
             for (let index = 0; index < v1; index++) {
                 str+=options.fn(this);
             }
