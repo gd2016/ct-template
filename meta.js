@@ -84,22 +84,22 @@ module.exports = {
             "type":"string",
             "message" :"how many search items?"
         },
-        "1":{
+        "item1":{
             "when":"searchItems",
             "type":"string",
             "message" :"first item type?"
         },
-        "2":{
+        "item2":{
             "when":"searchItems>1",
             "type":"string",
             "message" :"second item type?"
         },
-        "3":{
+        "item3":{
             "when":"searchItems>2",
             "type":"string",
             "message" :"third item type?"
         },
-        "4":{
+        "item4":{
             "when":"searchItems>3",
             "type":"string",
             "message" :"third item type?"
