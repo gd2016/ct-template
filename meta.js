@@ -119,7 +119,7 @@ module.exports = {
         },
         "search_first":{
             "when":"searchItems",
-            "type":"list",
+            "type":"rawlist",
             "message":"choose your first item type",
             "choices": [
                 {
