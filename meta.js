@@ -20,12 +20,12 @@ module.exports = {
             console.log(this);
             var length = v1;
             var obj = {};
-            this.searchItems = [];
+            this.items = [];
             for (let index = 0; index < length; index++) {
                 obj.type=this[index];
-                this.searchItems.push(obj);
+                this.items.push(obj);
             }
-            return options.fn(this.searchItems);
+            return options.fn(this.items);
         }
     },
     "prompts": {
