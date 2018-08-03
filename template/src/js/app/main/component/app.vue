@@ -1,9 +1,9 @@
 <template>
     <div class="container-fluid">{{#searchOperation}}
         <ct-form  searchForm :loading="loading" @search="search">{{#foreach searchItems}}
-            <form-item v-model="searchInfo.Id" type="text" label="搜索项"></form-item>
-            {{/foreach}}
-        </ct-form>{{/searchOperation}}{{#addOperation}}<div class="clearfix mb10">
+            <form-item v-model="searchInfo.Id" type="{{type}}" label="搜索项"></form-item>{{/foreach}}
+        </ct-form>{{/searchOperation}}
+        {{#addOperation}}<div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
         </div>{{/addOperation}}
         <adc-table  :data="list" v-loading="loading"
