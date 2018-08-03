@@ -24,10 +24,10 @@ import formItem from 'component/formItem';
 import slideout from 'ct-adc-slideout';
 import mixin from 'common/loadMixin';
 import Interface from 'common/interface';{{/viewOperation}}
-export default {{{#viewOperation}}
+export default { {{#viewOperation}}
     mixins: [mixin],{{/viewOperation}}
     data() {
-        return {{{#viewOperation}}
+        return { {{#viewOperation}}
             info: {},{{/viewOperation}}
             show: false
         };
@@ -40,7 +40,7 @@ export default {{{#viewOperation}}
             }
         }
     },
-    methods: {{{#viewOperation}}
+    methods: { {{#viewOperation}}
         view(){
             this.show = true;
             this.getInfo({
