@@ -29,6 +29,12 @@ module.exports = {
                 return options.fn(this);
             }
             return options.inverse(this);
+        },
+        "if_and": function (v1, v2, options) {
+              if(v1 && v2){
+                  return options.fn(this);
+              }
+              return options.inverse(this);
         }
     },
     "prompts": {
@@ -45,6 +51,27 @@ module.exports = {
                     "name": "component: for component",
                     "value": "component",
                     "short": "component"
+                }
+            ]
+        },
+        "check": {
+            "type": "checkbox",
+            "message": 'check name',
+            "choices": [
+                {
+                    "name": "firstName",
+                    "value": "firstValue",
+                    "short": "firstShort"
+                },
+                {
+                    "name": "secondName",
+                    "value": "secondName",
+                    "short": "secondName"
+                },
+                {
+                    "name": "thirdName",
+                    "value": "thirdName",
+                    "short": "thirdName"
                 }
             ]
         },
@@ -90,7 +117,7 @@ module.exports = {
         },
         "search_first":{
             "when":"searchItems",
-            "type":"list",
+            "type":"rawlist",
             "message":"choose your first item type",
             "choices": [
                 {
