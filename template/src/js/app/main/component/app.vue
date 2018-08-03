@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">{{#searchOperation}}
-        <ct-form  searchForm :loading="loading" @search="search">{{#foreach searchItems}}
+        <ct-form  searchForm :loading="loading" @search="search">{{#foreach items}}
             <form-item v-model="searchInfo.Id" type="{{type}}" label="搜索项"></form-item>{{/foreach}}
         </ct-form>{{/searchOperation}}
         {{#addOperation}}<div class="clearfix mb10">
