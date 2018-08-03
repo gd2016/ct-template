@@ -21,7 +21,7 @@ module.exports = {
             var obj = {};
             this.items = [];
             for (let index = 0; index < v1; index++) {
-                obj.type=this[index];
+                obj.type=this['item'+index];
                 this.items.push(obj);
             }
             return options.fn(this.items);
