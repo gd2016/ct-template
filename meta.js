@@ -16,6 +16,14 @@ module.exports = {
             }
 
             return options.inverse(this);
+        },
+        "foreach": function (v1, v2, options) {
+          console.log(v1,v2,options);
+            if (v1 || v2) {
+                return options.fn(this);
+            }
+
+            return options.inverse(this);
         }
     },
     "prompts": {
