@@ -56,6 +56,27 @@ module.exports = {
                 }
             ]
         },
+        "check": {
+            "type": "checkbox",
+            "message": 'check name',
+            "choices": [
+                {
+                    "name": "firstName",
+                    "value": "firstValue",
+                    "short": "firstShort"
+                },
+                {
+                    "name": "secondName",
+                    "value": "secondName",
+                    "short": "secondName"
+                },
+                {
+                    "name": "thirdName",
+                    "value": "thirdName",
+                    "short": "thirdName"
+                }
+            ]
+        },
         "name": {
             "type": "string",
             "required": true,
