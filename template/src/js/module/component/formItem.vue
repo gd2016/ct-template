@@ -3,7 +3,7 @@
         <div class="form-group form-group-sm">
             <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">\{{label}}</label>
             <div class="col-sm-8" :class="{'has-error': validateState==='error'}">
-                <section v-if="type==='text'">
+                <section v-if="type==='text'||type==='input'">
                     <input :placeholder="placeholder"  :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
                 </section>
                 <section v-if="type==='select'">
@@ -42,7 +42,7 @@
             <slot></slot>
         </div>
         <div v-if="!isStatic" :class="[{'has-error': validateState==='error'},valueClass?valueClass:'col-sm-9']">
-            <section v-if="type==='text'">
+            <section v-if="type==='text'||type==='input'">
                 <input :disabled="disabled" :placeholder="placeholder" :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
             </section>
             <section v-if="type==='select'">

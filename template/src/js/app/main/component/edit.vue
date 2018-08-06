@@ -3,12 +3,8 @@
         <slideout width="60%" title="编辑" v-model="show" @on-after-hide="back">
             <template slot="body">
                 <ct-form v-if="!error" v-loading="loading" :model="formData" ref="forms" :rules="rules">
-                    <!-- <form-item isStatic v-model="formData.Id" type="text" required label="Id:"></form-item>
-                    <form-item prop="Name" v-model="formData.Name" type="text" required label="名称:"></form-item>
-                    <form-item prop="Type" defaultSelect required :selectList="TypeList" type="select" v-model="formData.Type" label="类型:"></form-item>
-                    <form-item type="textarea" v-model="formData.Remark" required label="备注:" ></form-item> -->
-                    {{#each_item editCount "edit_"}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>
-                                        {{/each_item}}
+                    {{#each_item editCount "edit_"}}{{#if_is @type 'select'}}<form-item prop="{{@field}}"  v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :selectList="TypeList" defaultSelect></form-item>{{else if_is @type 'autoComplete'}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :completeList="TypeList" :matchKeys="['key','val']" :keys="['key','val']" :showKeys="['key','val']"></form-item>{{else}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}                      
+                        {{/each_item}}
                     <template slot="footer">
                         <button :disabled="handleLoading" type="button" @click="save" class="btn btn-primary mr20">
                             <i class="glyphicon mr5" :class="{'glyphicon-refresh':handleLoading, rotate:handleLoading, 'glyphicon-save':!handleLoading}"></i>保存</button>

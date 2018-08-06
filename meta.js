@@ -17,14 +17,31 @@ module.exports = {
 
             return options.inverse(this);
         },
-        each_item: function (count, operation, options) {
-            var str='';
-            for (let index = 0; index < count; index++) {
-                const info = this[operation+index];
-                const field = info.split(" ")[0];
-                const label = info.split(" ")[1];
-                const type = info.split(" ")[2];
-                str+=options.fn(this,{data:{field:field,label:label,type:type}});
+        each_item: function(count, operation, options) {
+            var _count, _operation,str = '';
+
+            if (this.same){                 // 如果编辑项与添加项相同
+                if (operation === 'edit_'){   // 如果当前循环的是编辑则把添加项的输入赋给编辑
+                    _operation = 'add_';
+                    _count = this.addCount;
+                } 
+            } else {
+                _count = count;
+                _operation = operation;
+            }
+
+            for (let index = 0; index < _count; index++) {
+                const info = this[_operation + index];
+                const field = info.split(' ')[0];
+                const label = info.split(' ')[1];
+
+                if (_operation !== 'view_'){   //查看功能只有label和value  需要区分
+                    const type = info.split(' ')[2];
+
+                    str += options.fn(this, {data: {field: field, label: label, type: type}});
+                } else {
+                    str += options.fn(this, {data: {field: field, label: label}});
+                }
             }
             return str;
         },
@@ -183,6 +200,11 @@ module.exports = {
             type:"input",
             message:"set your five item info (field label type)"
         },
+        same:{
+            when:"operation.add && operation.edit",
+            type:"confirm",
+            message :"whethere or not the same to edit item?"
+        },
         editCount:{
             when:"operation.edit",
             type:"list",
@@ -265,27 +287,27 @@ module.exports = {
         view_0:{
             when:"operation.view && viewCount",
             type:"input",
-            message:"set your first item info (field label type)"
+            message:"set your first item info (field label)"
         },
         view_1:{
             when:"operation.view && viewCount>1",
             type:"input",
-            message:"set your second item info (field label type)"
+            message:"set your second item info (field label)"
         },
         view_2:{
             when:"operation.view && viewCount>2",
             type:"input",
-            message:"set your third item info (field label type)"
+            message:"set your third item info (field label)"
         },
         view_3:{
             when:"operation.view && viewCount>3",
             type:"input",
-            message:"set your fourth item info (field label type)"
+            message:"set your fourth item info (field label)"
         },
         view_4:{
             when:"operation.view && viewCount>4",
             type:"input",
-            message:"set your five item info (field label type)"
+            message:"set your five item info (field label)"
         }
         // ,
         // "build": {

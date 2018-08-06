@@ -3,8 +3,8 @@
         <slideout width="60%" title="添加" v-model="show" @on-after-hide="back">
             <template slot="body">
                 <ct-form v-loading="loading" :model="formData" ref="forms" :rules="rules">
-                    {{#each_item addCount "add_"}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>
-                                        {{/each_item}}
+                    {{#each_item addCount "add_"}}{{#if_is @type 'select'}}<form-item prop="{{@field}}"  v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :selectList="TypeList" defaultSelect></form-item>{{else if_is @type 'autoComplete'}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :completeList="TypeList" :matchKeys="['key','val']" :keys="['key','val']" :showKeys="['key','val']"></form-item>{{else}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}                      
+                        {{/each_item}}
                     <template slot="footer">
                         <button :disabled="handleLoading" type="button" @click="save" class="btn btn-primary mr20">
                             <i class="glyphicon mr5" :class="{'glyphicon-refresh':handleLoading, rotate:handleLoading, 'glyphicon-save':!handleLoading}"></i>保存</button>
