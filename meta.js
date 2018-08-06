@@ -18,6 +18,7 @@ module.exports = {
             return options.inverse(this);
         },
         each_item: function(count, operation, options) {
+            console.log(this,count,operation);
             var _count, _operation,str = '';
 
             if (this.same){                 // 如果编辑项与添加项相同
