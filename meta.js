@@ -10,7 +10,6 @@ const {
 module.exports = {
     helpers: {
         if_or: function (v1, v2, options) {
-          console.log(this)
             if (v1 || v2) {
                 return options.fn(this);
             }
