@@ -19,7 +19,7 @@ module.exports = {
         each_item: function(count, operation, options) {
             var _count, _operation,str = '';
 
-            if (this.same && operation === 'edit_){ // 如果编辑项与添加项相同
+            if (this.same && operation === 'edit_'){ // 如果编辑项与添加项相同
               _operation = 'add_';
               _count = this.addCount;
             } else {
@@ -203,7 +203,7 @@ module.exports = {
             message :"whethere or not the same to edit item?"
         },
         editCount:{
-            when:"operation.edit",
+            when:"!same && operation.edit",
             type:"list",
             message :"how many edit items?",
             choices: [
@@ -230,17 +230,17 @@ module.exports = {
             ]
         },
         edit_0:{
-            when:"operation.edit && editCount",
+            when:"!same && operation.edit && editCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         edit_1:{
-            when:"operation.edit && editCount>1",
+            when:"!same && operation.edit && editCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         edit_2:{
-            when:"operation.edit && editCount>2",
+            when:"!same && operation.edit && editCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
