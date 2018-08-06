@@ -107,27 +107,27 @@ module.exports = {
             ]
         },
         search_0:{
-            when:"searchCount",
+            when:"operation.search && searchCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         search_1:{
-            when:"searchCount>1",
+            when:"operation.search && searchCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         search_2:{
-            when:"searchCount>2",
+            when:"operation.search && searchCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
         search_3:{
-            when:"searchCount>3",
+            when:"operation.search && searchCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         search_4:{
-            when:"searchCount>4",
+            when:"operation.search && searchCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         },
@@ -159,27 +159,27 @@ module.exports = {
             ]
         },
         add_0:{
-            when:"addCount",
+            when:"operation.add && addCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         add_1:{
-            when:"addCount>1",
+            when:"operation.add && addCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         add_2:{
-            when:"addCount>2",
+            when:"operation.add && addCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
         add_3:{
-            when:"addCount>3",
+            when:"operation.add && addCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         add_4:{
-            when:"addCount>4",
+            when:"operation.add && addCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         },
@@ -211,27 +211,27 @@ module.exports = {
             ]
         },
         edit_0:{
-            when:"editCount",
+            when:"operation.edit && editCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         edit_1:{
-            when:"editCount>1",
+            when:"operation.edit && editCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         edit_2:{
-            when:"editCount>2",
+            when:"operation.edit && editCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
         edit_3:{
-            when:"editCount>3",
+            when:"operation.edit && editCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         edit_4:{
-            when:"editCount>4",
+            when:"operation.edit && editCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         },
@@ -263,27 +263,27 @@ module.exports = {
             ]
         },
         view_0:{
-            when:"viewCount",
+            when:"operation.view && viewCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         view_1:{
-            when:"viewCount>1",
+            when:"operation.view && viewCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         view_2:{
-            when:"viewCount>2",
+            when:"operation.view && viewCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
         view_3:{
-            when:"viewCount>3",
+            when:"operation.view && viewCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         view_4:{
-            when:"viewCount>4",
+            when:"operation.view && viewCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         }

@@ -1,7 +1,8 @@
 <template>
     <div class="container-fluid">{{#operation.search}}
         <ct-form  searchForm :loading="loading" @search="search">
-            {{#each_item searchCount "search_"}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/each_item}}
+            {{#each_item searchCount "search_"}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>
+            {{/each_item}}
         </ct-form>{{/operation.search}}
         {{#operation.add}}<div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
