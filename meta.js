@@ -107,27 +107,27 @@ module.exports = {
             ]
         },
         search_0:{
-            when:"searchItems",
+            when:"searchCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         search_1:{
-            when:"searchItems>1",
+            when:"searchCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         search_2:{
-            when:"searchItems>2",
+            when:"searchCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
         search_3:{
-            when:"searchItems>3",
+            when:"searchCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         search_4:{
-            when:"searchItems>4",
+            when:"searchCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         },
@@ -159,27 +159,27 @@ module.exports = {
             ]
         },
         add_0:{
-            when:"addItems",
+            when:"addCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         add_1:{
-            when:"addItems>1",
+            when:"addCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         add_2:{
-            when:"addItems>2",
+            when:"addCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
         add_3:{
-            when:"addItems>3",
+            when:"addCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         add_4:{
-            when:"addItems>4",
+            when:"addCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         },
@@ -211,27 +211,27 @@ module.exports = {
             ]
         },
         edit_0:{
-            when:"editItems",
+            when:"editCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         edit_1:{
-            when:"editItems>1",
+            when:"editCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         edit_2:{
-            when:"editItems>2",
+            when:"editCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
         edit_3:{
-            when:"editItems>3",
+            when:"editCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         edit_4:{
-            when:"editItems>4",
+            when:"editCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         },
@@ -263,27 +263,27 @@ module.exports = {
             ]
         },
         view_0:{
-            when:"viewItems",
+            when:"viewCount",
             type:"input",
             message:"set your first item info (field label type)"
         },
         view_1:{
-            when:"viewItems>1",
+            when:"viewCount>1",
             type:"input",
             message:"set your second item info (field label type)"
         },
         view_2:{
-            when:"viewItems>2",
+            when:"viewCount>2",
             type:"input",
             message:"set your third item info (field label type)"
         },
         view_3:{
-            when:"viewItems>3",
+            when:"viewCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         view_4:{
-            when:"viewItems>4",
+            when:"viewCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         }
