@@ -4,7 +4,7 @@
             <template slot="body">
                 <ct-form v-loading="loading" :model="formData" ref="forms" :rules="rules">
                     {{#each_item addCount "add_"}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>
-                    {{/each_item}}
+                                        {{/each_item}}
                     <template slot="footer">
                         <button :disabled="handleLoading" type="button" @click="save" class="btn btn-primary mr20">
                             <i class="glyphicon mr5" :class="{'glyphicon-refresh':handleLoading, rotate:handleLoading, 'glyphicon-save':!handleLoading}"></i>保存</button>
@@ -23,12 +23,12 @@ import slideout from 'ct-adc-slideout';
 import mixin from 'common/loadMixin';
 import Interface from 'common/interface';
 import Const from 'common/const';
-import {formRules} from 'common/rules';
+import {addRules} from 'common/rules';
 export default {
     mixins: [mixin],
     data() {
         return {
-            rules: formRules,
+            rules: addRules,
             show: false,
             saveShow: false,
             TypeList: Const.getData({col: 'type'}),

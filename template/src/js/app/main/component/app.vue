@@ -1,8 +1,8 @@
 <template>
     <div class="container-fluid">{{#operation.search}}
         <ct-form  searchForm :loading="loading" @search="search">
-            {{#each_item searchCount "search_"}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>
-            {{/each_item}}
+            {{#each_item searchCount "search_"}}{{#if_is @type 'select'}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}" :selectList="typeList"></form-item>{{else if_is @type 'complete'}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}" :completeList="completeList"></form-item>{{else}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}
+                        {{/each_item}}
         </ct-form>{{/operation.search}}
         {{#operation.add}}<div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
@@ -37,6 +37,7 @@ export default {
     data() {
         return {
             typeList: Const.getData({col: 'type'}),
+            completeList:Const.getData({col: 'type'}),
             stateFormat: Const.getData({col: 'state'}),
             list: [],
             count: 0,
@@ -58,11 +59,11 @@ export default {
                 this.list = res.Data.List;
                 this.count = res.Data.RecordCount;
             });
-        }{{#searchOperation}}, 
+        }{{#operation.search}}, 
         search(){
             this.searchInfo.PageIndex = 1;
             this.getData();
-        }{{/searchOperation}},
+        }{{/operation.search}},
         changePage(index){
             this.searchInfo.PageIndex = index;
             this.getData();
