@@ -8,8 +8,8 @@ const {
 } = require('./utils')
 
 module.exports = {
-    "helpers": {
-        "if_or": function (v1, v2, options) {
+    helpers: {
+        if_or: function (v1, v2, options) {
           console.log(this)
             if (v1 || v2) {
                 return options.fn(this);
@@ -17,43 +17,31 @@ module.exports = {
 
             return options.inverse(this);
         },
-        "search_item": function (v1, options) {
+        search_item: function (v1, options) {
             var str='';
-            for (let index = 1; index < v1; index++) {
-                str+=options.fn(this,{data:{"type":this["search_"+index],"name":index+"name"}});
+            for (let index = 0; index < v1; index++) {
+                const info = this["seaarch_"+index];
+                const field = info.split(" ")[0];
+                const label = info.split(" ")[1];
+                const type = info.split(" ")[2];
+                str+=options.fn(this,{data:{field:field,label:label,type:type}});
             }
             return str;
         },
-        "if_is": function (v1, v2, options) {
+        if_is: function (v1, v2, options) {
             if(v1===v2){
                 return options.fn(this);
             }
             return options.inverse(this);
         },
-        "if_and": function (v1, v2, options) {
+        if_and: function (v1, v2, options) {
               if(v1 && v2){
                   return options.fn(this);
               }
               return options.inverse(this);
         }
     },
-    "prompts": {
-        "projectType": {
-            "type": "list",
-            "message": "project type",
-            "choices": [
-                {
-                    "name": "business: for business",
-                    "value": "business",
-                    "short": "business"
-                },
-                {
-                    "name": "component: for component",
-                    "value": "component",
-                    "short": "component"
-                }
-            ]
-        },
+    prompts: {
 //         "name": {
 //             "type": "string",
 //             "required": true,
@@ -69,206 +57,106 @@ module.exports = {
 //             "type": "string",
 //             "message": "Author"
 //         },
-        "operation": {
-            "type": "checkbox",
-            "message": 'What operations are included ？',
-            "choices": [
+        operation: {
+            type: "checkbox",
+            message: 'What operations are included ？',
+            choices: [
                 {
-                    "name": "add",
-                    "value": "add",
-                    "short": "add"
+                    name: "1) add operation",
+                    value: "add"
                 },
                 {
-                    "name": "edit",
-                    "value": "edit",
-                    "short": "edit"
+                    name: "2) edit operation",
+                    value: "edit"
                 },
                 {
-                    "name": "search",
-                    "value": "search",
-                    "short": "search"
+                    name: "3) search operation",
+                    value: "search"
                 },
                 {
-                    "name": "view",
-                    "value": "view",
-                    "short": "view"
+                    name: "4) view operation",
+                    value: "view"
                 }
             ]
         },
-        "build": {
-            "type": "list",
-            "message": "Vue build",
-            "choices": [
+        searchItems:{
+            when:"operation.search",
+            type:"list",
+            message :"how many search items?",
+            choices: [
                 {
-                    "name": "Runtime + Compiler: recommended for most users",
-                    "value": "standalone",
-                    "short": "standalone"
+                    name: "1) 1",
+                    value: "1"
                 },
                 {
-                    "name": "Runtime-only: about 6KB lighter min+gzip, but templates (or any Vue-specific HTML) are ONLY allowed in .vue files - render functions are required elsewhere",
-                    "value": "runtime",
-                    "short": "runtime"
+                    name: "2) 2",
+                    value: "2"
+                },
+                {
+                    name: "3) 3",
+                    value: "3"
+                },
+                {
+                    name: "4) 4",
+                    value: "4"
+                },
+                {
+                    name: "5) 5",
+                    value: "5"
                 }
             ]
         },
-        "searchItems":{
-            "when":"operation.search",
-            "type":"string",
-            "message" :"how many search items?"
+        search_0:{
+            when:"searchItems",
+            type:"input",
+            message:"set your first item info (field label type)"
         },
-        "search_1":{
-            "when":"searchItems",
-            "type":"rawlist",
-            "message":"choose your first item type",
-            "choices": [
-                {
-                    "name": "text",
-                    "value": "text",
-                    "short": "text"
-                },
-                {
-                    "name": "select",
-                    "value": "select",
-                    "short": "select"
-                },
-                {
-                    "name": "dates",
-                    "value": "dates",
-                    "short": "dates"
-                },
-                {
-                    "name": "date",
-                    "value": "date",
-                    "short": "date"
-                },
-                {
-                    "name": "autoComplete",
-                    "value": "autoComplete",
-                    "short": "autoComplete"
-                }
-            ]
+        search_1:{
+            when:"searchItems>1",
+            type:"input",
+            message:"set your second item info (field label type)"
         },
-        "search_second":{
-            "when":"searchItems>1",
-            "type":"list",
-            "message":"choose your second item type",
-            "choices": [
-                {
-                    "name": "text",
-                    "value": "text",
-                    "short": "text"
-                },
-                {
-                    "name": "select",
-                    "value": "select",
-                    "short": "select"
-                },
-                {
-                    "name": "dates",
-                    "value": "dates",
-                    "short": "dates"
-                },
-                {
-                    "name": "date",
-                    "value": "date",
-                    "short": "date"
-                },
-                {
-                    "name": "autoComplete",
-                    "value": "autoComplete",
-                    "short": "autoComplete"
-                }
-            ]
+        search_2:{
+            when:"searchItems>2",
+            type:"input",
+            message:"set your third item info (field label type)"
         },
-        "search_third":{
-            "when":"searchItems>2",
-            "type":"list",
-            "message":"choose your third item type",
-            "choices": [
-                {
-                    "name": "text",
-                    "value": "text",
-                    "short": "text"
-                },
-                {
-                    "name": "select",
-                    "value": "select",
-                    "short": "select"
-                },
-                {
-                    "name": "dates",
-                    "value": "dates",
-                    "short": "dates"
-                },
-                {
-                    "name": "date",
-                    "value": "date",
-                    "short": "date"
-                },
-                {
-                    "name": "autoComplete",
-                    "value": "autoComplete",
-                    "short": "autoComplete"
-                }
-            ]
+        search_3:{
+            when:"searchItems>3",
+            type:"input",
+            message:"set your fourth item info (field label type)"
         },
-        "search_fourth":{
-            "when":"searchItems>3",
-            "type":"list",
-            "message":"choose your fourth item type",
-            "choices": [
-                {
-                    "name": "text",
-                    "value": "text",
-                    "short": "text"
-                },
-                {
-                    "name": "select",
-                    "value": "select",
-                    "short": "select"
-                },
-                {
-                    "name": "dates",
-                    "value": "dates",
-                    "short": "dates"
-                },
-                {
-                    "name": "date",
-                    "value": "date",
-                    "short": "date"
-                },
-                {
-                    "name": "autoComplete",
-                    "value": "autoComplete",
-                    "short": "autoComplete"
-                }
-            ]
-        },
-        "addOperation":{
-            "type":"confirm",
-            "message" :"has add operation?"
-        },
-        "editOperation":{
-            "type":"confirm",
-            "message" :"has edit operation?"
-        },
-        "viewOperation":{
-            "type":"confirm",
-            "message" :"has view operation?"
-        },
-        "autoInstall": {
-            type: 'confirm',
-            message: 'Should we run `npm install` for you after the project has been created? (recommended)'
+        search_4:{
+            when:"searchItems>4",
+            type:"input",
+            message:"set your five item info (field label type)"
         }
+        // ,
+        // "build": {
+        //     "type": "list",
+        //     "message": "Vue build",
+        //     "choices": [
+        //         {
+        //             "name": "Runtime + Compiler: recommended for most users",
+        //             "value": "standalone",
+        //             "short": "standalone"
+        //         },
+        //         {
+        //             "name": "Runtime-only: about 6KB lighter min+gzip, but templates (or any Vue-specific HTML) are ONLY allowed in .vue files - render functions are required elsewhere",
+        //             "value": "runtime",
+        //             "short": "runtime"
+        //         }
+        //     ]
+        // },
+        // "autoInstall": {
+        //     type: 'confirm',
+        //     message: 'Should we run `npm install` for you after the project has been created? (recommended)'
+        // }
     },
-    "filters": {
-        "build/webpack.umd.conf.js": "projectType === 'component'",
-        "src/component/**/*": "projectType === 'component'",
-        "src/js/module/**/*": "projectType === 'business'",
-        "src/css/**/*": "projectType === 'business'",
-        "src/js/app/main/component/add.vue": "addOperation",
-        "src/js/app/main/component/edit.vue":"editOperation",
-        "src/js/app/main/component/btn.vue":"editOperation || viewOperation",
+    filters: {
+        "src/js/app/main/component/add.vue": "operation.add",
+        "src/js/app/main/component/edit.vue":"operation.edit",
+        "src/js/app/main/component/btn.vue":"operation.edit || operation.view",
     },
     complete: function(data, { chalk }) {
         const green = chalk.green

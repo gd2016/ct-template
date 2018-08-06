@@ -18,7 +18,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.vue', '.json','.css'],
-    modules: ['node_modules','src/js/module','src/css'{{#if_eq projectType "component"}}, 'src/component'{{/if_eq}}],
+    modules: ['node_modules','src/js/module','src/css'],
     alias: {
       {{#if_eq build "standalone"}}
       'vue$': 'vue/dist/vue.esm.js',

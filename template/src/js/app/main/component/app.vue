@@ -1,21 +1,17 @@
 <template>
-    <div class="container-fluid">{{#searchOperation}}
+    <div class="container-fluid">{{#operation.search}}
         <ct-form  searchForm :loading="loading" @search="search">
-            <!-- <form-item v-model="searchInfo.Id" type="{{search_first}}" label="搜索项"></form-item>{{#search_second}}
-            <form-item v-model="searchInfo.Id" type="{{this}}" label="搜索项"></form-item>{{/search_second}}{{#search_third}}
-            <form-item v-model="searchInfo.Id" type="{{this}}" label="搜索项"></form-item>{{/search_third}}{{#search_fourth}}
-            <form-item v-model="searchInfo.Id" type="{{this}}" label="搜索项"></form-item>{{/search_fourth}} -->
-            {{#search_item searchItems}}<form-item v-model="searchInfo.Id" type="{{@name}}" label="搜索项"></form-item>{{/search_item}}
-        </ct-form>{{/searchOperation}}
-        {{#addOperation}}<div class="clearfix mb10">
+            {{#search_item searchItems}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/search_item}}
+        </ct-form>{{/operation.search}}
+        {{#operation.add}}<div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
-        </div>{{/addOperation}}
+        </div>{{/operation.add}}
         <adc-table  :data="list" v-loading="loading"
                    :status="status"  :msg="message">
             <adc-column prop="Id" name="ID"></adc-column>
             <adc-column prop="Name" name="名称"></adc-column>
             <adc-column prop="CreateTime" filter="dateTimeFormat" name="时间"></adc-column>
-            <adc-column prop="GrantState" :mapper="stateFormat" name="状态"></adc-column>{{#if_or viewOperation editOperation}} 
+            <adc-column prop="GrantState" :mapper="stateFormat" name="状态"></adc-column>{{#if_or operation.view operation.edit}} 
             <adc-column :vm="{name: 'btn'}" name="操作"></adc-column> {{/if_or}}
         </adc-table>
         <page form
@@ -32,7 +28,7 @@ import Interface from 'common/interface';
 import page from 'ct-adc-page';
 import ctForm from 'component/ctForm';
 import formItem from 'component/formItem';
-import Const from 'common/const';{{#if_or viewOperation editOperation}} 
+import Const from 'common/const';{{#if_or operation.view operation.edit}} 
 import Vue from 'vue';
 import btn from './btn';
 Vue.component('btn', btn);{{/if_or}} 
@@ -76,10 +72,10 @@ export default {
                 this.searchInfo.PageIndex = 1;
                 this.getData();
             }
-        }{{#addOperation}},
+        }{{#operation.add}},
         add(){
             this.$router.push({path: '/app/add'});
-        }{{/addOperation}}
+        }{{/operation.add}}
     },
     mixins: [mixin],
     components: {

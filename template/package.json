@@ -2,18 +2,14 @@
   "name": "{{ name }}",
   "version": "1.0.0",
   "description": "{{ description }}",
-  "author": "{{ author }}"{{#if_eq projectType "component"}},
-  "private": false,
-  "main": "lib/index.js"{{/if_eq}}{{#if_eq projectType "business"}},
-  "private": true{{/if_eq}},
+  "author": "{{ author }}",
+  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "build": "node build/build.js"{{#if_eq projectType "component"}},
-    "umd": "webpack --config build/webpack.umd.conf.js"{{/if_eq}},
+    "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-{{#if_eq projectType "business"}}
     "vue": "~2.5.0",
     "vue-router": "^2.2.0",
     "async-validator": "^1.8.4",
@@ -26,13 +22,8 @@
     "ct-adc-page": "^1.1.0",
     "ct-adc-permission": "^1.1.0",
     "ct-adc-slideout": "^1.1.6-alpha.1"
-{{/if_eq}}
   },
   "devDependencies": {
-{{#if_eq projectType "component"}}
-    "vue": "~2.5.0",
-    "vue-router": "^2.2.0",
-{{/if_eq}}
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",

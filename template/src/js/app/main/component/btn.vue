@@ -1,11 +1,11 @@
 <template>
-    <div>{{#viewOperation}}
+    <div>{{#operation.view}}
         <button  type="button" class="btn btn-xs btn-primary"  @click="view">
             <i class="glyphicon glyphicon-edit"></i> 查看
-        </button>{{/viewOperation}}{{#editOperation}}
+        </button>{{/operation.view}}{{#operation.edit}}
         <button  type="button" class="btn btn-xs btn-primary"  @click="edit">
             <i class="glyphicon glyphicon-edit"></i> 编辑
-        </button>{{/editOperation}}{{#viewOperation}}
+        </button>{{/operation.edit}}{{#operation.view}}
         <slideout  width="50%" title="查看" v-model="show" >
             <template slot="body">
                 <form v-if="!error" v-loading="loading" class="form-horizontal">
@@ -16,19 +16,19 @@
                 </form>
                 <div v-if="error" class="error">\{{error}}</div>
             </template>
-        </slideout>{{/viewOperation}}
+        </slideout>{{/operation.view}}
     </div>
 </template>
-<script>{{#viewOperation}}
+<script>{{#operation.view}}
 import formItem from 'component/formItem';
 import slideout from 'ct-adc-slideout';
 import mixin from 'common/loadMixin';
-import Interface from 'common/interface';{{/viewOperation}}
-export default { {{#viewOperation}}
-    mixins: [mixin],{{/viewOperation}}
+import Interface from 'common/interface';{{/operation.view}}
+export default { {{#operation.view}}
+    mixins: [mixin],{{/operation.view}}
     data() {
-        return { {{#viewOperation}}
-            info: {},{{/viewOperation}}
+        return { {{#operation.view}}
+            info: {},{{/operation.view}}
             show: false
         };
     },
@@ -40,7 +40,7 @@ export default { {{#viewOperation}}
             }
         }
     },
-    methods: { {{#viewOperation}}
+    methods: { {{#operation.view}}
         view(){
             this.show = true;
             this.getInfo({
@@ -51,14 +51,14 @@ export default { {{#viewOperation}}
             }).then((res)=>{
                 this.info = res.Data;
             });
-        }{{/viewOperation}}{{#if_and viewOperation editOperation}},{{/if_and}}{{#editOperation}}
+        }{{/operation.view}}{{#if_and operation.view operation.edit}},{{/if_and}}{{#operation.edit}}
         edit(){
             this.$router.push({path: '/app/edit', query: {id: this.item.Id}});
-        }{{/editOperation}}
-    }{{#viewOperation}},
+        }{{/operation.edit}}
+    }{{#operation.view}},
     components: {
         formItem,
         slideout
-    }{{/viewOperation}}
+    }{{/operation.view}}
 };
 </script>
