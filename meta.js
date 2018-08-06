@@ -250,7 +250,7 @@ module.exports = {
             message:"set your fourth item info (field label type)"
         },
         edit_4:{
-            when:"!Soperation.edit && editCount>4",
+            when:"!same && operation.edit && editCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         },
