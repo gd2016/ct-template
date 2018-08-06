@@ -344,7 +344,7 @@ module.exports = {
         // }
     },
     filters: {
-        "?(app)/**/*":"pageOrProject==='page'",
+        "@app/**/*":"pageOrProject==='page'",
         "src/js/app/main/component/add.vue": "operation.add",
         "src/js/app/main/component/edit.vue":"operation.edit",
         "src/js/app/main/component/btn.vue":"operation.edit || operation.view",
