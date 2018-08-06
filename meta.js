@@ -17,7 +17,6 @@ module.exports = {
             return options.inverse(this);
         },
         each_item: function(count, operation, options) {
-            console.log(this);
             var _count, _operation,str = '';
 
             if (this.same && operation === 'edit_'){ // 如果编辑项与添加项相同
@@ -57,20 +56,6 @@ module.exports = {
         }
     },
     prompts: {
-        pageOrProject: {
-            type: "list",
-            message: 'Is it a page or project ？',
-            choices: [
-                {
-                    name: "1) page",
-                    value: "page"
-                },
-                {
-                    name: "2) project",
-                    value: "project"
-                }
-            ]
-        },
         name: {
             type: "string",
             required: true,
@@ -87,7 +72,6 @@ module.exports = {
             message: "Author"
         },
         operation: {
-            when: 'pageOrProject==="project"',
             type: "checkbox",
             message: 'What operations are included ？',
             choices: [
@@ -243,7 +227,8 @@ module.exports = {
                     name: "5) 5",
                     value: "5"
                 }
-            ]
+            ],
+            default:0
         },
         edit_0:{
             when:"operation.edit && editCount",
@@ -345,7 +330,6 @@ module.exports = {
         // }
     },
     filters: {
-        "@app/**/*":"pageOrProject==='page'",
         "src/js/app/main/component/add.vue": "operation.add",
         "src/js/app/main/component/edit.vue":"operation.edit",
         "src/js/app/main/component/btn.vue":"operation.edit || operation.view",
