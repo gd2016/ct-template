@@ -17,10 +17,10 @@ module.exports = {
 
             return options.inverse(this);
         },
-        search_item: function (v1, options) {
+        each_item: function (count, operation, options) {
             var str='';
-            for (let index = 0; index < v1; index++) {
-                const info = this["seaarch_"+index];
+            for (let index = 0; index < count; index++) {
+                const info = this[operation+index];
                 const field = info.split(" ")[0];
                 const label = info.split(" ")[1];
                 const type = info.split(" ")[2];
@@ -42,21 +42,21 @@ module.exports = {
         }
     },
     prompts: {
-//         "name": {
-//             "type": "string",
-//             "required": true,
-//             "message": 'project name'
-//         },
-//         "description": {
-//             "type": "string",
-//             "required": false,
-//             "message": "Project description",
-//             "default": "A Vue.js project"
-//         },
-//         "author": {
-//             "type": "string",
-//             "message": "Author"
-//         },
+        name: {
+            type: "string",
+            required: true,
+            message: 'project name'
+        },
+        description: {
+            type: "string",
+            required: false,
+            message: "Project description",
+            default: "A Vue.js project"
+        },
+        author: {
+            type: "string",
+            message: "Author"
+        },
         operation: {
             type: "checkbox",
             message: 'What operations are included ？',
@@ -79,7 +79,7 @@ module.exports = {
                 }
             ]
         },
-        searchItems:{
+        searchCount:{
             when:"operation.search",
             type:"list",
             message :"how many search items?",
@@ -128,6 +128,162 @@ module.exports = {
         },
         search_4:{
             when:"searchItems>4",
+            type:"input",
+            message:"set your five item info (field label type)"
+        },
+        addCount:{
+            when:"operation.add",
+            type:"list",
+            message :"how many add items?",
+            choices: [
+                {
+                    name: "1) 1",
+                    value: "1"
+                },
+                {
+                    name: "2) 2",
+                    value: "2"
+                },
+                {
+                    name: "3) 3",
+                    value: "3"
+                },
+                {
+                    name: "4) 4",
+                    value: "4"
+                },
+                {
+                    name: "5) 5",
+                    value: "5"
+                }
+            ]
+        },
+        add_0:{
+            when:"addItems",
+            type:"input",
+            message:"set your first item info (field label type)"
+        },
+        add_1:{
+            when:"addItems>1",
+            type:"input",
+            message:"set your second item info (field label type)"
+        },
+        add_2:{
+            when:"addItems>2",
+            type:"input",
+            message:"set your third item info (field label type)"
+        },
+        add_3:{
+            when:"addItems>3",
+            type:"input",
+            message:"set your fourth item info (field label type)"
+        },
+        add_4:{
+            when:"addItems>4",
+            type:"input",
+            message:"set your five item info (field label type)"
+        },
+        editCount:{
+            when:"operation.edit",
+            type:"list",
+            message :"how many edit items?",
+            choices: [
+                {
+                    name: "1) 1",
+                    value: "1"
+                },
+                {
+                    name: "2) 2",
+                    value: "2"
+                },
+                {
+                    name: "3) 3",
+                    value: "3"
+                },
+                {
+                    name: "4) 4",
+                    value: "4"
+                },
+                {
+                    name: "5) 5",
+                    value: "5"
+                }
+            ]
+        },
+        edit_0:{
+            when:"editItems",
+            type:"input",
+            message:"set your first item info (field label type)"
+        },
+        edit_1:{
+            when:"editItems>1",
+            type:"input",
+            message:"set your second item info (field label type)"
+        },
+        edit_2:{
+            when:"editItems>2",
+            type:"input",
+            message:"set your third item info (field label type)"
+        },
+        edit_3:{
+            when:"editItems>3",
+            type:"input",
+            message:"set your fourth item info (field label type)"
+        },
+        edit_4:{
+            when:"editItems>4",
+            type:"input",
+            message:"set your five item info (field label type)"
+        },
+        viewCount:{
+            when:"operation.view",
+            type:"list",
+            message :"how many view items?",
+            choices: [
+                {
+                    name: "1) 1",
+                    value: "1"
+                },
+                {
+                    name: "2) 2",
+                    value: "2"
+                },
+                {
+                    name: "3) 3",
+                    value: "3"
+                },
+                {
+                    name: "4) 4",
+                    value: "4"
+                },
+                {
+                    name: "5) 5",
+                    value: "5"
+                }
+            ]
+        },
+        view_0:{
+            when:"viewItems",
+            type:"input",
+            message:"set your first item info (field label type)"
+        },
+        view_1:{
+            when:"viewItems>1",
+            type:"input",
+            message:"set your second item info (field label type)"
+        },
+        view_2:{
+            when:"viewItems>2",
+            type:"input",
+            message:"set your third item info (field label type)"
+        },
+        view_3:{
+            when:"viewItems>3",
+            type:"input",
+            message:"set your fourth item info (field label type)"
+        },
+        view_4:{
+            when:"viewItems>4",
             type:"input",
             message:"set your five item info (field label type)"
         }
