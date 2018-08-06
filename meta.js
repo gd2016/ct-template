@@ -17,14 +17,11 @@ module.exports = {
             return options.inverse(this);
         },
         each_item: function(count, operation, options) {
-            console.log(this,count,operation);
             var _count, _operation,str = '';
 
-            if (this.same){                 // 如果编辑项与添加项相同
-                if (operation === 'edit_'){   // 如果当前循环的是编辑则把添加项的输入赋给编辑
-                    _operation = 'add_';
-                    _count = this.addCount;
-                } 
+            if (this.same && operation === 'edit_){                 // 如果编辑项与添加项相同
+              _operation = 'add_';
+              _count = this.addCount;
             } else {
                 _count = count;
                 _operation = operation;
