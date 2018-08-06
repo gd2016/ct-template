@@ -245,12 +245,12 @@ module.exports = {
             message:"set your third item info (field label type)"
         },
         edit_3:{
-            when:"operation.edit && editCount>3",
+            when:"!same && operation.edit && editCount>3",
             type:"input",
             message:"set your fourth item info (field label type)"
         },
         edit_4:{
-            when:"operation.edit && editCount>4",
+            when:"!Soperation.edit && editCount>4",
             type:"input",
             message:"set your five item info (field label type)"
         },
