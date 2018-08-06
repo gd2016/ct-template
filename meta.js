@@ -19,7 +19,7 @@ module.exports = {
         each_item: function(count, operation, options) {
             var _count, _operation,str = '';
 
-            if (this.same && operation === 'edit_){                 // 如果编辑项与添加项相同
+            if (this.same && operation === 'edit_){ // 如果编辑项与添加项相同
               _operation = 'add_';
               _count = this.addCount;
             } else {
