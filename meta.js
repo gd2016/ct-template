@@ -56,6 +56,20 @@ module.exports = {
         }
     },
     prompts: {
+        pageOrProject: {
+            type: "choice",
+            message: 'Is it a page or project ？',
+            choices: [
+                {
+                    name: "1) page",
+                    value: "page"
+                },
+                {
+                    name: "2) project",
+                    value: "project"
+                }
+            ]
+        },
         name: {
             type: "string",
             required: true,
@@ -72,6 +86,7 @@ module.exports = {
             message: "Author"
         },
         operation: {
+            when: 'pageOrProject==="project"',
             type: "checkbox",
             message: 'What operations are included ？',
             choices: [
@@ -123,27 +138,27 @@ module.exports = {
         search_0:{
             when:"operation.search && searchCount",
             type:"input",
-            message:"set your first item info (field label type)"
+            message:"first item info (field label type:text/select/date/dates/autoComplete)"
         },
         search_1:{
             when:"operation.search && searchCount>1",
             type:"input",
-            message:"set your second item info (field label type)"
+            message:"second item info (field label type:text/select/date/dates/autoComplete)"
         },
         search_2:{
             when:"operation.search && searchCount>2",
             type:"input",
-            message:"set your third item info (field label type)"
+            message:"third item info (field label type:text/select/date/dates/autoComplete)"
         },
         search_3:{
             when:"operation.search && searchCount>3",
             type:"input",
-            message:"set your fourth item info (field label type)"
+            message:"fourth item info (field label type:text/select/date/dates/autoComplete)"
         },
         search_4:{
             when:"operation.search && searchCount>4",
             type:"input",
-            message:"set your five item info (field label type)"
+            message:"fifth item info (field label type:text/select/date/dates/autoComplete)"
         },
         addCount:{
             when:"operation.add",
@@ -175,35 +190,35 @@ module.exports = {
         add_0:{
             when:"operation.add && addCount",
             type:"input",
-            message:"set your first item info (field label type)"
+            message:"first item info (field label type:text/select/date/dates/autoComplete)"
         },
         add_1:{
             when:"operation.add && addCount>1",
             type:"input",
-            message:"set your second item info (field label type)"
+            message:"second item info (field label type:text/select/date/dates/autoComplete)"
         },
         add_2:{
             when:"operation.add && addCount>2",
             type:"input",
-            message:"set your third item info (field label type)"
+            message:"third item info (field label type:text/select/date/dates/autoComplete)"
         },
         add_3:{
             when:"operation.add && addCount>3",
             type:"input",
-            message:"set your fourth item info (field label type)"
+            message:"fourth item info (field label type:text/select/date/dates/autoComplete)"
         },
         add_4:{
             when:"operation.add && addCount>4",
             type:"input",
-            message:"set your five item info (field label type)"
+            message:"fifth item info (field label type:text/select/date/dates/autoComplete)"
         },
         same:{
             when:"operation.add && operation.edit",
             type:"confirm",
-            message :"whethere or not the same to edit item?"
+            message :"Is edit item the same to add item?"
         },
         editCount:{
-            when:"!same && operation.edit",
+            when:"operation.edit && (!operation.add || !same)",
             type:"list",
             message :"how many edit items?",
             choices: [
@@ -230,29 +245,29 @@ module.exports = {
             ]
         },
         edit_0:{
-            when:"!same && operation.edit && editCount",
+            when:"operation.edit && editCount",
             type:"input",
-            message:"set your first item info (field label type)"
+            message:"first item info (field label type:text/select/date/dates/autoComplete)"
         },
         edit_1:{
-            when:"!same && operation.edit && editCount>1",
+            when:"operation.edit && editCount>1",
             type:"input",
-            message:"set your second item info (field label type)"
+            message:"second item info (field label type:text/select/date/dates/autoComplete)"
         },
         edit_2:{
-            when:"!same && operation.edit && editCount>2",
+            when:"operation.edit && editCount>2",
             type:"input",
-            message:"set your third item info (field label type)"
+            message:"third item info (field label type:text/select/date/dates/autoComplete)"
         },
         edit_3:{
-            when:"!same && operation.edit && editCount>3",
+            when:"operation.edit && editCount>3",
             type:"input",
-            message:"set your fourth item info (field label type)"
+            message:"fourth item info (field label type:text/select/date/dates/autoComplete)"
         },
         edit_4:{
-            when:"!same && operation.edit && editCount>4",
+            when:"operation.edit && editCount>4",
             type:"input",
-            message:"set your five item info (field label type)"
+            message:"fifth item info (field label type:text/select/date/dates/autoComplete)"
         },
         viewCount:{
             when:"operation.view",
@@ -284,27 +299,27 @@ module.exports = {
         view_0:{
             when:"operation.view && viewCount",
             type:"input",
-            message:"set your first item info (field label)"
+            message:"first item info (field label)"
         },
         view_1:{
             when:"operation.view && viewCount>1",
             type:"input",
-            message:"set your second item info (field label)"
+            message:"second item info (field label)"
         },
         view_2:{
             when:"operation.view && viewCount>2",
             type:"input",
-            message:"set your third item info (field label)"
+            message:"third item info (field label)"
         },
         view_3:{
             when:"operation.view && viewCount>3",
             type:"input",
-            message:"set your fourth item info (field label)"
+            message:"fourth item info (field label)"
         },
         view_4:{
             when:"operation.view && viewCount>4",
             type:"input",
-            message:"set your five item info (field label)"
+            message:"fifth item info (field label)"
         }
         // ,
         // "build": {
@@ -329,6 +344,7 @@ module.exports = {
         // }
     },
     filters: {
+        "?(app)/**/*":"pageOrProject==='page'",
         "src/js/app/main/component/add.vue": "operation.add",
         "src/js/app/main/component/edit.vue":"operation.edit",
         "src/js/app/main/component/btn.vue":"operation.edit || operation.view",

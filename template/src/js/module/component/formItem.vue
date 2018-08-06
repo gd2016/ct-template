@@ -88,43 +88,43 @@ export default {
         DatesInput, DateInput, AutoComplete
     },
     props: {
-        prop: [String, Array],
-        label: String,
-        labelClass: String,
-        valueClass: String,
-        isStatic: Boolean,
-        value: [String, Number, Object],
-        type: String,
-        selectList: Array,
-        completeList: Array,
-        valueKey: {
+        prop: [String, Array], //需要校验的字段
+        label: String,         //表单项
+        labelClass: String,    //label类名
+        valueClass: String,    //value类名
+        isStatic: Boolean,     //是否只读
+        value: [String, Number, Object],//v-model绑定值
+        type: String,          //表单项类型
+        selectList: Array,     //选择框列表
+        completeList: Array,   //模糊匹配框列表
+        disabled: Boolean,
+        maxlength: {type: [String, Number]},
+        defaultSelect: {type: Boolean, default: false},//是否显示请选择一项
+        placeholder: String,        
+        beginPlaceholder: String,//dates组件placeholder
+        endPlaceholder: String,  //dates组件placeholder
+        autoSelectIfOne: Boolean,//模糊匹配框属性
+        allForEmpty: Boolean,  
+        autoClear: Boolean,
+        matchKeys: Array,
+        keys: Array,
+        showKeys: Array,       
+        keyfield: {type: String, default: 'key'}, //模糊匹配v-model绑定的键名
+        valueKey: {            //定义选择框的value key采用的字段名称
             type: Object, 
             default: ()=>{
                 return {
                     key: 'key', value: 'val'
                 };
             }
-        },
-        disabled: Boolean,
-        maxlength: {type: [String, Number]},
-        defaultSelect: {type: Boolean, default: false},
-        placeholder: String,
-        beginPlaceholder: String,
-        endPlaceholder: String,
-        autoSelectIfOne: Boolean,
-        allForEmpty: Boolean,
-        autoClear: Boolean,
-        matchKeys: Array,
-        keys: Array,
-        showKeys: Array,
-        keyfield: {type: String, default: 'key'}
+        }
     },
     data() {
         return {
             validateState: '',
             validateMessage: '',
             datesValue: this.value,
-            reset: false,
+            reset: false,          //重置校验规则
             commonValue: this.value
         };
     },
@@ -144,7 +144,7 @@ export default {
                 this.reset = false;
             });
         },
-        resetField(){
+        resetField(){  //重置所有校验项的提示信息
             this.reset = true;
             if (this.form.model){
                 this.commonValue = '';
@@ -181,10 +181,10 @@ export default {
         }
     },
     computed: {
-        isSearch(){
+        isSearch(){  //判断是否是搜索项
             return this.$parent.searchForm;
         },
-        form(){
+        form(){  //表单对象
             if (!this.prop) return ;
             let parent = this.$parent;
             let parentName = parent.$options.name;
@@ -195,13 +195,13 @@ export default {
             }
             return parent;
         },
-        filedvalue(){
+        filedvalue(){ //当前表单项对应的值
             if (!this.prop) return ;
             if (this.form.model){
                 return this.form.model[this.prop];
             }
         },
-        required(){
+        required(){ //是否为必填项
             if (!this.prop) return ;
             var rules = this.form.rules[this.prop];
 

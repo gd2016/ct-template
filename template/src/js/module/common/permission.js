@@ -14,7 +14,6 @@ export default permission.config({
         }
     },
     axios: {
-        // url: 'http://yapi.tcy365.org:3000/mock/116/getPermission/api/permission',
         url: Interface.common.getPermission,
         method: 'get',
         transformResponse(res){
