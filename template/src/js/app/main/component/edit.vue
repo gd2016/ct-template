@@ -4,7 +4,7 @@
             <template slot="body">
                 <ct-form v-if="!error" v-loading="loading" :model="formData" ref="forms" :rules="rules">
                     {{#forin editCount}}
-                        <form-item type="text" label="编辑项"></form-item>
+                    <form-item type="text" label="编辑项"></form-item>
                     {{/forin}}
                     <template slot="footer">
                         <button :disabled="handleLoading" type="button" @click="save" class="btn btn-primary mr20">
