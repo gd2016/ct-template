@@ -3,12 +3,6 @@
         <slideout width="60%" title="编辑" v-model="show" @on-after-hide="back">
             <template slot="body">
                 <ct-form v-if="!error" v-loading="loading" :model="formData" ref="forms" :rules="rules">
-                    <!-- {{#each_item editCount "edit_"}}
-                    {{#if_is @type 'select'}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="TypeList" defaultSelect></form-item>
-                    {{else if_is @type 'autoComplete'}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="TypeList" :matchKeys="['key','val']" :keys="['key','val']" :showKeys="['key','val']"></form-item>
-                    {{else if_is @type 'radio'}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="TypeList"></form-item>
-                    {{else}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}                      
-                    {{/each_item}} -->
                     {{#forin editCount}}
                         <form-item type="text" label="编辑项"></form-item>
                     {{/forin}}

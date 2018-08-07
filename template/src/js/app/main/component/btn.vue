@@ -9,9 +9,6 @@
         <slideout  width="50%" title="查看" v-model="show" >
             <template slot="body">
                 <form v-if="!error" v-loading="loading" class="form-horizontal">
-                    <!-- {{#each_item viewCount "view_"}}
-                    <form-item isStatic label="{{@label}}" :value="info.{{@field}}"></form-item>
-                    {{/each_item}} -->
                     <form-item isStatic label="ID:" :value="info.Id"></form-item>
                     <form-item isStatic label="名称:" :value="info.Name"></form-item>
                     <form-item isStatic label="类型" :value="info.Type"></form-item>
