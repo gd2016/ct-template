@@ -42,7 +42,7 @@ module.exports = {
             }
             return str;
         },
-        foreach: function(count, options){
+        forin: function(count, options){
             var str = '';
             for (let index = 0; index < count; index++) {
                 str+=options.fn(this);

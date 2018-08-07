@@ -9,9 +9,9 @@
                     {{else if_is @type 'radio'}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="TypeList"></form-item>
                     {{else}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}                      
                     {{/each_item}} -->
-                    {{#foreach addCount}}
+                    {{#forin addCount}}
                         <form-item type="text" label="添加项"></form-item>
-                    {{/foreach}}
+                    {{/forin}}
                     <template slot="footer">
                         <button :disabled="handleLoading" type="button" @click="save" class="btn btn-primary mr20">
                             <i class="glyphicon mr5" :class="{'glyphicon-refresh':handleLoading, rotate:handleLoading, 'glyphicon-save':!handleLoading}"></i>保存</button>
