@@ -56,6 +56,11 @@
                     <input :checked="value==item[valueKey.key]" name="radio" type="radio" :value="item[valueKey.key]">\{{item[valueKey.value]}}
                 </label>
             </section>
+            <section v-if="type==='checkbox'">
+                <label class="checkbox-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
+                    <input v-model="commonValue" type="checkbox" :value="item[valueKey.key]">\{{item[valueKey.value]}}
+                </label>
+            </section>
             <section v-if="type==='dates'">
                 <dates-input v-model="datesValue" :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" ></dates-input>
             </section>
@@ -98,16 +103,16 @@ export default {
         labelClass: String,    //label类名
         valueClass: String,    //value类名
         isStatic: Boolean,     //是否只读
-        value: [String, Number, Object],//v-model绑定值
+        value: [String, Number, Object, Array], //v-model绑定值
         type: String,          //表单项类型
         list: Array,           //选择框、单选框、模糊匹配列表
         disabled: Boolean,
         maxlength: {type: [String, Number]},
-        defaultSelect: {type: Boolean, default: false},//是否显示请选择一项
+        defaultSelect: {type: Boolean, default: false}, //是否显示请选择一项
         placeholder: String,        
-        beginPlaceholder: String,//dates组件placeholder
+        beginPlaceholder: String, //dates组件placeholder
         endPlaceholder: String,  //dates组件placeholder
-        autoSelectIfOne: Boolean,//模糊匹配框属性
+        autoSelectIfOne: Boolean, //模糊匹配框属性
         allForEmpty: Boolean,  
         autoClear: Boolean,
         matchKeys: Array,
@@ -167,9 +172,14 @@ export default {
             } else {
                 value = event.target.value;
             }
-            this.setValue(value);
-            this.$emit('input', value);
-            this.$emit('change', value);
+            if (this.type === 'checkbox'){
+                this.$emit('input', this.commonValue);
+                this.$emit('change', this.commonValue);    
+            } else {
+                this.setValue(value);
+                this.$emit('input', value);
+                this.$emit('change', value);
+            }
         },
         setValue(val){
             this.commonValue = val;

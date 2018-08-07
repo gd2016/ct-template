@@ -64,7 +64,7 @@ export default {
         loading: Boolean,
         btnClass: String,
         wrapClass: String,
-        searchForm: Boolean,//搜索用标志
+        searchForm: Boolean, //搜索用标志
         model: Object,      //表单数据对象
         rules: Object       //校验具体规则
     },

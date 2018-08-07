@@ -52,9 +52,6 @@ export default {
         this.getData();
     },
     methods: {
-        change(value){
-            console.log(value);
-        },
         getData(){
             this.getList({
                 url: Interface.statistics.list,
