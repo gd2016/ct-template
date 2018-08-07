@@ -53,7 +53,7 @@
             </section>
             <section v-if="type==='radio'">
                 <label  class="radio-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
-                    <input :checked="value==item[valueKey.key]" name="radio" type="radio" :value="item[valueKey.key]"> {{item[valueKey.value]}}
+                    <input :checked="value==item[valueKey.key]" name="radio" type="radio" :value="item[valueKey.key]">\{{item[valueKey.value]}}
                 </label>
             </section>
             <section v-if="type==='dates'">
