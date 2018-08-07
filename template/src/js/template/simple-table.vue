@@ -10,10 +10,10 @@
         </thead>
         <tbody>
             <tr v-for="(item,index) in dataList" :key="index" >
-                <td>{{item.PrizeName}}</td>
+                <td>\{{item.PrizeName}}</td>
                 <td class="text-center"><img :src="item.PrizePic" /></td>
-                <td>{{item.RewardNumber}}</td>
-                <td>{{item.Music===0?'普通音效':'特殊音效'}}</td>
+                <td>\{{item.RewardNumber}}</td>
+                <td>\{{item.Music===0?'普通音效':'特殊音效'}}</td>
             </tr>
         </tbody>
     </table>

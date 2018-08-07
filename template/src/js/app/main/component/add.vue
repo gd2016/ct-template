@@ -3,12 +3,15 @@
         <slideout width="60%" title="添加" v-model="show" @on-after-hide="back">
             <template slot="body">
                 <ct-form v-loading="loading" :model="formData" ref="forms" :rules="rules">
-                    {{#each_item addCount "add_"}}
+                    <!-- {{#each_item addCount "add_"}}
                     {{#if_is @type 'select'}}<form-item prop="{{@field}}"  v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="TypeList" defaultSelect></form-item>
                     {{else if_is @type 'autoComplete'}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="TypeList" :matchKeys="['key','val']" :keys="['key','val']" :showKeys="['key','val']"></form-item>
                     {{else if_is @type 'radio'}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="TypeList"></form-item>
                     {{else}}<form-item prop="{{@field}}" v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}                      
-                    {{/each_item}}
+                    {{/each_item}} -->
+                    {{#foreach addCount}}
+                        <form-item type="text" label="添加项"></form-item>
+                    {{/foreach}}
                     <template slot="footer">
                         <button :disabled="handleLoading" type="button" @click="save" class="btn btn-primary mr20">
                             <i class="glyphicon mr5" :class="{'glyphicon-refresh':handleLoading, rotate:handleLoading, 'glyphicon-save':!handleLoading}"></i>保存</button>
