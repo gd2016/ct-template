@@ -9,7 +9,7 @@
                 <section v-if="type==='select'">
                     <select class="form-control" :value="commonValue" @change="handleChange">
                         <option value="" v-if="defaultSelect">请选择</option>
-                        <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
+                        <option v-for="(item,index) in list" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
                     </select>
                 </section>
                 <section v-if="type==='dates'">
@@ -20,7 +20,7 @@
                 </section>
                 <section v-if="type==='autoComplete'">
                     <auto-complete  
-                        :list="completeList"
+                        :list="list"
                         :placeholder="placeholder"  @select="selectComplete"
                         v-model="commonValue"  @change="handleChange"
                         :match-keys="matchKeys" 
@@ -48,8 +48,13 @@
             <section v-if="type==='select'">
                 <select class="form-control" :value="commonValue" @change="handleChange">
                     <option value="" v-if="defaultSelect">请选择</option>
-                    <option v-for="(item,index) in selectList" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
+                    <option v-for="(item,index) in list" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
                 </select>
+            </section>
+            <section v-if="type==='radio'">
+                <label  class="radio-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
+                    <input :checked="value==item[valueKey.key]" name="radio" type="radio" :value="item[valueKey.key]"> {{item[valueKey.value]}}
+                </label>
             </section>
             <section v-if="type==='dates'">
                 <dates-input v-model="datesValue" :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" ></dates-input>
@@ -59,7 +64,7 @@
             </section>
             <section v-if="type==='autoComplete'">
                 <auto-complete  
-                    :list="completeList"
+                    :list="list"
                     :placeholder="placeholder"  @select="selectComplete"
                     v-model="commonValue"  @change="handleChange"
                     :match-keys="matchKeys" 
@@ -95,8 +100,7 @@ export default {
         isStatic: Boolean,     //是否只读
         value: [String, Number, Object],//v-model绑定值
         type: String,          //表单项类型
-        selectList: Array,     //选择框列表
-        completeList: Array,   //模糊匹配框列表
+        list: Array,           //选择框、单选框、模糊匹配列表
         disabled: Boolean,
         maxlength: {type: [String, Number]},
         defaultSelect: {type: Boolean, default: false},//是否显示请选择一项

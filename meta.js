@@ -17,6 +17,7 @@ module.exports = {
             return options.inverse(this);
         },
         each_item: function(count, operation, options) {
+            console.log(this);
             var _count, _operation,str = '';
 
             if (this.same && operation === 'edit_'){ // 如果编辑项与添加项相同
@@ -231,27 +232,27 @@ module.exports = {
             default:0
         },
         edit_0:{
-            when:"operation.edit && editCount",
+            when:"operation.edit && (!operation.add || !same) && editCount",
             type:"input",
             message:"first item info (field label type:text/select/date/dates/autoComplete)"
         },
         edit_1:{
-            when:"operation.edit && editCount>1",
+            when:"operation.edit && (!operation.add || !same) && editCount>1",
             type:"input",
             message:"second item info (field label type:text/select/date/dates/autoComplete)"
         },
         edit_2:{
-            when:"operation.edit && editCount>2",
+            when:"operation.edit && (!operation.add || !same) && editCount>2",
             type:"input",
             message:"third item info (field label type:text/select/date/dates/autoComplete)"
         },
         edit_3:{
-            when:"operation.edit && editCount>3",
+            when:"operation.edit && (!operation.add || !same) && editCount>3",
             type:"input",
             message:"fourth item info (field label type:text/select/date/dates/autoComplete)"
         },
         edit_4:{
-            when:"operation.edit && editCount>4",
+            when:"operation.edit && (!operation.add || !same) && editCount>4",
             type:"input",
             message:"fifth item info (field label type:text/select/date/dates/autoComplete)"
         },

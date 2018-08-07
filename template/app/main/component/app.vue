@@ -2,7 +2,7 @@
     <div class="container-fluid">{{#operation.search}}
         <ct-form  searchForm :loading="loading" @search="search">
             {{#each_item searchCount "search_"}}
-            {{#if_is @type 'select'}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}" :selectList="typeList" defaultSelect></form-item>{{else if_is @type 'autoComplete'}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}" :completeList="completeList" :matchKeys="['key','val']" :keys="['key','val']" :showKeys="['key','val']"></form-item>{{else}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}
+            {{#if_is @type 'select'}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}" :list="typeList" defaultSelect></form-item>{{else if_is @type 'autoComplete'}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}" :list="list" :matchKeys="['key','val']" :keys="['key','val']" :showKeys="['key','val']"></form-item>{{else}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}
             {{/each_item}}
         </ct-form>{{/operation.search}}
         {{#operation.add}}<div class="clearfix mb10">
@@ -38,7 +38,7 @@ export default {
     data() {
         return {
             typeList: Const.getData({col: 'type'}),
-            completeList: Const.getData({col: 'type'}),
+            list: Const.getData({col: 'type'}),
             stateFormat: Const.getData({col: 'state'}),
             list: [],
             count: 0,
