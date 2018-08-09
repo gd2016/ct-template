@@ -10,17 +10,14 @@ export default new VueRouter({
     }, {
         path: '/app',
         component: App,
-        children: [{
-            path: 'edit'{{#operation.edit}},
-            component: edit{{/operation.edit}}
-        },
-        {
-            path: 'add'{{#operation.add}},
-            component: add{{/operation.add}}
-        }]
-    }, {
-        path: '/no-permission',
-        component: Vue.component('no-permission')
+        children: [{{#operation.edit}}{ 
+            path: 'edit',
+            component: edit
+        }{{/operation.edit}}{{#if_and operation.add operation.edit}},{{/if_and}}
+        {{#operation.add}}{ 
+            path: 'add',
+            component: add
+        }{{/operation.add}}]
     }]
 });
 

@@ -33,11 +33,7 @@ export default {
             show: false,
             saveShow: false,
             TypeList: Const.getData({col: 'type'}),
-            formData: {
-                Remark: '',
-                Name: null,
-                Type: null
-            }
+            formData: {}
         };
     },
     mounted() {

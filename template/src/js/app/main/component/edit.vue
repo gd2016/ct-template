@@ -35,10 +35,7 @@ export default {
             saveShow: false,
             TypeList: Const.getData({col: 'type'}),
             formData: {
-                Id: this.$route.query.id,
-                Remark: '',
-                Name: null,
-                Type: null
+                Id: this.$route.query.id
             }
         };
     },

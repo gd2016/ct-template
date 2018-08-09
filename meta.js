@@ -17,6 +17,7 @@ module.exports = {
             return options.inverse(this);
         },
         each_item: function(count, operation, options) {
+            console.log(this);
             var _count, _operation,str = '';
 
             if (this.same && operation === 'edit_'){ // 如果编辑项与添加项相同
