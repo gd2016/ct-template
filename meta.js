@@ -153,152 +153,12 @@ module.exports = {
             type:"input",
             message:"fifth item info (field label type:text/select/date/dates/autoComplete)"
         },
-        addCount:{
+        addMessage:{
             when:"operation.add",
-            type:"input",
-            message :"how many add items?"
+            type:"editor",
+            message :"add items info?"
         },
-        // add_0:{
-        //     when:"operation.add && addCount",
-        //     type:"input",
-        //     message:"first item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // add_1:{
-        //     when:"operation.add && addCount>1",
-        //     type:"input",
-        //     message:"second item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // add_2:{
-        //     when:"operation.add && addCount>2",
-        //     type:"input",
-        //     message:"third item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // add_3:{
-        //     when:"operation.add && addCount>3",
-        //     type:"input",
-        //     message:"fourth item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // add_4:{
-        //     when:"operation.add && addCount>4",
-        //     type:"input",
-        //     message:"fifth item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // same:{
-        //     when:"operation.add && operation.edit",
-        //     type:"confirm",
-        //     message :"Is edit item the same to add item?"
-        // },
-        editCount:{
-            when:"operation.edit",
-            type:"input",
-            message :"how many edit items?"
-        },
-        // editCount:{
-        //     when:"operation.edit && (!operation.add || !same)",
-        //     type:"list",
-        //     message :"how many edit items?",
-        //     choices: [
-        //         {
-        //             name: "1) 1",
-        //             value: "1"
-        //         },
-        //         {
-        //             name: "2) 2",
-        //             value: "2"
-        //         },
-        //         {
-        //             name: "3) 3",
-        //             value: "3"
-        //         },
-        //         {
-        //             name: "4) 4",
-        //             value: "4"
-        //         },
-        //         {
-        //             name: "5) 5",
-        //             value: "5"
-        //         }
-        //     ]
-        // },
-        // edit_0:{
-        //     when:"operation.edit && (!operation.add || !same) && editCount",
-        //     type:"input",
-        //     message:"first item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // edit_1:{
-        //     when:"operation.edit && (!operation.add || !same) && editCount>1",
-        //     type:"input",
-        //     message:"second item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // edit_2:{
-        //     when:"operation.edit && (!operation.add || !same) && editCount>2",
-        //     type:"input",
-        //     message:"third item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // edit_3:{
-        //     when:"operation.edit && (!operation.add || !same) && editCount>3",
-        //     type:"input",
-        //     message:"fourth item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // edit_4:{
-        //     when:"operation.edit && (!operation.add || !same) && editCount>4",
-        //     type:"input",
-        //     message:"fifth item info (field label type:text/select/date/dates/autoComplete)"
-        // },
-        // viewCount:{
-        //     when:"operation.view",
-        //     type:"list",
-        //     message :"how many view items?",
-        //     choices: [
-        //         {
-        //             name: "1) 1",
-        //             value: "1"
-        //         },
-        //         {
-        //             name: "2) 2",
-        //             value: "2"
-        //         },
-        //         {
-        //             name: "3) 3",
-        //             value: "3"
-        //         },
-        //         {
-        //             name: "4) 4",
-        //             value: "4"
-        //         },
-        //         {
-        //             name: "5) 5",
-        //             value: "5"
-        //         }
-        //     ]
-        // },
-        // view_0:{
-        //     when:"operation.view && viewCount",
-        //     type:"input",
-        //     message:"first item info (field label)"
-        // },
-        // view_1:{
-        //     when:"operation.view && viewCount>1",
-        //     type:"input",
-        //     message:"second item info (field label)"
-        // },
-        // view_2:{
-        //     when:"operation.view && viewCount>2",
-        //     type:"input",
-        //     message:"third item info (field label)"
-        // },
-        // view_3:{
-        //     when:"operation.view && viewCount>3",
-        //     type:"input",
-        //     message:"fourth item info (field label)"
-        // },
-        // view_4:{
-        //     when:"operation.view && viewCount>4",
-        //     type:"input",
-        //     message:"fifth item info (field label)"
-        // }
-        // ,
-        "build": {
+        build: {
             "type": "list",
             "message": "Vue build",
             "choices": [
@@ -314,7 +174,7 @@ module.exports = {
                 }
             ]
         },
-        "autoInstall": {
+        autoInstall: {
             type: 'confirm',
             message: 'Should we run `npm install` for you after the project has been created? (recommended)'
         }
