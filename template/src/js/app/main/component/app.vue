@@ -1,24 +1,29 @@
 <template>
     <div class="container-fluid">{{#operation.search}}
         <ct-form  searchForm :loading="loading" @search="search">
-            {{#each_item searchCount "search_"}}
+            {{#each_search searchInfo}}
             {{#if_is @type 'select'}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}" :list="typeList" defaultSelect></form-item>{{else if_is @type 'autoComplete'}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}" :list="typeList" :matchKeys="['key','val']" :keys="['key','val']" :showKeys="['key','val']"></form-item>{{else}}<form-item v-model="searchInfo.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}
-            {{/each_item}}
-        </ct-form>{{/operation.search}}{{#operation.add}}<div class="clearfix mb10">
+            {{/each_search}}
+        </ct-form>{{/operation.search}}{{#operation.add}}
+        <div class="clearfix mb10">
             <button @click="add" type="button" class="btn btn-sm btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span>添加</button>
         </div>{{/operation.add}}
-        <adc-table  :data="list" v-loading="loading"
-                   :status="status"  :msg="message">
-            <adc-column prop="Id" name="ID"></adc-column>
-            <adc-column prop="Name" name="名称"></adc-column>
-            <adc-column prop="CreateTime" filter="dateTimeFormat" name="时间"></adc-column>
-            <adc-column prop="GrantState" :mapper="stateFormat" name="状态"></adc-column>{{#if_or operation.view operation.edit}} 
-            <adc-column :vm="{name: 'btn'}" name="操作"></adc-column> {{/if_or}}
+        <adc-table  :data="list" v-loading="loading" :status="status"  :msg="message">
+            {{#each_column tableInfo}}
+            {{#if_is @type 'date'}}<adc-column prop="{{@label}}" filter="dateTimeFormat" name="{{@field}}"></adc-column>{{else if_is @type 'select'}}<adc-column prop="{{@label}}" :mapper="stateFormat" name="{{@field}}"></adc-column>{{else}}<adc-column prop="{{@label}}" name="{{@field}}"></adc-column>{{/if_is}}
+            {{/each_column}} 
+            {{#if_or operation.view operation.edit}}
+            <adc-column name="操作">{{#operation.view}}
+                <button  type="button" class="btn btn-xs btn-primary"  @click="view">
+                    <i class="glyphicon glyphicon-edit"></i> 查看
+                </button>{{/operation.view}}{{#operation.edit}}
+                <button  type="button" class="btn btn-xs btn-primary"  @click="edit">
+                    <i class="glyphicon glyphicon-edit"></i> 编辑
+                </button>{{/operation.edit}}
+            </adc-column>
+            {{/if_or}}
         </adc-table>
-        <page form
-            :curr-page="searchInfo.PageIndex"
-            :page-len="searchInfo.PageSize"
-            :total-num="count" @change-page="changePage"></page>
+        <page form :curr-page="searchInfo.PageIndex" :page-len="searchInfo.PageSize" :total-num="count" @change-page="changePage"></page>
         <router-view @refresh="refresh"></router-view>
     </div>
 </template>
@@ -29,10 +34,7 @@ import Interface from 'common/interface';
 import page from 'ct-adc-page';
 import ctForm from 'component/ctForm';
 import formItem from 'component/formItem';
-import Const from 'common/const';{{#if_or operation.view operation.edit}} 
-import Vue from 'vue';
-import btn from './btn';
-Vue.component('btn', btn);{{/if_or}} 
+import Const from 'common/const';
 export default {
     data() {
         return {
@@ -76,7 +78,13 @@ export default {
         }{{#operation.add}},
         add(){
             this.$router.push({path: '/app/add'});
-        }{{/operation.add}}
+        }{{/operation.add}}{{#operation.view}},
+        view(){
+            this.$router.push({path: '/app/view', query: {id: this.item.Id}});
+        }{{/operation.view}}{{#operation.edit}},
+        edit(){
+            this.$router.push({path: '/app/edit', query: {id: this.item.Id}});
+        }{{/operation.edit}}
     },
     mixins: [mixin],
     components: {

@@ -3,9 +3,9 @@
         <slideout width="60%" title="添加" v-model="show" @on-after-hide="back">
             <template slot="body">
                 <ct-form v-loading="loading" :model="formData" ref="forms" :rules="rules">
-                    {{#forin addCount}}
-                    <form-item type="text" label="添加项"></form-item>
-                    {{/forin}}
+                    {{#each_handle addInfo}}
+                    {{#if_is @type 'select'}}<form-item v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="typeList" defaultSelect></form-item>{{else if_is @type 'autoComplete'}}<form-item v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}" :list="typeList" :matchKeys="['key','val']" :keys="['key','val']" :showKeys="['key','val']"></form-item>{{else if_is @type 'custom'}}<form-item label="{{@label}}"></form-item>{{else if_or @type 'checkbox' 'radio'}}<form-item v-model="formData.{{@field}}" label="{{@label}}" :list="typeList"></form-item>{{else}}<form-item v-model="formData.{{@field}}" type="{{@type}}" label="{{@label}}"></form-item>{{/if_is}}
+                    {{/each_handle}}
                     <template slot="footer">
                         <button :disabled="handleLoading" type="button" @click="save" class="btn btn-primary mr20">
                             <i class="glyphicon mr5" :class="{'glyphicon-refresh':handleLoading, rotate:handleLoading, 'glyphicon-save':!handleLoading}"></i>保存</button>
@@ -32,7 +32,7 @@ export default {
             rules: addRules,
             show: false,
             saveShow: false,
-            TypeList: Const.getData({col: 'type'}),
+            typeList: Const.getData({col: 'type'}),
             formData: {}
         };
     },
