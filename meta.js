@@ -11,13 +11,13 @@ function getLableArr(info){
     var arr = info.split('//');
     var labelArr = [];
     for (let i = 1; i < arr.length; i++) {
-        labelArr.push(arr[i].replace(/\s[\x00-\xff]*/g,''));
+        labelArr.push(arr[i].replace(/\s[\s\S]*/g,''));
     }
     return labelArr;
 }
 
 function jsonFormat(info){
-    var jsonReg = /((\\)|(\/\*[\s\S]*?\*\/)|(\/\/.*$))/mg;
+    var jsonReg = /(\\)|\/\/.*$/mg;
     return JSON.parse(info.replace(jsonReg,''));
 }
 
