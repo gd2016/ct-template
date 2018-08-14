@@ -10,7 +10,7 @@
         </div>{{/operation.add}}
         <adc-table  :data="list" v-loading="loading" :status="status"  :msg="message">
             {{#each_column tableInfo}}
-            {{#if_is @type 'date'}}<adc-column prop="{{@label}}" filter="dateTimeFormat" name="{{@field}}"></adc-column>{{else if_is @type 'select'}}<adc-column prop="{{@label}}" :mapper="stateFormat" name="{{@field}}"></adc-column>{{else}}<adc-column prop="{{@label}}" name="{{@field}}"></adc-column>{{/if_is}}
+            {{#if_is @type 'date'}}<adc-column prop="{{@field}}" filter="dateTimeFormat" name="{{@label}}"></adc-column>{{else if_is @type 'select'}}<adc-column prop="{{@field}}" :mapper="stateFormat" name="{{@label}}"></adc-column>{{else}}<adc-column prop="{{@field}}" name="{{@label}}"></adc-column>{{/if_is}}
             {{/each_column}} 
             {{#if_or operation.view operation.edit}}
             <adc-column name="操作">{{#operation.view}}

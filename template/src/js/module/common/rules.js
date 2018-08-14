@@ -12,7 +12,7 @@
 //     DailyLimit: [
 //                  { required: true, message: '每日投入上限不能为空'},
 //                  {pattern: /^(0|[1-9][0-9]*)$/, message: '格式不正确'}
-//                 ],
+//                 ],//多项规则使用数组
 //     custom:[custom]
 // };
 // var custom = {
@@ -24,4 +24,5 @@
 //         }
 //     }
 // }
-//https://github.com/yiminghe/async-validator
+//官网 ：https://github.com/yiminghe/async-validator
+//中文说明：https://blog.csdn.net/langxifu/article/details/80942501

@@ -41,7 +41,7 @@
             \{{value}}
             <slot></slot>
         </div>
-        <div v-if="!isStatic" :class="[{'has-error': validateState==='error'},valueClass?valueClass:'col-sm-9']">
+        <div v-if="!isStatic" :class="[{'form-error': validateState==='error'},valueClass?valueClass:'col-sm-9']">
             <section v-if="type==='text'||type==='input'">
                 <input :disabled="disabled" :placeholder="placeholder" :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
             </section>
@@ -82,7 +82,7 @@
                 <textarea :disabled="disabled" :maxlength="maxlength" @input="handleChange" :placeholder="placeholder" :value="commonValue" style="max-width:100%" class="form-control"></textarea>
             </section>
             <slot></slot>
-            <span v-if="validateState==='error'" class="help-block text-danger">
+            <span v-if="validateState==='error'" class="error-msg help-block">
             <span class="glyphicon glyphicon-remove-sign"></span> \{{ validateMessage }}</span>
         </div>
     </div>
@@ -126,7 +126,8 @@ export default {
                     key: 'key', value: 'val'
                 };
             }
-        }
+        },
+        index: Number
     },
     data() {
         return {
@@ -145,8 +146,8 @@ export default {
             const validator = new AsyncValidator(descriptor);
             const model = {};
 
-            model[this.prop] = this.form.model;
-            validator.validate(this.form.model, (errors, invalidFields) => {
+            model[this.prop] = this.filedvalue;
+            validator.validate(model, (errors, invalidFields) => {
                 this.validateState = !errors ? 'success' : 'error';
                 this.validateMessage = errors ? errors[0].message : '';
                 callback(this.validateMessage, invalidFields);
@@ -157,7 +158,10 @@ export default {
             this.reset = true;
             if (this.form.model){
                 this.commonValue = '';
-                this.datesValue = '';
+                this.datesValue = {
+                    begin: '',
+                    end: ''
+                };
             }
             this.validateState = '';
             this.validateMessage = '';
@@ -211,9 +215,14 @@ export default {
         },
         filedvalue(){ //当前表单项对应的值
             if (!this.prop) return ;
-            if (this.form.model){
+            if (typeof this.value === 'undefined'){
+                if (this.form.model instanceof Array){
+                    return this.form.model[this.index][this.prop];
+                }
                 return this.form.model[this.prop];
             }
+            
+            return this.value;
         },
         required(){ //是否为必填项
             if (!this.prop) return ;
@@ -248,3 +257,11 @@ export default {
     }
 };
 </script>
+<style>
+.form-error .form-control{
+    border-color: #a94442;
+}
+.error-msg{
+    color: #a94442;
+}
+</style>
