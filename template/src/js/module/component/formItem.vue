@@ -1,10 +1,13 @@
 <template>
-    <div v-if="isSearch" class="col-sm-3">
+    <div v-if="isSearch" class="col-sm-4 col-lg-3">
         <div class="form-group form-group-sm">
             <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">\{{label}}</label>
             <div class="col-sm-8" :class="{'has-error': validateState==='error'}">
                 <section v-if="type==='text'||type==='input'">
-                    <input :placeholder="placeholder"  :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
+                    <input @blur="handleBlur" :placeholder="placeholder"  :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
+                </section>
+                <section :class="inputClass" v-if="type==='number'">
+                    <input @keyup="handleUp" :placeholder="placeholder"  :maxlength="maxlength" type="text" class="form-control" :value="commonValue" />
                 </section>
                 <section v-if="type==='select'">
                     <select class="form-control" :value="commonValue" @change="handleChange">
@@ -185,6 +188,14 @@ export default {
                 this.$emit('change', value);
             }
         },
+        handleUp(event){
+            this.setValue(event.target.value);
+            this.commonValue = this.commonValue.replace(/[^\d]/g, '');
+            this.$emit('input', this.commonValue);
+        },
+        handleBlur(event){
+            this.$emit('blur', event.target.value);
+        },
         setValue(val){
             this.commonValue = val;
         },
@@ -193,8 +204,6 @@ export default {
             this.$emit('change', this.datesValue);
         },
         selectComplete(obj){
-            this.setValue(obj[this.keyfield].toString());
-            this.$emit('input', obj[this.keyfield].toString());
             this.$emit('select', obj);
         }
     },
@@ -243,6 +252,18 @@ export default {
         },
         value(val){
             this.setValue(val);
+        },
+        disabled(){
+            this.validateState = 'success';
+            this.validateMessage = '';
+        },
+        beginDisabled(){
+            this.validateState = 'success';
+            this.validateMessage = '';
+        },
+        endDisabled(){
+            this.validateState = 'success';
+            this.validateMessage = '';
         }
     },
     mounted() {
