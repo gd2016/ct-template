@@ -170,7 +170,6 @@ export default {
                     callback(this.validateMessage, invalidFields);
                     this.reset = false;
                 }
-                
             });
         },
         resetField(){  //重置所有校验项的提示信息

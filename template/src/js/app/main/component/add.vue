@@ -51,6 +51,11 @@ export default {
                         this.$emit('refresh');
                         this.show = false;
                     });
+                } else {
+                    this.minimsg = this.$minimsg({
+                        type: 'error',
+                        content: '当前有未完成的校验信息'
+                    });
                 }
             });
         },

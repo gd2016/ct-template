@@ -13,12 +13,11 @@ export default new VueRouter({
         children: [{{#operation.edit}}{ 
             path: 'edit',
             component: edit
-        }{{/operation.edit}}{{#operation.view}},
+        },{{/operation.edit}}{{#operation.view}}
         { 
             path: 'view',
             component: view
-        }{{/operation.view}}{{#operation.add}},
-        { 
+        },{{/operation.view}}{{#operation.add}}{ 
             path: 'add',
             component: add
         }{{/operation.add}}]
