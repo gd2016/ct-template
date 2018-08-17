@@ -38,7 +38,7 @@
     </div>
     <div v-else class="form-group clearfix">
         <label :class="labelClass?labelClass:'col-sm-3'" class="control-label">
-            <i v-if="required" class="red">*</i>\{{label}}
+            <i v-if="isRequired" class="red">*</i>\{{label}}
         </label>
         <div v-if="isStatic" :class="[{'form-control-static':isStatic},valueClass?valueClass:'col-sm-9']">
             \{{value}}
@@ -101,6 +101,7 @@ export default {
         DatesInput, DateInput, AutoComplete
     },
     props: {
+        rules: Array,          //单独的校验规则
         prop: [String, Array], //需要校验的字段
         label: String,         //表单项
         labelClass: String,    //label类名
@@ -110,8 +111,8 @@ export default {
         type: String,          //表单项类型
         list: Array,           //选择框、单选框、模糊匹配列表
         disabled: Boolean,
-        maxlength: {type: [String, Number]},
-        defaultSelect: {type: Boolean, default: false}, //是否显示请选择一项
+        maxlength: [String, Number],
+        defaultSelect: Boolean, //是否显示请选择一项
         placeholder: String,        
         beginPlaceholder: String, //dates组件placeholder
         endPlaceholder: String,  //dates组件placeholder
@@ -130,7 +131,8 @@ export default {
                 };
             }
         },
-        index: Number
+        index: Number,
+        required: Boolean
     },
     data() {
         return {
@@ -142,19 +144,33 @@ export default {
         };
     },
     methods: {
+        getRules(){
+            const formRules = this.form.rules[this.prop];
+            const selfRules = this.rules;
+
+            return [].concat(selfRules || formRules);
+        },
         validate(callback){
             const descriptor = {};
 
-            descriptor[this.prop] = this.form.rules[this.prop];
+            descriptor[this.prop] = this.getRules();
             const validator = new AsyncValidator(descriptor);
             const model = {};
 
             model[this.prop] = this.filedvalue;
             validator.validate(model, (errors, invalidFields) => {
-                this.validateState = !errors ? 'success' : 'error';
-                this.validateMessage = errors ? errors[0].message : '';
-                callback(this.validateMessage, invalidFields);
-                this.reset = false;
+                if (this.disabled || this.beginDisabled || this.endDisabled){
+                    this.validateState = 'success';
+                    this.validateMessage = '';
+                    callback(this.validateMessage, invalidFields);
+                    this.reset = false;
+                } else {
+                    this.validateState = !errors ? 'success' : 'error';
+                    this.validateMessage = errors ? errors[0].message : '';
+                    callback(this.validateMessage, invalidFields);
+                    this.reset = false;
+                }
+                
             });
         },
         resetField(){  //重置所有校验项的提示信息
@@ -194,6 +210,9 @@ export default {
             this.$emit('input', this.commonValue);
         },
         handleBlur(event){
+            if (this.trigger === 'blur') {
+                this.validate(()=>{});
+            }
             this.$emit('blur', event.target.value);
         },
         setValue(val){
@@ -233,9 +252,10 @@ export default {
             
             return this.value;
         },
-        required(){ //是否为必填项
+        isRequired(){ //是否为必填项
+            if (this.required) return true;
             if (!this.prop) return ;
-            var rules = this.form.rules[this.prop];
+            var rules = this.getRules();
 
             for (let index = 0; index < rules.length; index++) {
                 if (rules[index].required){
@@ -243,11 +263,25 @@ export default {
                 }
             }
             return false; 
+        },
+        trigger(){
+            if (!this.prop) return;
+            const rules = this.getRules();
+            var type = '';
+
+            for (let i = 0; i < rules.length; i++) {
+                if (rules[i].trigger){
+                    type = rules[i].trigger;
+                }
+            }
+            
+            return type;
         }
     },
     watch: {
         filedvalue(){
             if (this.reset) return ;
+            if (this.trigger === 'blur') return;
             this.validate(()=>{});   
         },
         value(val){
@@ -279,6 +313,9 @@ export default {
 };
 </script>
 <style>
+.help-block{
+    clear: both;
+}
 .form-error .form-control{
     border-color: #a94442;
 }

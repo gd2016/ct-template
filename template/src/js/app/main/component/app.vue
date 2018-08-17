@@ -93,8 +93,8 @@ export default {
     components: {
         ctForm,
         formItem,
-        page,
-        exportBtn
+        page{{#operation.export}},
+        exportBtn{{/operation.export}}
     }
 };
 </script>
