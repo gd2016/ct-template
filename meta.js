@@ -163,9 +163,19 @@ module.exports = {
                 }
             ]
         },
+        ishandle:{
+            when:"operation.add && operation.edit",
+            type:"confirm",
+            message :"Is adding and editing the same file?"
+        },
         tableInfo:{
             type:"editor",
             message :"table column info?"
+        },
+        handleInfo:{
+            when:'ishandle',
+            type:"editor",
+            message :"add and edit items info?"
         },
         searchInfo:{
             when:"operation.search",
@@ -173,12 +183,12 @@ module.exports = {
             message :"search items info?"
         },
         addInfo:{
-            when:"operation.add",
+            when:"operation.add && (!operation.edit || operation.edit && !ishandle)",
             type:"editor",
             message :"add items info?"
         },
         editInfo:{
-            when:"operation.edit",
+            when:"operation.edit && (!operation.add || operation.add && !ishandle)",
             type:"editor",
             message :"edit items info?"
         },
@@ -210,8 +220,10 @@ module.exports = {
         // }
     },
     filters: {
-        "src/js/app/main/component/add.vue": "operation.add",
-        "src/js/app/main/component/edit.vue":"operation.edit",
+        "src/js/app/main/component/handle.vue": "operation.add && operation.edit && ishandle",
+        "src/js/app/main/component/search.vue": "operation.search",
+        "src/js/app/main/component/add.vue": "operation.add && (!operation.edit || operation.edit && !ishandle)",
+        "src/js/app/main/component/edit.vue":"operation.edit && (!operation.add || operation.add && !ishandle)",
         "src/js/app/main/component/view.vue":"operation.view",
     },
     complete: function(data, { chalk }) {

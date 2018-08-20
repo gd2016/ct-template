@@ -1,8 +1,15 @@
 .error {
   background-color: #fef0f0;
   color: #f56c6c;
-  width: 100%;
   padding: 8px 16px;
   text-align: center;
   border-radius: 4px;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.btn .glyphicon{
+  margin-right: 5px;
 }
