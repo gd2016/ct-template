@@ -21,7 +21,8 @@
     "ct-adc-mini-msg": "^2.0.0",
     "ct-adc-page": "^1.1.0",
     "ct-adc-permission": "^1.1.0",
-    "ct-adc-slideout": "^1.1.6-alpha.1"
+    "ct-adc-slideout": "^1.1.6-alpha.1",
+    "ct-adc-popper": "^2.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

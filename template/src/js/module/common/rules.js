@@ -2,6 +2,9 @@
 };
 {{/operation.edit}}
 
+export const handleRules = { {{#each_handle handleInfo}}
+    {{#if_is @index @length}}{{@field}}: [{required: true, message: '{{@label}}不能为空'}]{{else}}{{@field}}: [{required: true, message: '{{@label}}不能为空'}],{{/if_is}}{{/each_handle}}
+};
 {{#operation.add}}export const addRules = {
     
 }

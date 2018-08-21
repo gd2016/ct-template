@@ -1,7 +1,7 @@
 import App from './component/app';
-import VueRouter from 'vue-router';{{#if_and !ishandle operation.edit}}
-import edit from './component/edit';{{/if_and}}{{#if_and !ishandle operation.edit}}
-import add from './component/add';{{/if_and}}{{#operation.view}}
+import VueRouter from 'vue-router';{{#if_nothandle ishandle operation.edit}}
+import edit from './component/edit';{{/if_nothandle}}{{#if_nothandle ishandle operation.edit}}
+import add from './component/add';{{/if_nothandle}}{{#operation.view}}
 import view from './component/view';{{/operation.view}}{{#ishandle}}
 import handle from './component/handle';{{/ishandle}}
 
@@ -12,17 +12,17 @@ export default new VueRouter({
     }, {
         path: '/app',
         component: App,
-        children: [{{#if_and !ishandle operation.edit}}{ 
+        children: [{{#if_nothandle ishandle operation.edit}}{ 
             path: 'edit',
             component: edit
-        },{{/if_and}}{{#operation.view}}
+        },{{/if_nothandle}}{{#operation.view}}
         { 
             path: 'view',
             component: view
-        },{{/operation.view}}{{#if_and !ishandle operation.add}}{ 
+        },{{/operation.view}}{{#if_nothandle ishandle operation.add}}{ 
             path: 'add',
             component: add
-        },{{/if_and}}{{#ishandle}}{ 
+        },{{/if_nothandle}}{{#ishandle}}{ 
             path: ':handle',
             component: handle
         }{{/ishandle}}]

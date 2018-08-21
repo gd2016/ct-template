@@ -83,7 +83,7 @@ module.exports = {
             var fieldArr = Object.keys(json);
             var template = "";
             for (let i = 0; i < labelArr.length; i++) {
-                template += options.fn(this,{data: {type:getHandleType(json,fieldArr,i), label:labelArr[i], field:fieldArr[i]}})
+                template += options.fn(this,{data: {index:i, length:labelArr.length-1, type:getHandleType(json,fieldArr,i), label:labelArr[i], field:fieldArr[i]}})
             }
             return template;
         },
@@ -115,6 +115,12 @@ module.exports = {
                   return options.fn(this);
               }
               return options.inverse(this);
+        },
+        if_nothandle: function (v1, v2, options) {
+            if(!v1 && v2){
+                return options.fn(this);
+            }
+            return options.inverse(this);
         }
     },
     prompts: {
