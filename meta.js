@@ -90,7 +90,7 @@ module.exports = {
         },
         each_view: function(info, options){
             var json = jsonFormat(info);
-            var labelArr = getLableArr(json);
+            var labelArr = getLableArr(json.Data);
             var fieldArr = Object.keys(json.Data);
             var template = "";
             for (let i = 0; i < labelArr.length; i++) {
