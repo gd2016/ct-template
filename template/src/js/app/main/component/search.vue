@@ -14,5 +14,5 @@ export default {
         }
     },
     props: ['loading', 'searchInfo']
-}
+};
 </script>

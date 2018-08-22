@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">{{#operation.search}},
+    <div class="container-fluid">{{#operation.search}}
         <search :searchInfo="searchInfo" :loading="loading" @search="search"></search>{{/operation.search}}{{#if_or operation.export operation.add}}
         <div class="clearfix mb10">{{#operation.export}}
             <export-btn :searchInfo="searchInfo" :url="exportUrl"></export-btn>{{/operation.export}}{{#operation.add}}

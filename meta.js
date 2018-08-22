@@ -25,7 +25,8 @@ function getSearchType(json, fieldArr, i){
     var value = json[fieldArr[i]];
     if(value===1234567890) return 'dates';
     else if(value===123456789) return 'date';
-    else if(value===3) return 'select';
+    else if(value<5) return 'select';
+    else if(typeof value === 'number') return 'number';
     else if(value==='autoComplete') return 'autoComplete';
     else return 'text';
 }

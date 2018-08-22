@@ -3,36 +3,35 @@
         <div class="form-group form-group-sm">
             <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">\{{label}}</label>
             <div class="col-sm-8" :class="{'has-error': validateState==='error'}">
-                <section v-if="type==='text'||type==='input'">
-                    <input @blur="handleBlur" :placeholder="placeholder"  :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
-                </section>
-                <section :class="inputClass" v-if="type==='number'">
-                    <input @keyup="handleUp" :placeholder="placeholder"  :maxlength="maxlength" type="text" class="form-control" :value="commonValue" />
-                </section>
-                <section v-if="type==='select'">
-                    <select class="form-control" :value="commonValue" @change="handleChange">
-                        <option value="" v-if="defaultSelect">请选择</option>
-                        <option v-for="(item,index) in list" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
+                <section :class="inputClass">
+                    <input  v-if="type==='text'" :placeholder="placeholder" :maxlength="maxlength"
+                            type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs"
+                            @blur="handleBlur" @input="handleChange" @focus="handleFocus" ref="input"
+                            />
+                    <input  v-if="type==='number'" :placeholder="placeholder" :maxlength="maxlength" 
+                            type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs" 
+                            @keyup="handleUp"  @blur="handleBlur" @input="handleChange" @focus="handleFocus" 
+                            />
+                    <select v-if="type==='select'" class="form-control" :value="commonValue" @change="handleChange"
+                            :disabled="disabled" v-bind="$attrs" ref="select">
+                            <option value="" v-if="defaultSelect">请选择</option>
+                            <option v-for="(item,index) in list" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
                     </select>
-                </section>
-                <section v-if="type==='dates'">
-                    <dates-input v-model="datesValue" :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" ></dates-input>
-                </section>
-                <section v-if="type==='date'">
-                    <date-input ref="date" v-model="commonValue" :placeholder="placeholder" @change="handleChange" ></date-input>
-                </section>
-                <section v-if="type==='autoComplete'">
-                    <auto-complete  
-                        :list="list"
-                        :placeholder="placeholder"  @select="selectComplete"
-                        v-model="commonValue"  @change="handleChange"
-                        :match-keys="matchKeys" 
-                        :keys="keys" 
-                        :show-keys="showKeys"
-                    >
+                    <dates-input v-if="type==='dates'" v-model="datesValue" :begin-ops="beginOps" :end-ops="endOps"
+                                 :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" 
+                                 :beginDisabled="beginDisabled" :endDisabled="endDisabled" :valueReadable="valueReadable"
+                                 :valueEndTransfered="valueEndTransfered"></dates-input>
+                    <date-input v-if="type==='date'" v-model="datesValue" :placeholder="placeholder" @change="updateTime" 
+                                :ops="ops" :valueReadable="valueReadable" ></date-input>
+                    <auto-complete  v-if="type==='autoComplete'" :list="list" :placeholder="placeholder"  
+                                    @select="selectComplete" v-model="commonValue"  @change="handleChange"
+                                    :match-keys="matchKeys" :keys="keys" :show-keys="showKeys"
+                                    :disabled="disabled" :maxlength="maxlength" :caseSensitive="caseSensitive"
+                                    :autoClear="autoClear" :autoSelectIfOne="autoSelectIfOne"
+                                    @clear="handleClear">
                     </auto-complete>
                 </section>
-                <section v-if="!type"><slot></slot></section>
+                <slot></slot>
             </div>
         </div>
     </div>
@@ -45,44 +44,37 @@
             <slot></slot>
         </div>
         <div v-if="!isStatic" :class="[{'form-error': validateState==='error'},valueClass?valueClass:'col-sm-9']">
-            <section v-if="type==='text'||type==='input'">
-                <input :disabled="disabled" :placeholder="placeholder" :maxlength="maxlength" @input="handleChange" type="text" class="form-control" :value="commonValue" />
-            </section>
-            <section v-if="type==='select'">
-                <select class="form-control" :value="commonValue" @change="handleChange">
-                    <option value="" v-if="defaultSelect">请选择</option>
-                    <option v-for="(item,index) in list" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
+            <section :class="inputClass">
+                <input  v-if="type==='text'" :placeholder="placeholder" :maxlength="maxlength"
+                        type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs"
+                        @blur="handleBlur" @input="handleChange" @focus="handleFocus" ref="input" />
+                <select v-if="type==='select'" class="form-control" :value="commonValue" @change="handleChange"
+                        :disabled="disabled" v-bind="$attrs" ref="select">
+                        <option value="" v-if="defaultSelect">请选择</option>
+                        <option v-for="(item,index) in list" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
                 </select>
-            </section>
-            <section v-if="type==='radio'">
-                <label  class="radio-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
+                <label v-if="type==='radio'" class="radio-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
                     <input :checked="value==item[valueKey.key]" name="radio" type="radio" :value="item[valueKey.key]">\{{item[valueKey.value]}}
                 </label>
-            </section>
-            <section v-if="type==='checkbox'">
-                <label class="checkbox-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
+                <label v-if="type==='checkbox'" class="checkbox-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
                     <input v-model="commonValue" type="checkbox" :value="item[valueKey.key]">\{{item[valueKey.value]}}
                 </label>
-            </section>
-            <section v-if="type==='dates'">
-                <dates-input v-model="datesValue" :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" ></dates-input>
-            </section>
-            <section v-if="type==='date'">
-                <date-input ref="date" v-model="commonValue" :placeholder="placeholder" @change="handleChange" ></date-input>
-            </section>
-            <section v-if="type==='autoComplete'">
-                <auto-complete  
-                    :list="list"
-                    :placeholder="placeholder"  @select="selectComplete"
-                    v-model="commonValue"  @change="handleChange"
-                    :match-keys="matchKeys" 
-                    :keys="keys" 
-                    :show-keys="showKeys"
-                >
+                <dates-input v-if="type==='dates'" v-model="datesValue" :begin-ops="beginOps" :end-ops="endOps"
+                            :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" 
+                            :beginDisabled="beginDisabled" :endDisabled="endDisabled" :valueReadable="valueReadable"
+                            :valueEndTransfered="valueEndTransfered"></dates-input>
+                <date-input v-if="type==='date'" v-model="datesValue" :placeholder="placeholder" @change="updateTime" 
+                            :ops="ops" :valueReadable="valueReadable" ></date-input>
+                <auto-complete v-if="type==='autoComplete'" :list="list" :placeholder="placeholder" 
+                                v-model="commonValue"   :match-keys="matchKeys" :keys="keys" :show-keys="showKeys"
+                                :disabled="disabled" :maxlength="maxlength" :caseSensitive="caseSensitive"
+                                :autoClear="autoClear" :autoSelectIfOne="autoSelectIfOne"
+                                @change="handleChange"  @select="selectComplete"
+                                @clear="handleClear">
                 </auto-complete>
-            </section>
-            <section v-if="type==='textarea'">
-                <textarea :disabled="disabled" :maxlength="maxlength" @input="handleChange" :placeholder="placeholder" :value="commonValue" style="max-width:100%" class="form-control"></textarea>
+                <textarea v-if="type==='textarea'" :disabled="disabled" :maxlength="maxlength"
+                          @input="handleChange" :placeholder="placeholder" :value="commonValue" 
+                          style="max-width:100%" class="form-control"></textarea>
             </section>
             <slot></slot>
             <span v-if="validateState==='error'" class="error-msg help-block">
@@ -105,24 +97,35 @@ export default {
         prop: [String, Array], //需要校验的字段
         label: String,         //表单项
         labelClass: String,    //label类名
+        inputClass: String,    //input类名
         valueClass: String,    //value类名
         isStatic: Boolean,     //是否只读
         value: [String, Number, Object, Array], //v-model绑定值
         type: String,          //表单项类型
-        list: Array,           //选择框、单选框、模糊匹配列表
-        disabled: Boolean,
-        maxlength: [String, Number],
+        list: Array,           //选择框、单选框、复选框、模糊匹配列表
+        disabled: Boolean,     //是否禁用
+        maxlength: [String, Number], //input最大长度限制
         defaultSelect: Boolean, //是否显示请选择一项
         placeholder: String,        
         beginPlaceholder: String, //dates组件placeholder
         endPlaceholder: String,  //dates组件placeholder
+        beginDisabled: Boolean,
+        endDisabled: Boolean,
+        beginOps: Object,
+        endOps: Object,
+        ops: Object,
+        valueReadable: Boolean,
+        valueEndTransfered: Boolean, // 时间戳的值是否精确到毫秒
         autoSelectIfOne: Boolean, //模糊匹配框属性
         allForEmpty: Boolean,  
+        caseSensitive: Boolean,
         autoClear: Boolean,
         matchKeys: Array,
         keys: Array,
         showKeys: Array,       
         keyfield: {type: String, default: 'key'}, //模糊匹配v-model绑定的键名
+        index: Number,
+        required: Boolean,
         valueKey: {            //定义选择框的value key采用的字段名称
             type: Object, 
             default: ()=>{
@@ -130,9 +133,7 @@ export default {
                     key: 'key', value: 'val'
                 };
             }
-        },
-        index: Number,
-        required: Boolean
+        }
     },
     data() {
         return {
@@ -162,14 +163,12 @@ export default {
                 if (this.disabled || this.beginDisabled || this.endDisabled){
                     this.validateState = 'success';
                     this.validateMessage = '';
-                    callback(this.validateMessage, invalidFields);
-                    this.reset = false;
                 } else {
                     this.validateState = !errors ? 'success' : 'error';
                     this.validateMessage = errors ? errors[0].message : '';
-                    callback(this.validateMessage, invalidFields);
-                    this.reset = false;
                 }
+                callback(this.validateMessage, invalidFields);
+                this.reset = false;
             });
         },
         resetField(){  //重置所有校验项的提示信息
@@ -207,12 +206,16 @@ export default {
             this.setValue(event.target.value);
             this.commonValue = this.commonValue.replace(/[^\d]/g, '');
             this.$emit('input', this.commonValue);
+            this.$emit('keyup', this.commonValue);
         },
         handleBlur(event){
             if (this.trigger === 'blur') {
                 this.validate(()=>{});
             }
             this.$emit('blur', event.target.value);
+        },
+        handleFocus(event){
+            this.$emit('focus', event);
         },
         setValue(val){
             this.commonValue = val;
@@ -223,6 +226,9 @@ export default {
         },
         selectComplete(obj){
             this.$emit('select', obj);
+        },
+        handleClear(){
+            this.$emit('clear');
         }
     },
     computed: {
@@ -314,6 +320,9 @@ export default {
 <style>
 .help-block{
     clear: both;
+}
+.form-group section{
+    padding-left: 0;
 }
 .form-error .form-control{
     border-color: #a94442;
