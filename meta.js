@@ -11,7 +11,7 @@ function getLableArr(info){
     var arr = info.split('//');
     var labelArr = [];
     for (let i = 1; i < arr.length; i++) {
-        labelArr.push(arr[i].replace(/\s[\s\S]*/g,''));
+        labelArr.push(arr[i].replace(/(^\s*)|\s[\s\S]*/g,''));
     }
     return labelArr;
 }
@@ -90,20 +90,13 @@ module.exports = {
         },
         each_view: function(info, options){
             var json = jsonFormat(info);
-            var labelArr = getLableArr(info);
+            var labelArr = getLableArr(info.Data);
             var fieldArr = Object.keys(json);
             var template = "";
             for (let i = 0; i < labelArr.length; i++) {
                 template += options.fn(this,{data: {label:labelArr[i], field:fieldArr[i]}})
             }
             return template;
-        },
-        forin: function(count, options){
-            var str = '';
-            for (let index = 0; index < count; index++) {
-                str+=options.fn(this);
-            }
-            return str;
         },
         if_is: function (v1, v2, options) {
             if(v1==v2){

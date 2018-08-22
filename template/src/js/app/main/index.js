@@ -8,6 +8,10 @@ import miniMsg from 'ct-adc-mini-msg';     //弱提示
 import 'common/vue-filter';                //全局过滤器
 {{#operation.delete}}import Popper from 'ct-adc-popper';
 Vue.use(Popper);{{/operation.delete}}
+import ctForm from 'component/ctForm';
+import formItem from 'component/formItem';
+Vue.component('ctForm', ctForm);
+Vue.component('formItem', formItem);
 Vue.use(VueRouter);
 Vue.use(Loading);
 Vue.use(miniMsg);

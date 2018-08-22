@@ -12,20 +12,22 @@ export default new VueRouter({
     }, {
         path: '/app',
         component: App,
-        children: [{{#if_nothandle ishandle operation.edit}}{ 
-            path: 'edit',
-            component: edit
-        },{{/if_nothandle}}{{#operation.view}}
-        { 
-            path: 'view',
-            component: view
-        },{{/operation.view}}{{#if_nothandle ishandle operation.add}}{ 
-            path: 'add',
-            component: add
-        },{{/if_nothandle}}{{#ishandle}}{ 
-            path: ':handle',
-            component: handle
-        }{{/ishandle}}]
+        children: 
+        [
+            {{#if_nothandle ishandle operation.edit}}{ 
+                path: 'edit',
+                component: edit
+            },{{/if_nothandle}}{{#operation.view}} { 
+                path: 'view',
+                component: view
+            },{{/operation.view}}{{#if_nothandle ishandle operation.add}} { 
+                path: 'add',
+                component: add
+            },{{/if_nothandle}}{{#ishandle}} { 
+                path: ':handle',
+                component: handle
+            }{{/ishandle}}
+        ]
     }]
 });
 
