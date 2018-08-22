@@ -2,18 +2,17 @@
     <div>
         <slideout  width="50%" title="查看" v-model="show" @on-after-hide="back">
             <template slot="body">
-                <form v-if="!error" v-loading="loading" class="form-horizontal">
+                <ct-form v-if="!error" v-loading="loading">
                     {{#each_view viewInfo}}
                     <form-item isStatic label="{{@label}}:" :value="info.{{@field}}"></form-item>
                     {{/each_view}}
-                </form>
+                </ct-form>
                 <div v-if="error" class="error">\{{error}}</div>
             </template>
         </slideout>
     </div>
 </template>
 <script>
-import formItem from 'component/formItem';
 import slideout from 'ct-adc-slideout';
 import mixin from 'common/loadMixin';
 import Interface from 'common/interface';
@@ -48,7 +47,6 @@ export default {
         }
     },
     components: {
-        formItem,
         slideout
     }
 };

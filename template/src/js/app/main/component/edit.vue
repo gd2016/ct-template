@@ -19,8 +19,6 @@
 </template>
 
 <script>
-import ctForm from 'component/ctForm';
-import formItem from 'component/formItem';
 import slideout from 'ct-adc-slideout';
 import mixin from 'common/loadMixin';
 import Interface from 'common/interface';
@@ -77,7 +75,7 @@ export default {
         }
     },
     components: {
-        slideout, formItem, ctForm
+        slideout
     }
 };
 </script>

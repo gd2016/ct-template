@@ -28,8 +28,6 @@ import search from './search';{{/operation.search}}
 import mixin from 'common/loadMixin';
 import Interface from 'common/interface';
 import page from 'ct-adc-page';
-import ctForm from 'component/ctForm';
-import formItem from 'component/formItem';
 import Const from 'common/const';
 export default {
     data() {
@@ -102,8 +100,6 @@ export default {
     },
     mixins: [mixin],
     components: {
-        ctForm,
-        formItem,
         page{{#operation.export}},
         exportBtn{{/operation.export}}{{#operation.search}},
         search{{/operation.search}}
