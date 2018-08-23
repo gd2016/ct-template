@@ -212,19 +212,18 @@ module.exports = {
                     "short": "runtime"
                 }
             ]
+        },
+        autoInstall: {
+            type: 'confirm',
+            message: 'Should we run `npm install` for you after the project has been created? (recommended)'
         }
-        // ,
-        // autoInstall: {
-        //     type: 'confirm',
-        //     message: 'Should we run `npm install` for you after the project has been created? (recommended)'
-        // }
     },
     filters: {
         "src/js/app/main/component/handle.vue": "operation.add && operation.edit && ishandle",
         "src/js/app/main/component/search.vue": "operation.search",
         "src/js/app/main/component/add.vue": "operation.add && (!operation.edit || operation.edit && !ishandle)",
         "src/js/app/main/component/edit.vue":"operation.edit && (!operation.add || operation.add && !ishandle)",
-        "src/js/app/main/component/view.vue":"operation.view",
+        "src/js/app/main/component/view.vue":"operation.view"
     },
     complete: function(data, { chalk }) {
         const green = chalk.green
