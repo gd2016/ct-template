@@ -46,7 +46,7 @@ export default {
     methods: {
         getData(){
             this.getInfo({
-                url: Interface.statistics.detail,
+                url: Interface.index.detail,
                 data: {
                     Id: this.$route.query.id
                 }
@@ -60,7 +60,7 @@ export default {
             this.$refs.forms.validate((res)=>{
                 if (res){
                     this.post({
-                        url: Interface.statistics.post,
+                        url: Interface.index.post,
                         data: this.formData,
                         method: 'post'
                     }).then(()=>{

@@ -32,7 +32,6 @@ import Const from 'common/const';
 export default {
     data() {
         return {
-            typeList: Const.getData({col: 'type'}),
             stateFormat: Const.getData({col: 'state'}),
             list: [],
             count: 0,
@@ -41,7 +40,7 @@ export default {
                 PageIndex: 1,
                 PageSize: 10
             }{{#operation.export}},
-            exportUrl: Interface.statistics.post{{/operation.export}}
+            exportUrl: Interface.index.post{{/operation.export}}
         };
     },
     created() {
@@ -50,7 +49,7 @@ export default {
     methods: {
         getData(){
             this.getList({
-                url: Interface.statistics.list,
+                url: Interface.index.list,
                 data: this.pageCfg
             }).then((res)=>{
                 this.list = res.Data.List;
@@ -82,7 +81,7 @@ export default {
                 msg: '确定删除',
                 yes: ()=>{
                     this.post({
-                        url: Interface.statistics.post,
+                        url: Interface.index.post,
                         data: {
                             Id: id
                         },

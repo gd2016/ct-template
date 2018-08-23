@@ -7,7 +7,13 @@
 </template>
 
 <script>
+import Const from 'common/const';
 export default {
+    data() {
+        return {
+            typeList: Const.getData({col: 'type'})
+        };
+    },
     methods: {
         search(){
             this.$emit('search');

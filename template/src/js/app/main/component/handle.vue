@@ -63,7 +63,7 @@ export default {
             this.$refs.forms.validate((res)=>{
                 if (res){
                     this.post({
-                        url: Interface.statistics.post,
+                        url: Interface.index.post,
                         data: this.formData,
                         method: 'post'
                     }).then(()=>{

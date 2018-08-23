@@ -15,7 +15,7 @@ var getEnv = function() {
     return env[tdl] || 'dev';
 };
 var base = {
-    statistics: {
+    index: {
         list: '/api/getlist',
         post: '/api/post',
         detail: '/api/detail'

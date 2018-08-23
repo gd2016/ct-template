@@ -4,16 +4,16 @@
             <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">\{{label}}</label>
             <div class="col-sm-8" :class="{'has-error': validateState==='error'}">
                 <section :class="inputClass">
-                    <input  v-if="type==='text'" :placeholder="placeholder" :maxlength="maxlength"
+                    <input  v-if="type==='text'" :placeholder="placeholder" :maxlength="maxlength" :style="inputStyle"
                             type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs"
                             @blur="handleBlur" @input="handleChange" @focus="handleFocus" ref="input"
                             />
-                    <input  v-if="type==='number'" :placeholder="placeholder" :maxlength="maxlength" 
+                    <input  v-if="type==='number'" :placeholder="placeholder" :maxlength="maxlength" :style="inputStyle"
                             type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs" 
                             @keyup="handleUp"  @blur="handleBlur" @input="handleChange" @focus="handleFocus" 
                             />
                     <select v-if="type==='select'" class="form-control" :value="commonValue" @change="handleChange"
-                            :disabled="disabled" v-bind="$attrs" ref="select">
+                            :disabled="disabled" v-bind="$attrs" ref="select" :style="inputStyle">
                             <option value="" v-if="defaultSelect">请选择</option>
                             <option v-for="(item,index) in list" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
                     </select>
@@ -45,19 +45,19 @@
         </div>
         <div v-if="!isStatic" :class="[{'form-error': validateState==='error'},valueClass?valueClass:'col-sm-9']">
             <section :class="inputClass">
-                <input  v-if="type==='text'" :placeholder="placeholder" :maxlength="maxlength"
+                <input  v-if="type==='text'" :placeholder="placeholder" :maxlength="maxlength" :style="inputStyle"
                         type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs"
                         @blur="handleBlur" @input="handleChange" @focus="handleFocus" ref="input" />
                 <select v-if="type==='select'" class="form-control" :value="commonValue" @change="handleChange"
-                        :disabled="disabled" v-bind="$attrs" ref="select">
+                        :disabled="disabled" v-bind="$attrs" ref="select" :style="inputStyle">
                         <option value="" v-if="defaultSelect">请选择</option>
                         <option v-for="(item,index) in list" :value="item[valueKey.key]" :key="index">\{{item[valueKey.value]}}</option>
                 </select>
                 <label v-if="type==='radio'" class="radio-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
-                    <input :checked="value==item[valueKey.key]" name="radio" type="radio" :value="item[valueKey.key]">\{{item[valueKey.value]}}
+                    <input :style="inputStyle" :checked="value==item[valueKey.key]" name="radio" type="radio" :value="item[valueKey.key]">\{{item[valueKey.value]}}
                 </label>
                 <label v-if="type==='checkbox'" class="checkbox-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
-                    <input v-model="commonValue" type="checkbox" :value="item[valueKey.key]">\{{item[valueKey.value]}}
+                    <input :style="inputStyle" v-model="commonValue" type="checkbox" :value="item[valueKey.key]">\{{item[valueKey.value]}}
                 </label>
                 <dates-input v-if="type==='dates'" v-model="datesValue" :begin-ops="beginOps" :end-ops="endOps"
                             :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" 
@@ -74,7 +74,7 @@
                 </auto-complete>
                 <textarea v-if="type==='textarea'" :disabled="disabled" :maxlength="maxlength"
                           @input="handleChange" :placeholder="placeholder" :value="commonValue" 
-                          style="max-width:100%" class="form-control"></textarea>
+                          style="min-height:100px;max-width:100%" class="form-control" :style="inputStyle"></textarea>
             </section>
             <slot></slot>
             <span v-if="validateState==='error'" class="error-msg help-block">
@@ -98,9 +98,10 @@ export default {
         label: String,         //表单项
         labelClass: String,    //label类名
         inputClass: String,    //input类名
+        inputStyle: Object,    //控件样式
         valueClass: String,    //value类名
         isStatic: Boolean,     //是否只读
-        value: [String, Number, Object, Array], //v-model绑定值
+        value: [String, Number, Object, Array, Boolean], //v-model绑定值
         type: String,          //表单项类型
         list: Array,           //选择框、单选框、复选框、模糊匹配列表
         disabled: Boolean,     //是否禁用
@@ -123,10 +124,9 @@ export default {
         matchKeys: Array,
         keys: Array,
         showKeys: Array,       
-        keyfield: {type: String, default: 'key'}, //模糊匹配v-model绑定的键名
         index: Number,
         required: Boolean,
-        valueKey: {            //定义选择框的value key采用的字段名称
+        valueKey: {            //定义选择框、单选框、复选框的value key采用的字段名称
             type: Object, 
             default: ()=>{
                 return {

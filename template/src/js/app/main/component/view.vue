@@ -4,7 +4,7 @@
             <template slot="body">
                 <ct-form v-if="!error" v-loading="loading">
                     {{#each_view viewInfo}}
-                    <form-item isStatic label="{{@label}}:" :value="info.{{@field}}"></form-item>
+                    <form-item isStatic label="{{@label}}" :value="info.{{@field}}"></form-item>
                     {{/each_view}}
                 </ct-form>
                 <div v-if="error" class="error">\{{error}}</div>
@@ -32,14 +32,15 @@ export default {
     },
     methods: { 
         getData(){
-            this.show = true;
             this.getInfo({
-                url: Interface.statistics.detail,
+                url: Interface.index.detail,
                 data: {
                     Id: this.$route.query.id
                 }
             }).then((res)=>{
                 this.info = res.Data;
+            }).catch((error)=>{
+                this.error = error.message;
             });
         },
         back(){
