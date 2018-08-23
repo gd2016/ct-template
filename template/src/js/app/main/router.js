@@ -25,7 +25,7 @@ export default new VueRouter({
             { 
                 path: 'add',
                 component: add
-            },{{/if_nothandle}}{{#ishandle}}
+            }{{/if_nothandle}}{{#ishandle}}
             { 
                 path: ':handle',
                 component: handle

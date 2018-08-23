@@ -24,8 +24,8 @@ module.exports = {
     define: {
         isProxy: true,
         matchPath: /\/api/i,
-        domain: 'http://tcy365.admin.ct108.org:1506',
-        path: ''
+        domain: 'http://yapi.tcy365.org:3000',
+        path: '/mock/228'
     },
     interFaces: interFaces,
     getInterFace(key){
