@@ -7,12 +7,8 @@
 ## 初始化项目
 
 ```
-  vue init ct-adc/webpack [你的项目名称]
+  vue init gd2016/ct-template [你的项目名称]
 ```
-
-### 初始化配置特殊说明
-
-* project type 组件开发/常规项目开发
 
 ## 配置项说明 
 

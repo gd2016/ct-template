@@ -160,6 +160,29 @@ module.exports = {
                 {
                     name: "6) export",
                     value: "export"
+                },
+                {
+                    name: "7) more operation",
+                    value: "more"
+                }
+            ]
+        },
+        more: {
+            when: "operation.more",
+            type: "checkbox",
+            message: 'What content are included ？',
+            choices: [
+                {
+                    name: "1) slideout",
+                    value: "slideout"
+                },
+                {
+                    name: "2) popup",
+                    value: "popup"
+                },
+                {
+                    name: "3) child page",
+                    value: "page"
                 }
             ]
         },
@@ -170,32 +193,92 @@ module.exports = {
         },
         tableInfo:{
             type:"editor",
-            message :"table column info?"
+            message :"table column info?",
+            validate: function(val) {
+                try {
+                    if(!jsonFormat(val).Data.List[0]){
+                        return "数据格式错误！";
+                    }
+                } catch (error) {
+                    return "数据格式错误！";
+                }
+                return true;
+            }
         },
         handleInfo:{
-            when:'ishandle',
+            when:'operation.add && operation.edit && ishandle',
             type:"editor",
-            message :"add and edit items info?"
+            message :"add and edit items info?",
+            validate: function(val) {
+                try {
+                    if(!jsonFormat(val)){
+                        return "数据格式错误！";
+                    }
+                } catch (error) {
+                    return "数据格式错误！";
+                }
+                return true;
+            }
         },
         searchInfo:{
             when:"operation.search",
             type:"editor",
-            message :"search items info?"
+            message :"search items info?",
+            validate: function(val) {
+                try {
+                    if(!jsonFormat(val)){
+                        return "数据格式错误！";
+                    }
+                } catch (error) {
+                    return "数据格式错误！";
+                }
+                return true;
+            }
         },
         addInfo:{
             when:"operation.add && (!operation.edit || operation.edit && !ishandle)",
             type:"editor",
-            message :"add items info?"
+            message :"add items info?",
+            validate: function(val) {
+                try {
+                    if(!jsonFormat(val)){
+                        return "数据格式错误！";
+                    }
+                } catch (error) {
+                    return "数据格式错误！";
+                }
+                return true;
+            }
         },
         editInfo:{
             when:"operation.edit && (!operation.add || operation.add && !ishandle)",
             type:"editor",
-            message :"edit items info?"
+            message :"edit items info?",
+            validate: function(val) {
+                try {
+                    if(!jsonFormat(val)){
+                        return "数据格式错误！";
+                    }
+                } catch (error) {
+                    return "数据格式错误！";
+                }
+                return true;
+            }
         },
         viewInfo:{
             when:"operation.view",
             type:"editor",
-            message :"view items info?"
+            message :"view items info?",
+            validate: function(val) {
+                try {
+                    if(!jsonFormat(val)){
+                        return "数据格式错误！";
+                    }
+                } catch (error) {
+                    return "数据格式错误！";
+                }
+                return true;
+            }
         },
         build: {
             "type": "list",
@@ -219,6 +302,7 @@ module.exports = {
         }
     },
     filters: {
+        "src/js/app/main/component/slideout.vue": "operation.more && more.slideout",
         "src/js/app/main/component/handle.vue": "operation.add && operation.edit && ishandle",
         "src/js/app/main/component/search.vue": "operation.search",
         "src/js/app/main/component/add.vue": "operation.add && (!operation.edit || operation.edit && !ishandle)",

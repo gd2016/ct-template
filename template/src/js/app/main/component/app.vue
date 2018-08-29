@@ -13,7 +13,9 @@
                 <template slot-scope="data">{{#operation.view}}
                     <router-link :to="{path:'/app/view',query: { id: data.item.Id }}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-search"></i>查看</router-link>{{/operation.view}}{{#operation.edit}}
                     <router-link :to="{path:'/app/edit',query: { id: data.item.Id }}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i>编辑</router-link>{{/operation.edit}}{{#operation.delete}}
-                    <button type="button" class="btn btn-xs btn-danger" @click="remove($event,data.item.Id)"><i class="glyphicon glyphicon-trash"></i>删除</button>{{/operation.delete}}
+                    <button type="button" class="btn btn-xs btn-danger" @click="remove($event,data.item.Id)"><i class="glyphicon glyphicon-trash"></i>删除</button>{{/operation.delete}}{{#if_and operation.more more.popup}}
+                    <button type="button" class="btn btn-xs btn-danger" @click="popup($event,data.item.Id)"><i class="glyphicon glyphicon-trash"></i>popup</button>{{/if_and}}{{#if_and operation.more more.slideout}}
+                    <router-link :to="{path:'/app/slideout',query: { id: data.item.Id }}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-search"></i>slideout</router-link>{{/if_and}}
                 </template>
             </adc-column>
         </adc-table>
@@ -33,8 +35,6 @@ export default {
     data() {
         return {
             stateFormat: Const.getData({col: 'state'}),
-            list: [],
-            count: 0,
             searchInfo: {},
             pageCfg: {
                 PageIndex: 1,
@@ -51,15 +51,11 @@ export default {
             this.getList({
                 url: Interface.index.list,
                 data: this.pageCfg
-            }).then((res)=>{
-                this.list = res.Data.List;
-                this.count = res.Data.RecordCount;
-            });
+            })
         }{{#operation.search}}, 
         search(){
             this.pageCfg = Object.assign(this.pageCfg, this.searchInfo);
             this.pageCfg.PageIndex = 1;
-            this.count = 0;
             this.getData();
         }{{/operation.search}},
         changePage(index){
@@ -95,7 +91,30 @@ export default {
                     });
                 }
             });
-        }{{/operation.delete}}
+        }{{/operation.delete}}{{#if_and operation.more more.popup}},
+        popup(event, id){
+            event.stopPropagation();
+            this.$pop({
+                ref: event.target,
+                placement: 'top',
+                msg: 'popup信息',
+                yes: ()=>{
+                    this.post({
+                        url: Interface.index.post,
+                        data: {
+                            Id: id
+                        },
+                        method: 'post'
+                    }).then((res)=>{
+                        this.minimsg = this.$minimsg({
+                            type: 'success',
+                            content: res.Message
+                        });
+                        this.refresh(true);
+                    });
+                }
+            });
+        }{{/if_and}}
     },
     mixins: [mixin],
     components: {

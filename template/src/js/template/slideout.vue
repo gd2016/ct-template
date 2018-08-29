@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import slideout from 'ct-adc-slideout';
 import mixin from 'common/loadMixin';
 export default {
     mixins: [mixin],

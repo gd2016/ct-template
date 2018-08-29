@@ -4,13 +4,10 @@
             <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">\{{label}}</label>
             <div class="col-sm-8" :class="{'has-error': validateState==='error'}">
                 <section :class="inputClass">
-                    <input  v-if="type==='text'" :placeholder="placeholder" :maxlength="maxlength" :style="inputStyle"
+                    <input  v-if="type==='text'||type==='number'" :placeholder="placeholder"          
+                            :maxlength="maxlength" :style="inputStyle"
                             type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs"
                             @blur="handleBlur" @input="handleChange" @focus="handleFocus" ref="input"
-                            />
-                    <input  v-if="type==='number'" :placeholder="placeholder" :maxlength="maxlength" :style="inputStyle"
-                            type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs" 
-                            @keyup="handleUp"  @blur="handleBlur" @input="handleChange" @focus="handleFocus" 
                             />
                     <select v-if="type==='select'" class="form-control" :value="commonValue" @change="handleChange"
                             :disabled="disabled" v-bind="$attrs" ref="select" :style="inputStyle">
@@ -86,12 +83,7 @@
 
 <script>
 import AsyncValidator from 'async-validator';
-import {DateInput, DatesInput} from 'ct-adc-date';
-import AutoComplete from 'ct-adc-auto-complete';
 export default {
-    components: {
-        DatesInput, DateInput, AutoComplete
-    },
     props: {
         rules: Array,          //单独的校验规则
         prop: [String, Array], //需要校验的字段
@@ -140,8 +132,8 @@ export default {
             validateState: '',
             validateMessage: '',
             datesValue: this.value,
-            reset: false,          //重置校验规则
-            commonValue: this.value
+            commonValue: this.value,
+            validated: false
         };
     },
     methods: {
@@ -168,18 +160,10 @@ export default {
                     this.validateMessage = errors ? errors[0].message : '';
                 }
                 callback(this.validateMessage, invalidFields);
-                this.reset = false;
+                if(!this.validated) this.validated = true; 
             });
         },
         resetField(){  //重置所有校验项的提示信息
-            this.reset = true;
-            if (this.form.model){
-                this.commonValue = '';
-                this.datesValue = {
-                    begin: '',
-                    end: ''
-                };
-            }
             this.validateState = '';
             this.validateMessage = '';
         },
@@ -201,12 +185,6 @@ export default {
                 this.$emit('input', value);
                 this.$emit('change', value);
             }
-        },
-        handleUp(event){
-            this.setValue(event.target.value);
-            this.commonValue = this.commonValue.replace(/[^\d]/g, '');
-            this.$emit('input', this.commonValue);
-            this.$emit('keyup', this.commonValue);
         },
         handleBlur(event){
             if (this.trigger === 'blur') {
@@ -285,8 +263,8 @@ export default {
     },
     watch: {
         filedvalue(){
-            if (this.reset) return ;
             if (this.trigger === 'blur') return;
+            if (!val && !this.validated) return;
             this.validate(()=>{});   
         },
         value(val){
@@ -303,6 +281,12 @@ export default {
         endDisabled(){
             this.validateState = 'success';
             this.validateMessage = '';
+        },
+        commonValue(value){
+            if(this.type==='number'){
+                this.commonValue = this.commonValue.replace(/\D/g, '');
+                this.$emit('input', this.commonValue);
+            }
         }
     },
     mounted() {

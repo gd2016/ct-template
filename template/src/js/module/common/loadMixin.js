@@ -6,8 +6,9 @@ export default {
             status: true,           //表格列表加载状态
             message: '',            //表格列表加载出错的信息
             minimsg: '',            //弱提示
-            handleLoading: false,   //按钮加载状态
-            error: ''               //错误信息
+            error: '',              //错误信息
+            list: [],               //表格列表
+            count: 0                //分页总记录数
         };
     },
     methods: {
@@ -21,14 +22,14 @@ export default {
             this.message = msg.message;
         },
         saveSuccess(){
-            this.handleLoading = false;
             this.minimsg = this.$minimsg({
                 type: 'success',
                 content: '保存成功'
             });
         },
-        getList({method = 'get', url, data}){ //获取表格列表专用
+        getList({method = 'get', url, data}){ //获取表格列表 
             this.loading = true;
+            this.count = 0;
             return new Promise((resolve) => {
                 axios({
                     method: method,
@@ -38,6 +39,8 @@ export default {
                 }).then((res)=>{
                     this.message = '';
                     this.loadSuccess();
+                    this.list = res.Data.List;
+                    this.count = res.Data.RecordCount;
                     resolve(res);
                 }).catch((error)=>{
                     this.handleFail(error);
@@ -69,7 +72,7 @@ export default {
             });
         },
         post({method = 'post', url, data}){   //用户提交操作
-            this.handleLoading = true;
+            this.loading = true;
             return new Promise((resolve, reject) => {
                 axios({
                     method: method,
@@ -84,12 +87,12 @@ export default {
                         type: 'error',
                         content: error.message
                     });
-                    this.handleLoading = false;
+                    this.loading = false;
                     reject(error);
                 });
             });
         },
-        ajax({method = 'get', url, data}){   //常规异步请求（如获取筛选项列表等）
+        ajax({method = 'get', url, data}){   //常规异步请求
             return new Promise((resolve, reject) => {
                 axios({
                     method: method,

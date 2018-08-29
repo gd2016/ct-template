@@ -10,13 +10,20 @@ import 'common/vue-filter';                //全局过滤器
 Vue.use(Popper);{{/operation.delete}}
 import ctForm from 'component/ctForm';
 import formItem from 'component/formItem';
+import {DatesInput, DateInput} from 'ct-adc-date'; 
+import AutoComplete from 'ct-adc-auto-complete';
+import slideout from 'ct-adc-slideout';
+Vue.component('slideout', slideout);
 Vue.component('ctForm', ctForm);
 Vue.component('formItem', formItem);
+Vue.component('adc-table', table);
+Vue.component('adc-column', column);
+Vue.component('DatesInput', DatesInput);
+Vue.component('DateInput', DateInput);
+Vue.component('AutoComplete', AutoComplete);
 Vue.use(VueRouter);
 Vue.use(Loading);
 Vue.use(miniMsg);
-Vue.component('adc-table', table);
-Vue.component('adc-column', column);
 // permission.route(router);
 // permission.get('pageName').then(function(){
 new Vue({

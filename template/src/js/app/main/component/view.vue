@@ -13,7 +13,6 @@
     </div>
 </template>
 <script>
-import slideout from 'ct-adc-slideout';
 import mixin from 'common/loadMixin';
 import Interface from 'common/interface';
 export default { 
@@ -46,9 +45,6 @@ export default {
         back(){
             this.$router.push({path: '/app'});
         }
-    },
-    components: {
-        slideout
     }
 };
 </script>
