@@ -305,6 +305,7 @@ module.exports = {
         "src/js/app/main/component/slideout.vue": "operation.more && more.slideout",
         "src/js/app/main/component/handle.vue": "operation.add && operation.edit && ishandle",
         "src/js/app/main/component/search.vue": "operation.search",
+        "src/js/module/component/exportBtn.vue": "operation.export",
         "src/js/app/main/component/add.vue": "operation.add && (!operation.edit || operation.edit && !ishandle)",
         "src/js/app/main/component/edit.vue":"operation.edit && (!operation.add || operation.add && !ishandle)",
         "src/js/app/main/component/view.vue":"operation.view"
