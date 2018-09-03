@@ -8,8 +8,7 @@ import miniMsg from 'ct-adc-mini-msg';     //弱提示
 import 'common/vue-filter';                //全局过滤器
 {{#operation.delete}}import Popper from 'ct-adc-popper';
 Vue.use(Popper);{{/operation.delete}}
-import ctForm from 'component/ctForm';
-import formItem from 'component/formItem';
+import {ctForm, formItem} from 'ct-adc-formitem';
 import {DatesInput, DateInput} from 'ct-adc-date'; 
 import AutoComplete from 'ct-adc-auto-complete';
 import slideout from 'ct-adc-slideout';

@@ -3,6 +3,12 @@
         <slot></slot>
         <div class="text-right">
             <hr/>
+            <div v-if="!$slots.footer">
+                <button :disabled="loading" type="button" @click="save" class="btn btn-primary mr20">
+                    <i class="glyphicon mr5" :class="{'glyphicon-refresh':loading, rotate:loading, 'glyphicon-save':!loading}"></i>保存</button>
+                <button type="button" @click="cancel" class="btn btn-primary">取消</button>
+                <slot name="append"></slot>
+            </div>
             <slot name="footer"></slot>
         </div>
     </form>
@@ -36,16 +42,20 @@ export default {
             var valid = true;
             var count = 0;
 
-            this.items.forEach(field => {
-                field.validate((message, invalidFields)=>{
-                    if (message){
-                        valid = false;
-                    }
-                    if (typeof callback === 'function' && ++count === this.items.length) {
-                        callback(valid, invalidFields);
-                    }
+            if (this.items.length){
+                this.items.forEach(field => {
+                    field.validate((message, invalidFields)=>{
+                        if (message){
+                            valid = false;
+                        }
+                        if (typeof callback === 'function' && ++count === this.items.length) {
+                            callback(valid, invalidFields);
+                        }
+                    });
                 });
-            });
+            } else {
+                callback(valid);
+            }
         },
         resetFields() {
             if (!this.model) {
@@ -55,6 +65,12 @@ export default {
             this.items.forEach(field => {
                 field.resetField();
             });
+        },
+        save() {
+            this.$emit('save');
+        },
+        cancel() {
+            this.$emit('cancel');
         },
         search(){
             this.$emit('search');

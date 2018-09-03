@@ -1,7 +1,7 @@
 <template>
     <div v-if="isSearch" class="col-sm-4 col-lg-3">
         <div class="form-group form-group-sm">
-            <label class="control-label" :class="labelClass?labelClass:'col-sm-4'">\{{label}}</label>
+            <label class="control-label" :class="labelClass?labelClass:'col-sm-4'"><i v-if="isRequired" class="red">*</i>\{{label}}</label>
             <div class="col-sm-8" :class="{'has-error': validateState==='error'}">
                 <section :class="inputClass">
                     <input  v-if="type==='text'||type==='number'" :placeholder="placeholder"          
@@ -33,14 +33,14 @@
         </div>
     </div>
     <div v-else class="form-group clearfix">
-        <label :class="labelClass?labelClass:'col-sm-3'" class="control-label">
+        <label :class="labelClass?labelClass:'col-sm-2'" class="control-label">
             <i v-if="isRequired" class="red">*</i>\{{label}}
         </label>
-        <div v-if="isStatic" :class="[{'form-control-static':isStatic},valueClass?valueClass:'col-sm-9']">
+        <div v-if="isStatic" :class="[{'form-control-static':isStatic},valueClass?valueClass:'col-sm-10']">
             \{{value}}
             <slot></slot>
         </div>
-        <div v-if="!isStatic" :class="[{'form-error': validateState==='error'},valueClass?valueClass:'col-sm-9']">
+        <div v-if="!isStatic" :class="[{'form-error': validateState==='error'},valueClass?valueClass:'col-sm-10']">
             <section :class="inputClass">
                 <input  v-if="type==='text'" :placeholder="placeholder" :maxlength="maxlength" :style="inputStyle"
                         type="text" class="form-control" :value="commonValue" :disabled="disabled" v-bind="$attrs"
@@ -55,6 +55,9 @@
                 </label>
                 <label v-if="type==='checkbox'" class="checkbox-inline" v-for="(item,index) in list" :key="index" @change="handleChange">
                     <input :style="inputStyle" v-model="commonValue" type="checkbox" :value="item[valueKey.key]">\{{item[valueKey.value]}}
+                </label>
+                <label v-if="type==='checkbox'&&!list" class="checkbox-inline" @change="handleChange">
+                    <input :style="inputStyle" v-model="commonValue" type="checkbox">&nbsp;
                 </label>
                 <dates-input v-if="type==='dates'" v-model="datesValue" :begin-ops="beginOps" :end-ops="endOps"
                             :beginPlaceholder="beginPlaceholder" :endPlaceholder="endPlaceholder" @change="updateTime" 
@@ -93,7 +96,10 @@ export default {
         inputStyle: Object,    //控件样式
         valueClass: String,    //value类名
         isStatic: Boolean,     //是否只读
-        value: [String, Number, Object, Array, Boolean], //v-model绑定值
+        value: {type: [String, Number, Object, Array, Boolean], default: ()=>{
+            if (this.type !== 'checkbox') return undefined;
+        }},                    //v-model绑定值
+        model: [String, Number, Object, Array], //自定义时，需要校验的绑定值
         type: String,          //表单项类型
         list: Array,           //选择框、单选框、复选框、模糊匹配列表
         disabled: Boolean,     //是否禁用
@@ -227,12 +233,8 @@ export default {
         filedvalue(){ //当前表单项对应的值
             if (!this.prop) return ;
             if (typeof this.value === 'undefined'){
-                if (this.form.model instanceof Array){
-                    return this.form.model[this.index][this.prop];
-                }
-                return this.form.model[this.prop];
+                return this.model;
             }
-            
             return this.value;
         },
         isRequired(){ //是否为必填项
@@ -262,7 +264,7 @@ export default {
         }
     },
     watch: {
-        filedvalue(){
+        filedvalue(val){
             if (this.trigger === 'blur') return;
             if (!val && !this.validated) return;
             this.validate(()=>{});   
