@@ -9,16 +9,9 @@
 import axios from 'common/axios';
 export default {
     props: {
-        formData: {
-            type: Object,
-            default: ()=>{
-                return {};
-            }
-        },
-        url: {
-            type: String,
-            default: ''
-        }
+        searchInfo: Object,
+        url: String,
+        ajax: Boolean
     },
     data() {
         return {
@@ -29,6 +22,10 @@ export default {
     },
     methods: {
         exportCsv(){
+            if (this.ajax) this.byAjax();
+            else this.common();
+        },
+        byAjax(){
             this.loading = true;
             axios({
                 url: this.url,
@@ -51,6 +48,22 @@ export default {
                 });
                 this.loading = false;
             });
+        },
+        common(){
+            this.iframeSrc = `${this.url}?${this.getUrlString()}`;
+        },
+        getUrlString() {
+            const urlData = Object.assign({}, this.searchInfo, {_: +new Date()});
+
+            return this.urlStringify(urlData);
+        },
+        urlStringify(data) {
+            var arr = [];
+
+            for (const key in data) {
+                arr.push(key + '=' + data[key]);
+            }
+            return arr.join('&');
         }
     }
 };

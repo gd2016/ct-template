@@ -2,7 +2,7 @@
     <div class="container-fluid">{{#operation.search}}
         <search :searchInfo="searchInfo" :loading="loading" @search="search"></search>{{/operation.search}}{{#if_or operation.export operation.add}}
         <div class="clearfix mb10">{{#operation.export}}
-            <export-btn :searchInfo="searchInfo" :url="exportUrl"></export-btn>{{/operation.export}}{{#operation.add}}
+            <export-btn :searchInfo="pageCfg" :url="exportUrl"></export-btn>{{/operation.export}}{{#operation.add}}
             <router-link :to="{path:'/app/add'}" class="pull-right btn btn-primary"><i class="glyphicon glyphicon-plus"></i>添加</router-link>{{/operation.add}}
         </div>{{/if_or}}
         <adc-table  :data="list" v-loading="loading" :status="status"  :msg="message">
@@ -77,7 +77,7 @@ export default {
                 msg: '确定删除',
                 yes: ()=>{
                     this.post({
-                        url: Interface.index.post,
+                        url: Interface.index.remove,
                         data: {
                             Id: id
                         },
@@ -100,7 +100,7 @@ export default {
                 msg: 'popup信息',
                 yes: ()=>{
                     this.post({
-                        url: Interface.index.post,
+                        url: Interface.index.popup,
                         data: {
                             Id: id
                         },

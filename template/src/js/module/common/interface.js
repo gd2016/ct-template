@@ -18,7 +18,10 @@ var base = {
     index: {
         list: '/api/getlist',
         post: '/api/post',
-        detail: '/api/detail'
+        detail: '/api/detail',
+        export: '/api/export',
+        remove: '/api/remove',
+        popup: '/api/popup'
     },
     patchList: {
         api3: '/api/api3'
