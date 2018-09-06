@@ -276,7 +276,7 @@ module.exports = {
             message :"view items info?",
             validate: function(val) {
                 try {
-                    if(!jsonFormat(val)){
+                    if(!jsonFormat(val).Data){
                         return "数据格式错误！";
                     }
                 } catch (error) {
