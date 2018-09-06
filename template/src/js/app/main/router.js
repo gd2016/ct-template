@@ -29,7 +29,7 @@ export default new VueRouter({
             { 
                 path: ':handle',
                 component: handle
-            },{{/ishandle}}{{#if_and operation.more more.slideout}}
+            }{{/ishandle}}{{#if_and operation.more more.slideout}},
             { 
                 path: 'slideout',
                 component: slideout

@@ -138,33 +138,38 @@ module.exports = {
             message: 'What content are included ？',
             choices: [
                 {
-                    name: "1) add operation",
+                    name: "1) table",
+                    value: "table",
+                    checked: true
+                },
+                {
+                    name: "2) add operation",
                     value: "add"
                 },
                 {
-                    name: "2) delete operation",
+                    name: "3) delete operation",
                     value: "delete"
                 },
                 {
-                    name: "3) edit operation",
+                    name: "4) edit operation",
                     value: "edit"
                 },
                 {
-                    name: "4) search operation",
+                    name: "5) search operation",
                     value: "search"
                 },
                 {
-                    name: "5) view operation",
+                    name: "6) view operation",
                     value: "view"
                 },
                 {
-                    name: "6) export",
+                    name: "7) export",
                     value: "export"
-                },
-                {
-                    name: "7) more operation",
-                    value: "more"
                 }
+                // {
+                //     name: "7) more operation",
+                //     value: "more"
+                // }
             ]
         },
         more: {

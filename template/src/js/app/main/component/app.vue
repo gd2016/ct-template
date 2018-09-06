@@ -51,7 +51,7 @@ export default {
             this.getList({
                 url: Interface.index.list,
                 data: this.pageCfg
-            })
+            });
         }{{#operation.search}}, 
         search(){
             this.pageCfg = Object.assign(this.pageCfg, this.searchInfo);
