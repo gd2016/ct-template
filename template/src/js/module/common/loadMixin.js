@@ -22,6 +22,7 @@ export default {
             this.message = msg.message;
         },
         saveSuccess(){
+            this.loading = false;
             this.minimsg = this.$minimsg({
                 type: 'success',
                 content: '保存成功'
