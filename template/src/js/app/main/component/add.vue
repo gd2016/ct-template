@@ -40,10 +40,10 @@ export default {
         save(){
             this.$refs.forms.validate((res)=>{
                 if (res){
-                    this.post({
+                    this.ajax({
+                        type: 'submit',
                         url: Interface.index.post,
-                        data: this.formData,
-                        method: 'post'
+                        data: this.formData
                     }).then(()=>{
                         this.$emit('refresh');
                         this.show = false;

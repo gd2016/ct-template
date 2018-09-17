@@ -31,16 +31,14 @@ export default {
     },
     methods: { 
         getData(){
-            this.getInfo({
+            this.ajax({
                 url: Interface.index.detail,
                 data: {
                     Id: this.$route.query.id
                 }
             }).then((res)=>{
                 this.info = res.Data;
-            }).catch((error)=>{
-                this.error = error.message;
-            });
+            })
         },
         back(){
             this.$router.push({path: '/app'});

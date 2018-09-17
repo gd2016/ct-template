@@ -47,24 +47,22 @@ export default {
     },
     methods: {
         getData(){
-            this.getInfo({
+            this.ajax({
                 url: Interface.index.detail,
                 data: {
                     Id: this.$route.query.id
                 }
             }).then((res)=>{
                 this.formData = res.Data;
-            }).catch((error)=>{
-                this.error = error.message;
-            });
+            })
         },
         save(){
             this.$refs.forms.validate((res)=>{
                 if (res){
-                    this.post({
+                    this.ajax({
+                        type: 'submit',
                         url: Interface.index.post,
-                        data: this.formData,
-                        method: 'post'
+                        data: this.formData
                     }).then(()=>{
                         this.$emit('refresh', this.isEdit);
                         this.show = false;

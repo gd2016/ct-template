@@ -48,7 +48,8 @@ export default {
     },
     methods: {
         getData(){
-            this.getList({
+            this.ajax({
+                type: 'getList',
                 url: Interface.index.list,
                 data: this.pageCfg
             });
@@ -76,7 +77,7 @@ export default {
                 placement: 'top',
                 msg: '确定删除',
                 yes: ()=>{
-                    this.post({
+                    this.ajax({
                         url: Interface.index.remove,
                         data: {
                             Id: id
@@ -99,7 +100,7 @@ export default {
                 placement: 'top',
                 msg: 'popup信息',
                 yes: ()=>{
-                    this.post({
+                    this.ajax({
                         url: Interface.index.popup,
                         data: {
                             Id: id
