@@ -7,7 +7,7 @@ var getEnv = function() {
         'org:1506': 'dev',
         'org:1507': 'test',
         'org:1505': 'testStable',
-        'net:8001': 'pre',
+        'net:2505': 'pre',
         'net': 'official'
     };
     const tdl = location.host.split('.').slice(-1)[0];

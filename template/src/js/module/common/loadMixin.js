@@ -31,12 +31,11 @@ export default {
         },
         ajax({method = 'get', url, data, type}){
             if (type === 'getList'){   //表格列表
-                this.loading = true;
                 this.count = 0; 
             } else if (type === 'submit'){  //提交表单
-                this.loading = true;
                 method = 'post';
             }
+            this.loading = true;
             this.error = '';
             return new Promise((resolve, reject) => {
                 axios({
